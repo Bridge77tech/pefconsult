@@ -1,0 +1,23 @@
+<section>
+  <div class="menu-row">
+    <div class="left-row">
+      <h5>
+        PATRICK FISCIAN <br />
+        <span>CONSULTING</span>
+      </h5>
+    </div>
+    <div class="menu-icon" (click)="onMenuClick()">
+      <img [src]="_images.menuIcon" alt="" />
+    </div>
+    <div class="middle-row" [class.show]="isShowMenu">
+      @for (item of menuItems; track item.path) {
+      <div class="menu-item" (click)="routeTo(item.path)">
+        <p>{{ item.label }}</p>
+      </div>
+      }
+    </div>
+    <div class="send-mail">
+      <app-custom-button label="Send an Email!"></app-custom-button>
+    </div>
+  </div>
+</section>

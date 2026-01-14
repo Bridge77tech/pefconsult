@@ -1,0 +1,179 @@
+<section>
+  <div class="home-body">
+    <div class="hero-section">
+      <img [src]="_images.landingpageBackgroundImage" alt="" class="laptop" />
+      <img [src]="_images.homeHeroBgImg" alt="" class="mobile" />
+      <div class="content">
+        <div class="content-header">
+          <h3>RETHINK BUSINESS WITH <br />BALANCE, EQUITY AND GROWTH</h3>
+          <p>{{ homeContent }}</p>
+        </div>
+        <div class="reach-out">
+          <p>We are readily available to assist!</p>
+          <app-custom-button 
+          [label]="'Reach out, Call Us Now'"
+          (onClickEvent)="scrollToTheFooter()"
+          ></app-custom-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="our-reach">
+        <div class="top-content">
+          <div class="title" #titleRef>
+            <p>OUR REACH</p>
+          </div>
+          <div class="content" #contentRef>
+            <p>{{ ourReachContent }}</p>
+          </div>
+        </div>
+        <div class="globe-image">
+          <img [src]="_images.globalMapImage" alt="" />
+        </div>
+        <small>Trusted by companies in over 30 countries across the globe.</small>
+        <div class="clients">
+          <div class="cli-row">
+            @for (client of clients; track $index) {
+            <div class="client">
+              <img [src]="client.imageUrl" alt="" />
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body footprint">
+      <div class="content">
+        <div class="logo">
+          <h3>OUR FOOTPRINT</h3>
+        </div>
+        <div class="count-row">
+          @for (count of ourFootPrint; track $index) {
+          <div class="count" #countBox >
+            <p>{{animatedCounts[$index]}} +</p>
+            <h3>{{ count.label | uppercase }}</h3>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="body who-we-are">
+      <div class="content">
+        <div class="title">
+          <p>WHO WE ARE</p>
+        </div>
+        <div class="sub-text">
+          <p>
+            Business do not stand still, and neither do we! At PEF Consults, we design solutions
+            that move with you!
+          </p>
+        </div>
+
+        <div class="container-row">
+          <div class="cont-1">
+            <div class="title">Who we are</div>
+            <small>
+              PEF Consulting was founded in response 
+              to a clear and growing need for 
+              risk management solutions that 
+              are not merely theoretical, but 
+              firmly grounded in real-world, on-the-ground
+               experience. Drawing on practical 
+               expertise accumulated across more 
+               than 30 African countries, the firm 
+               was established to address the unique, 
+               complex, and often rapidly evolving risk 
+               environments faced by organizations 
+               operating on the continent.
+            </small>
+          </div>
+          <div class="cont-2">
+            <img [src]="_images.diversityAndInclusive" alt="diversity" class="diversity-image" />
+            <div class="text">
+              <p>Diversity and Inclusion</p>
+            </div>
+          </div>
+          <div class="cont-3">
+            <div class="number">
+              <h3>50+ years</h3>
+            </div>
+            <small
+              >We have crafted risk management 
+              solutions informed by over 50 years
+               of combined experience across more
+                than 30 African countries, 
+                delivering insight-driven solutions.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body services">
+      <div class="title">OUR SERVICES</div>
+      <div class="sub-content">
+        <p>
+          Risk is inevitable. Our host of services rely on real world insight to navigate complex
+          risk with precision.
+        </p>
+      </div>
+      <div class="container-row-1">
+        <div class="cont-1">
+          <img [src]="_images.riskManagementIcon" alt="" />
+          <div class="sub">Market Risk Management</div>
+          <div class="content">
+            ...across our home-grown indigenous firm made of professionals who are well-experienced
+            and exposed to the banking environment. We bring to bear a rich experience and exposure
+          </div>
+        </div>
+        <div class="cont-2">
+          <img [src]="_images.peopleIcon" alt="" />
+          <div class="sub">Corporate Governance, Risk and Compliance</div>
+          <div class="content">
+            GRC strategies help align processes and people to foster ethical conduct, strengthen
+            coordination, for sustainable business success. A well-structured GRC framework promotes
+            accountability, transparency, and long-term resilience.
+          </div>
+        </div>
+        <div class="cont-3">
+          <img [src]="_images.developmentIcon" alt="" />
+          <div class="sub">Corporate Strategy Development</div>
+          <div class="content">
+            ...across our home-grown indigenous firm made of professionals who are well-experienced
+            and exposed to the banking environment. We bring to bear a rich experience and exposure
+          </div>
+        </div>
+      </div>
+      <!-- <div class="container-row-1">
+        <div class="cont-2">
+          <img [src]="_images.peopleIcon" alt="" />
+          <div class="sub">Corporate Governance, Risk and Compliance</div>
+          <div class="content">
+            GRC strategies help align processes and people to foster ethical conduct, strengthen
+            coordination, for sustainable business success. A well-structured GRC framework promotes
+            accountability, transparency, and long-term resilience.
+          </div>
+        </div>
+        <div class="cont-1">
+          <img [src]="_images.riskManagementIcon" alt="" />
+          <div class="sub">Market Risk Management</div>
+          <div class="content">
+            ...across our home-grown indigenous firm made of professionals who are well-experienced
+            and exposed to the banking environment. We bring to bear a rich experience and exposure
+          </div>
+        </div>
+        <div class="cont-3">
+          <img [src]="_images.developmentIcon" alt="" />
+          <div class="sub">Corporate Strategy Development</div>
+          <div class="content">
+            ...across our home-grown indigenous firm made of professionals who are well-experienced
+            and exposed to the banking environment. We bring to bear a rich experience and exposure
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>

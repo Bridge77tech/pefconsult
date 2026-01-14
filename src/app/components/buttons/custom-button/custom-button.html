@@ -1,0 +1,18 @@
+<div class="button" (click)="onClick()">
+    @if (!isButtonLoading()) {
+        <div class="btn-row">
+            @if (prefixIcon()) {
+                <img [src]="prefixIcon()!" alt="icon" class="prefix-icon">
+            }
+            <small 
+            [style.font-size.px]="labelFontSize()"
+            [style.font-weight]="fontWeight()"
+            >{{ label() }}</small>
+            @if (suffixIcon()) {
+                <img [src]="suffixIcon()!" alt="icon" class="suffix-icon">
+            }
+        </div>
+    } @else {
+        <div class="loading"></div>
+    }
+</div>

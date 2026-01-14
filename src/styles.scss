@@ -1,0 +1,114 @@
+/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+@use "sass:map";
+@use "sass:meta";
+
+// Use the theme partial for access to `$theme`, `theme-get()` and mixins.
+@use "styles/theme" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Graduate&display=swap');
+
+:root {
+  --primary: #{theme-get(colors, primary)};
+  --menu-bg: #{theme-get(colors, menuBackgroundColor)};
+  --radius-sm: #{theme-get(spaces, xs)};
+}
+
+@font-face {
+  font-family: 'Graduate';
+  src: url('/assets/fonts/Graduate-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Satoshi local font faces (served from /public/fonts) */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Satoshi", serif;
+    font-weight: 400;
+    
+  }
+
+// Theme helper functions and mixins live in `src/styles/_theme.scss`.
+  
+  // Scrollbar styles
+  ::-webkit-scrollbar {
+    width: 0rem;
+    border-radius: 12px;
+    height: 0
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+  }
+  
+  // When the isnt't scrolling, hide the scrollbar
+  ::-webkit-scrollbar-thumb:active {
+    background: #b3b3b3;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Satoshi", sans-serif;
+  }

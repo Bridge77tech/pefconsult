@@ -1,0 +1,121 @@
+@use "../../../styles/theme" as *;
+
+section {
+    margin: 0;
+    padding: auto;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgba(theme-get(colors, menuBackgroundColor), 0.6);
+    border-radius: theme-get(spaces, xs);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    .menu-row {
+    display: flex;
+        justify-content: space-between;
+        align-items: center;
+    position: relative;
+        padding: 0.8rem 1.6rem;
+
+        .left-row {
+            cursor: pointer;
+
+            h5 {
+                font-size: theme-get(fontSizes, xxs);
+                font-weight: theme-get(weights, bold);
+
+                span {
+                    font-weight: theme-get(weights, normal);
+                    letter-spacing: 2.5px;
+                    color: theme-get(colors, secondaryTextColor);
+                }
+            }
+        }
+
+        .menu-icon {
+            display: none;
+
+            @include respond-to(mobile) {
+                display: block;
+            }
+        }
+
+        .middle-row {
+            display: flex;
+            align-items: center;
+            gap: theme-get(spaces, xxl);
+
+            @include respond-to(mobile) {
+                flex-direction: column;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: calc(100% + theme-get(spaces, xs));
+                background-color: rgba(theme-get(colors, menuBackgroundColor), 0.95);
+                border-radius: theme-get(spaces, xs);
+                padding: theme-get(spaces, s) theme-get(spaces, sm);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+                transform-origin: top;
+                transform: scaleY(0);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease;
+                z-index: 40;
+
+                &.show {
+                    transform: scaleY(1);
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+            }
+
+            .menu-item {
+                font-size: theme-get(fontSizes, xs);
+                cursor: pointer;
+
+                p {
+                    color: theme-get(colors, primaryTextColor);
+                    font-weight: theme-get(weights, semiBold);
+
+                    &:hover {
+                        color: theme-get(colors, primary);
+                    }
+                }
+
+                @include respond-to(mobile) {
+                    width: 100%;
+                    padding: theme-get(spaces, s) theme-get(spaces, sm);
+                    opacity: 0;
+                    transform: translateY(-8px);
+                    transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 220ms ease;
+                }
+            }
+
+            @include respond-to(mobile) {
+                &.show {
+                    .menu-item {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+
+        .send-mail {
+            display: flex;
+            align-items: center;
+            gap: theme-get(spaces, xs);
+            background-color: theme-get(colors, whiteColor);
+            border-radius: theme-get(spaces, xs);
+
+            @include respond-to(mobile) {
+                display: none;
+            }
+
+            small {
+                font-size: theme-get(fontSizes, xxs);
+                color: theme-get(colors, textColorBrown);
+            }
+        }
+    }
+}

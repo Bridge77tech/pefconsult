@@ -1,0 +1,484 @@
+@use '../../../styles/theme' as *;
+@use 'sass:color';
+
+.footer {
+  width: 100%;
+  background-color: theme-get(colors, whiteColor);
+  background-repeat: no-repeat;
+  padding: theme-get(spaces, xl) theme-get(spaces, md);
+  border: 2px solid theme-get(colors, borderColor);
+  border-radius: theme-get(spaces, md);
+  position: relative;
+  overflow: hidden;
+
+  @include respond-to(mobile) {
+    border: none;
+    padding: theme-get(spaces, md) theme-get(spaces, xs);
+  }
+
+  .footer-main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: theme-get(spaces, xl);
+    max-width: 1400px;
+    margin: 0 auto theme-get(spaces, xl) auto;
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      gap: theme-get(spaces, xl);
+
+      .branding {
+        .company-name {
+          font-size: theme-get(fontSizes, md);
+          font-weight: theme-get(weights, bold);
+          color: theme-get(colors, textColorBrown);
+          margin: 0;
+          line-height: 1.2;
+        }
+      }
+
+      .email-subscription {
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, sm);
+        width: 65%;
+
+        .subscription-form {
+          display: flex;
+          border: 1px solid rgba(54, 33, 2, 1);
+          border-radius: theme-get(spaces, s);
+          padding: theme-get(spaces, ss);
+
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
+          .email-input {
+            flex: 1;
+            font-size: theme-get(fontSizes, s);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+              border-color: theme-get(colors, primary);
+            }
+
+            &::placeholder {
+              color: rgba(0, 0, 0, 0.4);
+            }
+          }
+
+          .request-button {
+            padding: theme-get(spaces, xxs) theme-get(spaces, sm);
+            background-color: theme-get(colors, primaryLightColor);
+            color: theme-get(colors, primary);
+            border: none;
+            border-radius: theme-get(spaces, s);
+            font-size: theme-get(fontSizes, xxs);
+            font-weight: theme-get(weights, semiBold);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, xxs);
+              padding: theme-get(spaces, xxs) theme-get(spaces, s);
+            }
+
+            &:hover {
+              background-color: color.adjust(theme-get(colors, activeHoveColor), $lightness: -10%);
+              color: theme-get(colors, whiteColor);
+            }
+          }
+        }
+
+        .disclaimer {
+          font-size: theme-get(fontSizes, s);
+          color: theme-get(colors, secondaryTextColor);
+          margin: 0;
+          line-height: 1.5;
+
+          @include respond-to(mobile) {
+            font-size: theme-get(fontSizes, xxs);
+          }
+        }
+      }
+
+      .desktop {
+        display: block;
+        gap: theme-get(spaces, sm);
+
+        @include respond-to(mobile) {
+          display: none;
+        }
+
+        @include respond-to(tablet) {
+          display: none;
+        }
+      }
+    }
+
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 100%;
+      align-items: flex-end;
+
+      .contact-section {
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, xs);
+
+        .contact-heading {
+          font-size: theme-get(fontSizes, sm);
+          font-weight: theme-get(weights, bold);
+          margin: 0;
+        }
+
+        .contact-description {
+          font-size: theme-get(fontSizes, xs);
+          color: theme-get(colors, primaryTextColor);
+          line-height: 1.2rem;
+          letter-spacing: -4%;
+          margin: 0;
+        }
+
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: theme-get(spaces, md);
+
+          .form-input,
+          .form-textarea {
+            padding: theme-get(spaces, s) theme-get(spaces, xs);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: theme-get(spaces, s);
+            font-size: theme-get(fontSizes, xs);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+
+            &:focus {
+              border-color: theme-get(colors, primary);
+            }
+
+            &::placeholder {
+              color: rgba(0, 0, 0, 0.4);
+            }
+          }
+
+          .form-textarea {
+            min-height: 120px;
+          }
+        }
+      }
+
+      .mobile {
+        display: none;
+
+        @include respond-to(laptop) {
+          display: none;
+        }
+
+        @include respond-to(tablet) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .navigation-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    justify-items: stretch;
+    align-items: stretch;
+    gap: theme-get(spaces, sm);
+    margin: theme-get(spaces, xs);
+    width: 100%;
+
+    .nav-btn {
+      background-color: transparent;
+      color: theme-get(colors, primary);
+      border: 1px solid theme-get(colors, primary);
+      border-radius: theme-get(spaces, xs);
+      font-size: theme-get(fontSizes, xs);
+      font-weight: theme-get(weights, semiBold);
+      padding: theme-get(spaces, ss);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: theme-get(colors, primary);
+        color: theme-get(colors, whiteColor);
+      }
+    }
+  }
+
+  .desktop {
+    display: block;
+
+    @include respond-to(tablet) {
+      display: none;
+    }
+  }
+
+  .mobile {
+    display: none;
+
+    @include respond-to(mobile) {
+      display: block;
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @include respond-to(mobile) {
+      max-width: none;
+      margin: 0;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .footer-item {
+      flex: 1;
+      text-align: center;
+
+      @include respond-to(mobile) {
+        flex: none;
+        text-align: flex-start;
+      }
+
+      p {
+        font-size: theme-get(fontSizes, s);
+        color: theme-get(colors, textColor);
+        font-weight: theme-get(weights, normal);
+        margin: 0;
+
+        @include respond-to(mobile) {
+          text-align: left;
+        }
+
+        a {
+          color: theme-get(colors, tex);
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: theme-get(colors, textColorBrown);
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &.address {
+        text-align: left;
+      }
+
+      &.phone {
+        text-align: center;
+      }
+
+      &.email {
+        text-align: right;
+      }
+    }
+  }
+
+  // Responsive design
+  @include respond-to(laptop) {
+    padding: theme-get(spaces, lg) theme-get(spaces, lg);
+
+    .footer-main-content {
+      grid-template-columns: 1fr;
+      gap: theme-get(spaces, xl);
+    }
+
+    .navigation-buttons {
+      grid-template-columns: 1fr;
+      gap: theme-get(spaces, sm);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: theme-get(spaces, sm);
+      text-align: center;
+
+      .footer-item {
+        width: 100%;
+
+        &.address,
+        &.phone,
+        &.email {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  @include respond-to(tablet) {
+    padding: theme-get(spaces, xs) theme-get(spaces, xs);
+
+    .footer-main-content {
+      .left-section {
+        .branding {
+          .company-name {
+            font-size: theme-get(fontSizes, lg);
+          }
+
+          .company-subtitle {
+            font-size: theme-get(fontSizes, lg);
+          }
+        }
+      }
+
+      .right-section {
+        .contact-section {
+          .contact-heading {
+            font-size: theme-get(fontSizes, xl);
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      .footer-item {
+        p {
+          font-size: theme-get(fontSizes, s);
+        }
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: theme-get(spaces, sm);
+
+    .footer-main-content {
+      margin: 0 auto theme-get(spaces, sm) auto;
+      gap: theme-get(spaces, xs);
+
+      .left-section {
+        gap: theme-get(spaces, md);
+        width: 100%;
+
+        .branding {
+          .company-name {
+            font-size: theme-get(fontSizes, xs);
+            color: theme-get(colors, primary);
+          }
+        }
+
+        .email-subscription {
+          width: 100%;
+          .subscription-form {
+            width: 100%;
+
+            .email-input {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .right-section {
+        justify-content: center;
+        align-items: center;
+
+        .contact-section {
+          gap: none;
+
+          .contact-heading {
+            font-size: theme-get(fontSizes, xs);
+          }
+
+          .contact-description {
+            font-size: theme-get(fontSizes, s);
+          }
+
+          .contact-form {
+            gap: theme-get(spaces, xs);
+
+            .form-input,
+            .form-textarea {
+              width: 100%;
+              box-sizing: border-box;
+              display: block;
+              padding: theme-get(spaces, s);
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              font-size: theme-get(fontSizes, s);
+              color: theme-get(colors, textColor);
+              background-color: theme-get(colors, whiteColor);
+
+              &:focus {
+                border-color: theme-get(colors, primary);
+              }
+
+              &::placeholder {
+                color: rgba(0, 0, 0, 0.4);
+              }
+            }
+
+            .form-textarea {
+              min-height: 80px;
+            }
+          }
+        }
+
+        .mobile {
+          display: flex;
+          margin-top: theme-get(spaces, lg);
+
+          .nav-btn {
+            width: 100%;
+            box-sizing: border-box;
+            padding: theme-get(spaces, xxs) theme-get(spaces, s);
+            font-size: theme-get(fontSizes, s);
+            font-weight: theme-get(weights, semiBold);
+
+            &:hover {
+              background-color: theme-get(colors, primary);
+              color: theme-get(colors, whiteColor);
+            }
+          }
+        }
+
+        .footer-bottom {
+            text-align: left;
+
+            .footer-item {
+              text-align: left;
+
+              &.address,
+              &.phone,
+              &.email {
+                text-align: left;
+              }
+            }
+          }
+      }
+    }
+  }
+
+  /* Hide desktop nav on mobile/tablet (< 1025px) */
+  @media (max-width: 1024px) {
+    
+    .navigation-buttons.desktop {
+      display: none !important;
+    }
+  }
+
+  /* Hide mobile nav on desktop/laptop (>= 1025px) */
+  @media (min-width: 1025px) {
+    .navigation-buttons.mobile {
+      display: none !important;
+    }
+  }
+}

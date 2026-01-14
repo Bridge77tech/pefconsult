@@ -1,0 +1,97 @@
+// Theme map and helpers extracted from styles.scss
+@use "sass:map" as map;
+$theme: (
+    colors: (
+        primary: #955D09,
+        primaryTextColor: #3F3C36,
+        lightPrimary: #F4EDCB,
+        lighterPrimary: #F5E5CB,
+        activeHoveColor: #be9250,
+        secondaryTextColor: #010214,
+        menuBackgroundColor: rgba(255, 255, 255, 0.45),
+        whiteColor: white,
+        textColorBrown: #1D1C19,
+        textColor: #545353,
+        primaryLightColor: #F8F2E8,
+        borderColor: #F1F1F1,
+        backgroundColor: #FFFEFA,
+        bgOverlayColor: #FFFAF4,
+    ),
+    fontSizes: (
+        xxxs: 0.5rem,
+        xxs: 0.7rem,
+        s: 0.8rem,
+        xs: 1rem,
+        sm: 1.2rem,
+        md: 1.5rem,
+        lg: 2rem,
+        xl: 2.5rem,
+        xxl: 3rem,
+        xxxl: 4rem,
+        xxxxl: 5rem,
+    ),
+    weights: (
+        thin: 100,
+        light: 300,
+        normal: 400,
+        semiBold: 500,
+        bold: 700,
+        bolder: 900,
+    ),
+    spaces: (
+        main-app-space: 7%,
+        main-app-space-mobile: 4%,
+        xxs: 0.3rem,
+        s: 0.6rem,
+        ss: 0.75rem,
+        xs: 1rem,
+        sm: 1.5rem,
+        mm: 1.75rem,
+        md: 2rem,
+        lg: 3rem,
+        xl: 4rem,
+        xxl: 5rem,
+        xxxl: 6rem,
+        xxxxl: 7rem,
+        x5l: 9rem,
+        x12l: 12rem,
+    ),
+    breakPoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+    ),
+);
+
+
+@function theme-get($keys...) {
+    @return map.get($theme, $keys...);
+}
+
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint ==mobile {
+      @media (max-width: theme-get(breakPoints, sm)) {
+        @content;
+      }
+    }
+  
+    @else if $breakpoint ==tablet {
+      @media (max-width: theme-get(breakPoints, md)) {
+        @content;
+      }
+    }
+  
+    @else if $breakpoint ==laptop {
+      @media (max-width: theme-get(breakPoints, lg)) {
+        @content;
+      }
+    }
+  
+    @else if $breakpoint ==large-screens {
+      @media (max-width: theme-get(breakPoints, xl)) {
+        @content;
+      }
+    }
+}

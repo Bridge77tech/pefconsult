@@ -1,0 +1,638 @@
+@use '../../../styles/theme' as *;
+
+section {
+  width: 100%;
+  padding: auto;
+  margin: 0;
+  box-sizing: border-box;
+
+  .home-body {
+    width: 100%;
+    padding: auto;
+
+    .hero-section {
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 40rem;
+
+      .laptop {
+        display: block;
+
+        @include respond-to(mobile) {
+          display: none;
+        }
+      }
+
+      .mobile {
+        display: none;
+
+        @include respond-to(mobile) {
+          display: block;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        z-index: 0;
+      }
+
+      @include respond-to(mobile) {
+        height: 30rem;
+      }
+
+      /* lazy blur-up for large hero images */
+      .hero-section,
+      img.hero-section {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+        filter: blur(18px);
+        transform: scale(1.02);
+        opacity: 0.98;
+        will-change: filter, transform, opacity;
+      }
+
+      /* when the image is fully loaded, add `loaded` to remove blur */
+      .hero-section.loaded,
+      img.hero-section.loaded {
+        filter: blur(0);
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      /* fallback: if using background-image, support same pattern */
+      .bg-image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+        filter: blur(18px);
+        transform: scale(1.02);
+        opacity: 0.98;
+      }
+      .bg-image.loaded {
+        filter: blur(0);
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .content {
+        position: absolute;
+        top: 30%;
+        left: theme-get(spaces, x5l);
+        z-index: 3;
+
+        @include respond-to(mobile) {
+          top: 25%;
+          left: 3%;
+        }
+
+        .content-header {
+          display: flex;
+          flex-direction: column;
+          gap: theme-get(spaces, xs);
+
+          @include respond-to(mobile) {
+            gap: theme-get(spaces, md);
+          }
+
+          h3 {
+            font-size: theme-get(fontSizes, xl);
+            font-family: 'Graduate', serif;
+            color: theme-get(textColorBrown);
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, sm);
+            }
+          }
+
+          p {
+            font-family: Satoshi;
+            font-weight: theme-get(weights, normal);
+            font-style: Light;
+            font-size: theme-get(fontSizes, sm);
+            line-height: 27px;
+            letter-spacing: -4%;
+            max-width: 700px;
+            color: theme-get(colors, textColor);
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, xs);
+              max-width: 350px;
+              color: theme-get(colors, textColor);
+            }
+          }
+        }
+
+        .reach-out {
+          display: inline-flex;
+          align-items: center;
+          gap: theme-get(spaces, sm);
+          margin-top: theme-get(spaces, lg);
+          background-color: theme-get(colors, whiteColor);
+          border-radius: theme-get(spaces, xs);
+          padding: theme-get(spaces, ss);
+          width: auto;
+          align-self: flex-start;
+
+          p {
+            font-size: theme-get(fontSizes, mm);
+            font-weight: theme-get(weights, light);
+          }
+
+          @include respond-to(mobile) {
+            margin-top: theme-get(spaces, md);
+
+            p {
+              font-size: theme-get(fontSizes, s);
+            }
+          }
+        }
+      }
+    }
+
+    .body {
+      padding: theme-get(spaces, md) theme-get(spaces, x5l);
+
+      @include respond-to(mobile) {
+        padding: theme-get(spaces, sm);
+      }
+
+      .our-reach {
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, xl);
+
+        .top-content {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          @include respond-to(mobile) {
+            flex-direction: column;
+            gap: theme-get(spaces, sm);
+          }
+
+          .title {
+            width: 70%;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+
+            p {
+              color: theme-get(colors, primary);
+              font-size: theme-get(fontSizes, sm);
+            }
+          }
+
+          .title.visible {
+            opacity: 1;
+            transform: translateX(0);
+          }
+
+          .content {
+            width: 100%;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s ease-in-out;
+
+            p {
+              font-size: theme-get(fontSizes, xs);
+              letter-spacing: 0%;
+              color: theme-get(colors, textColor);
+            }
+          }
+
+          .content.visible-right {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        .globe-image {
+          padding: 0px theme-get(spaces, xl);
+
+          @include respond-to(mobile) {
+            padding: 0px;
+          }
+        }
+
+        small {
+          font-size: theme-get(fontSizes, sm);
+          letter-spacing: 0px;
+          color: theme-get(colors, primary);
+        }
+
+        .clients {
+          width: 100%;
+          overflow: hidden;
+
+          .cli-row {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: theme-get(spaces, xxl);
+            animation: slideLoop 20s linear infinite;
+            overflow: hidden;
+
+            @include respond-to(mobile) {
+              gap: theme-get(spaces, xs);
+
+              .client img {
+                height: 64px;
+                width: auto;
+              }
+            }
+          }
+
+          @keyframes slideLoop {
+            0% {
+              transform: translateX(100%);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+        }
+      }
+    }
+
+    .footprint {
+      width: 100%;
+      background-color: theme-get(colors, backgroundColor);
+      /* monotone noise overlay: fractalNoise baseFrequency=0.5, color #E3E1E1 at ~15% opacity */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><filter id='noise'><feTurbulence baseFrequency='0.5' type='fractalNoise' numOctaves='1' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='mono'/><feFlood flood-color='%23E3E1E1' flood-opacity='0.15' result='c'/><feComposite in='c' in2='mono' operator='in' result='noise'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
+      background-repeat: repeat;
+      background-size: auto;
+      margin: 0px;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, md);
+
+        .logo {
+          h3 {
+            color: theme-get(colors, primary);
+            font-size: theme-get(fontSizes, sm);
+          }
+        }
+
+        .count-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .count {
+            width: 100%;
+
+            p,
+            h3 {
+              font-family: 'Graduate', serif;
+              color: theme-get(colors, primary);
+            }
+
+            p {
+              font-size: theme-get(fontSizes, xxl);
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, md);
+              }
+            }
+
+            h3 {
+              font-size: theme-get(fontSizes, md);
+              border-bottom: 2px solid theme-get(colors, primary);
+              display: inline-block;
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xxs);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .who-we-are {
+      display: flex;
+      flex-direction: column;
+      /* low-opacity monotone noise overlay: fractalNoise baseFrequency=0.5, color #E3E1E1 at ~5% opacity */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><filter id='noise'><feTurbulence baseFrequency='0.5' type='fractalNoise' numOctaves='1' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='mono'/><feFlood flood-color='%23E3E1E1' flood-opacity='0.1' result='c'/><feComposite in='c' in2='mono' operator='in' result='noise'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
+      background-repeat: repeat;
+      background-size: auto;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, xs);
+
+        .title {
+          color: theme-get(colors, primary);
+          font-size: theme-get(fontSizes, sm);
+          font-weight: theme-get(weights, bold);
+
+          @include respond-to(mobile) {
+            font-size: theme-get(fontSizes, sm);
+          }
+        }
+
+        .sub-text {
+          font-size: theme-get(fontSizes, sm);
+          font-weight: theme-get(weights, bold);
+
+          @include respond-to(mobile) {
+            font-size: theme-get(fontSizes, xs);
+          }
+        }
+
+        .container-row {
+          display: flex;
+          gap: theme-get(spaces, sm);
+          width: 100%;
+          align-items: center;
+          height: 277px;
+          margin-top: theme-get(spaces, sm);
+
+          @include respond-to(mobile) {
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+          }
+
+          .cont-1 {
+            width: 50%;
+            background-color: theme-get(colors, lightPrimary);
+            height: 100%;
+            border-radius: theme-get(spaces, xs);
+            padding: theme-get(spaces, lg) theme-get(spaces, md);
+            display: flex;
+            flex-direction: column;
+            gap: theme-get(spaces, xs);
+
+            @include respond-to(mobile) {
+              width: 100%;
+              padding: theme-get(spaces, md);
+            }
+
+            small {
+              font-size: theme-get(fontSizes, xs);
+              color: theme-get(colors, textColor);
+              max-width: 800px;
+
+              span {
+                color: theme-get(colors, textColorBrown);
+              }
+            }
+          }
+
+          .cont-2 {
+            width: 25%;
+            z-index: 0;
+            position: relative;
+
+            @include respond-to(mobile) {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              align-content: center;
+            }
+
+            .diversity-image {
+              z-index: 0;
+              width: 100%;
+              height: 277px;
+              position: relative;
+              border-radius: theme-get(spaces, xs);
+              object-fit: fill;
+
+              @include respond-to(mobile) {
+                width: 80%;
+                height: 20rem;
+                object-fit: cover;
+                align-content: center;
+              }
+            }
+
+            .text {
+              z-index: 1;
+              position: absolute;
+              bottom: 10px;
+              display: flex;
+              right: 10px;
+              left: 10px;
+              align-items: center;
+              justify-content: center;
+              background-color: theme-get(colors, menuBackgroundColor);
+              margin-right: theme-get(spaces, xs);
+              border-radius: theme-get(spaces, sm);
+              padding: theme-get(spaces, s);
+
+              p {
+                color: theme-get(colors, whiteColor);
+                font-size: theme-get(fontSizes, xs);
+              }
+            }
+          }
+
+          .cont-3 {
+            width: 25%;
+            background-color: theme-get(colors, lighterPrimary);
+            height: 100%;
+            padding: theme-get(spaces, lg) theme-get(spaces, md);
+            border-radius: theme-get(spaces, sm);
+
+            @include respond-to(mobile) {
+              width: 100%;
+              padding: theme-get(spaces, md);
+            }
+
+            .number {
+              h3 {
+                font-size: theme-get(fontSizes, sm);
+                margin-bottom: theme-get(spaces, xs);
+              }
+            }
+
+            small {
+              color: theme-get(colors, textColor);
+              font-size: theme-get(fontSizes, xs);
+            }
+          }
+        }
+      }
+    }
+
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: theme-get(spaces, sm);
+
+      .title {
+        color: theme-get(colors, primary);
+        font-size: theme-get(fontSizes, mm);
+      }
+
+      .sub-content,
+      p {
+        font-size: theme-get(fontSizes, sm);
+        font-weight: theme-get(weights, bold);
+      }
+
+      .container-row-1 {
+        display: flex;
+        align-items: center;
+        gap: theme-get(spaces, sm);
+        height: 325px;
+
+        @include respond-to(mobile) {
+          flex-direction: column;
+          height: auto;
+          width: 100%;
+        }
+
+        .cont-1 {
+          width: 25%;
+          height: 100%;
+          border: 2px solid theme-get(colors, borderColor);
+          border-radius: theme-get(spaces, xs);
+          padding: theme-get(spaces, xs);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: theme-get(spaces, md);
+
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
+          img {
+            height: 18.33px;
+            width: 40px;
+          }
+
+          .content {
+            text-align: center;
+            font-size: theme-get(fontSizes, s);
+            color: theme-get(colors, textColor);
+          }
+        }
+
+        .cont-2 {
+          width: 60%;
+          height: 100%;
+          border: 2px solid theme-get(colors, borderColor);
+          border-radius: theme-get(spaces, xs);
+          padding: theme-get(spaces, xs);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: theme-get(spaces, md);
+
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
+          img {
+            height: 40px;
+            width: 40px;
+          }
+
+          .content {
+            text-align: center;
+            font-size: theme-get(fontSizes, s);
+            color: theme-get(colors, textColor);
+          }
+        }
+
+        .cont-3 {
+          width: 25%;
+          height: 100%;
+          border: 2px solid theme-get(colors, borderColor);
+          border-radius: theme-get(spaces, xs);
+          padding: theme-get(spaces, xs);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: theme-get(spaces, md);
+
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
+          img {
+            height: 40px;
+            width: 40px;
+          }
+
+          .content {
+            text-align: center;
+            font-size: theme-get(fontSizes, s);
+            color: theme-get(colors, textColor);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* global loader overlay (page-level) */
+.app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(theme-get(colors, whiteColor), 0.95); /* fallback to light overlay */
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  transition: opacity 300ms ease, visibility 300ms ease;
+  visibility: visible;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: theme-get(spaces, xs);
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 4px solid rgba(0, 0, 0, 0.08);
+      border-top-color: theme-get(colors, primary);
+      animation: spin 1s linear infinite;
+    }
+
+    p {
+      font-size: theme-get(fontSizes, xs);
+      color: theme-get(colors, textColor);
+      margin: 0;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

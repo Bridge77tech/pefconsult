@@ -1,0 +1,112 @@
+<section>
+    <div class="home-body">
+        <div class="hero-section">
+            <img [src]="_images.serviceHeroBgImg" alt="">
+            <div class="content">
+                <p>SOLUTIONS THAT MOVE YOUR BUSINESS FORWARD</p>
+                <small>
+                    Our consulting services help organizations 
+                    anticipate risks, strengthen governance and 
+                    improve decision-making. Browse through our 
+                    carefully curated, expert-led training courses 
+                    designed to empower your organization with 
+                    actionable strategies and compliance excellence. 
+                    We support your organization in achieving 
+                    lasting excellence at every level.
+                </small>
+            </div>
+        </div>
+
+        <div class="body col-container">
+            <div class="service">
+                <h3>Expert Services, Stronger organizations</h3>
+                <p>
+                    Our services span enterprise risk, audit, compliance
+                    strategic management and IT best practices, 
+                    Each of our services are tailored to support your
+                    unique challenges. We work with you to build structures,
+                    capabilities and systems that enhance stability and drive
+                    long-term success.
+                </p>
+            </div>
+            <div class="services-list">
+                <div class="service-item">
+                    <app-service-container
+                    [label]="'Enterprise and Operational Risk Management'"
+                    [description]="'We Help Businesses Identify, Assess, and Manage Key Risk, Building Resilient Systems That Safeguard Value And Ensure Stability in Dynamic Operating Environments.'"
+                    [backgroundColor]="'#FEFFFA'"
+                    >
+                    @for (risk of riskManagement; track $index) {
+                        <app-service-card
+                        [label]="risk.label"
+                        [iconUrl]="risk.iconUrl"
+                        [backgroundColor]="'#F3F0E1'"
+                        [learnButtonColor]="'#955D09'"
+                        (onButtonClickEvent)="onButtonClick(risk.path)"
+                        ></app-service-card>
+                    }
+                    </app-service-container>
+                </div>
+                <div class="service-item">
+                    <app-service-container
+                    [label]="'Corporate Governance & Board Effectivenes'"
+                    [description]="'We strengthen governance structures and leadership oversight, helping boards operate with clarity, accountability, and confidence in a rapidly evolving regulatory landscape.'"
+                    [backgroundColor]="'#FFFBFA'"
+                    >
+                    @for (corporate of corporateGovernances; track $index) {
+                        <app-service-card
+                        [label]="corporate.label"
+                        [iconUrl]="corporate.iconUrl"
+                        [backgroundColor]="'#F3E3E1'"
+                        [learnButtonColor]="'#950962'"
+                        (onButtonClickEvent)="onButtonClick(corporate.path)"
+                        ></app-service-card>
+                    }
+                    </app-service-container>
+                </div>
+                <div class="service-item">
+                    <app-service-container
+                    [label]="'Strategy & Organized Performance'"
+                    [description]="'We support organizations in shaping clear, competitive strategies that drive growth, sharpen focus, and enable sustained performance across all levels.'"
+                    [backgroundColor]="'#FAFFFE'"
+                    >
+                    @for (strategy of strategyOrgs; track $index) {
+                        <app-service-card
+                        [label]="strategy.label"
+                        [iconUrl]="strategy.iconUrl"
+                        [backgroundColor]="'#E1F3E7'"
+                        [learnButtonColor]="'#099533'"
+                        (onButtonClickEvent)="onButtonClick(strategy.path)"
+                        ></app-service-card>
+                    }
+                    </app-service-container>
+                </div>
+                <div class="service-item">
+                    <app-service-container
+                    [label]="'Information Systems, IT Governance and Audit'"
+                    [description]="'We provide guidance and assurance across IT environments, empowering organizations to manage technology risks, strengthen controls, and align systems with enterprise objectives.'"
+                    [backgroundColor]="'#FAFFFE'"
+                    >
+                    @for (info of informations; track $index) {
+                        <app-service-card
+                        [label]="info.label"
+                        [iconUrl]="info.iconUrl"
+                        [backgroundColor]="'#EFF3E1'"
+                        [learnButtonColor]="'#749509'"
+                        (onButtonClickEvent)="onButtonClick(info.path)"
+                        ></app-service-card>
+                    }
+                    </app-service-container>
+                </div>
+            </div>
+            <div class="make-move">
+                <p>Make The Move Towards Better Decisions</p>
+                <small>
+                    Transform uncertainty to opportunity with 
+                    our expertly tailored services. We are primed 
+                    to help you thrive! <br> Book a Consultation Now
+                </small>
+            </div>
+        </div>
+    </div>
+</section>

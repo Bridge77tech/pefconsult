@@ -1,0 +1,369 @@
+@use '../../../styles/theme' as *;
+
+/* hero helpers for About page */
+.hero-section {
+  position: relative;
+
+  .hero-section,
+  img.hero-section,
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+    filter: blur(16px);
+    transform: scale(1.02);
+    opacity: 0.98;
+  }
+
+  .hero-section.loaded,
+  img.hero-section.loaded,
+  .bg-image.loaded {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+section {
+  width: 100%;
+  padding: auto;
+  box-sizing: border-box;
+  background-color: theme-get(colors, backgroundColor);
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: theme-get(spaces, md);
+    width: 100%;
+
+    @include respond-to(mobile) {
+      gap: theme-get(spaces, xs);
+    }
+
+    .hero-section {
+      position: relative;
+      z-index: 0;
+
+      img {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        height: 40rem;
+        display: block;
+        background: linear-gradient(0deg, #000000 22.49%, rgba(0, 8, 33, 0) 59.79%);
+
+        @include respond-to(mobile) {
+          height: 30rem;
+        }
+      }
+
+      .content {
+        position: absolute;
+        bottom: theme-get(spaces, lg);
+        left: theme-get(spaces, xxl);
+        right: theme-get(spaces, xxl);
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: theme-get(spaces, sm);
+        align-items: center;
+
+        h2 {
+          color: theme-get(colors, whiteColor);
+          font-family: 'Graduate', serif;
+          font-size: theme-get(fontSizes, lg);
+          max-width: 1000px;
+          text-align: center;
+        }
+
+        p {
+          color: theme-get(colors, whiteColor);
+          text-align: center;
+          max-width: 900px;
+          font-weight: theme-get(weights, thin);
+          letter-spacing: -0.04em;
+        }
+
+        @include respond-to(mobile) {
+          left: theme-get(spaces, md);
+          right: theme-get(spaces, md);
+          align-items: start;
+
+          h2 {
+            font-size: theme-get(fontSizes, sm);
+            text-align: start;
+            max-width: 300px;
+          }
+
+          p {
+            font-size: theme-get(fontSizes, xs);
+            text-align: start;
+            font-weight: 200;
+          }
+        }
+      }
+    }
+
+    .body {
+      margin: 0 auto;
+      padding: theme-get(spaces, xl) theme-get(spaces, x5l);
+      width: 100%;
+
+      @include respond-to(mobile) {
+        padding: theme-get(spaces, md);
+      }
+
+      .topic {
+        font-size: theme-get(fontSizes, s);
+        color: theme-get(colors, primary);
+
+        @include respond-to(mobile) {
+          padding: theme-get(spaces, xs) 0;
+          font-size: them-get(fontSizes, sm);
+        }
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: theme-get(spaces, md);
+        margin: 0 auto;
+
+        @include respond-to(mobile) {
+          flex-direction: column;
+        }
+
+        .left {
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          gap: theme-get(spaces, sm);
+
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
+          .title {
+            font-size: theme-get(fontSizes, md);
+            font-weight: theme-get(weights, semiBold);
+            letter-spacing: -0.04em;
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, xs);
+            }
+          }
+
+          .content {
+            font-size: theme-get(fontSizes, xs);
+            max-width: 600px;
+            color: theme-get(colors, textColor);
+            letter-spacing: -0.04em;
+            font-weight: 300;
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, s);
+            }
+          }
+        }
+
+        .right {
+          display: flex;
+          gap: theme-get(spaces, xs);
+          align-items: center;
+          justify-content: center;
+          width: 40%;
+          margin-right: 7%;
+
+          @include respond-to(mobile) {
+            flex-direction: column;
+          }
+
+          .img1 {
+            height: 297px;
+            border-radius: theme-get(spaces, sm);
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .our-mission {
+      width: 100%;
+
+      .mission-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: theme-get(spaces, lg);
+
+        @include respond-to(mobile) {
+          flex-direction: column;
+          gap: theme-get(spaces, md);
+        }
+
+        .card {
+          width: 575px;
+          height: 500px;
+          position: relative;
+          z-index: 0;
+
+          @include respond-to(mobile) {
+            width: 358px;
+            height: 311.3px;
+          }
+
+          img {
+            position: relative;
+            z-index: 0;
+            height: 100%;
+            width: 100%;
+          }
+
+          .content {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: theme-get(spaces, xl) theme-get(spaces, sm);
+            gap: theme-get(spaces, lg);
+
+            @include respond-to(mobile) {
+              padding: theme-get(spaces, lg) theme-get(spaces, xs);
+              gap: theme-get(spaces, sm);
+            }
+
+            .title {
+              background-color: theme-get(colors, whiteColor);
+              padding: theme-get(spaces, xxs) theme-get(spaces, s);
+              border-radius: theme-get(spaces, xs);
+              font-size: theme-get(fontSizes, xs);
+              color: theme-get(colors, primary);
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, s);
+              }
+            }
+
+            p {
+              text-align: center;
+              font-size: theme-get(fontSizes, sm);
+              color: theme-get(colors, whiteColor);
+              letter-spacing: 0%;
+              font-weight: theme-get(weights, bold);
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xs);
+              }
+            }
+
+            small {
+              font-size: theme-get(fontSizes, xs);
+              font-weight: theme-get(weights, semiBold);
+              letter-spacing: 0%;
+              text-align: center;
+              color: theme-get(colors, whiteColor);
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, s);
+              }
+            }
+          }
+        }
+
+        .grid-view {
+          width: 50%;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          column-gap: theme-get(spaces, lg);
+          row-gap: theme-get(spaces, xxxl);
+
+          @include respond-to(mobile) {
+            width: 70%;
+            row-gap: theme-get(spaces, md);
+          }
+        }
+      }
+    }
+
+    .message-section {
+      .content {
+        width: 100%;
+        padding: 4rem 0;
+        
+        @include respond-to(mobile) {
+          padding: 0rem;
+        }
+
+        h2 {
+          font-size: 0.9rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #9c6b2f; // gold-ish heading
+          margin-bottom: 3rem;
+        }
+
+        .message-row {
+          display: grid;
+          grid-template-columns: 320px 1fr;
+          column-gap: 3rem;
+          align-items: flex-start;
+
+          @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+            row-gap: 2rem;
+          }
+        }
+
+        .image {
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          }
+
+          small {
+            display: block;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #111;
+            margin-top: 0.5rem;
+          }
+
+          p {
+            margin: 0.25rem 0 0;
+            font-size: 0.9rem;
+            color: #666;
+          }
+        }
+
+        .con {
+          p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+            max-width: 900px;
+          }
+        }
+      }
+    }
+  }
+}

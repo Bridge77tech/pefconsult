@@ -1,0 +1,121 @@
+@use '../../../styles/theme' as *;
+
+.main-layout {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .main {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .menu {
+      position: fixed;
+      top: theme-get(spaces, xs);
+      left: theme-get(spaces, x5l);
+      right: theme-get(spaces, x5l);
+      z-index: 100;
+
+      @include respond-to(mobile) {
+        left: theme-get(spaces, sm);
+        right: theme-get(spaces, sm);
+      }
+    }
+
+    .body {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      z-index: 1;
+      margin-top: 0;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    margin-top: auto;
+    padding: theme-get(spaces, md) theme-get(spaces, x5l);
+    z-index: 0;
+    background: radial-gradient(
+        1100px 700px at 0% 60%,
+        rgba(255, 115, 0, 0.2) 0%,
+        rgba(255, 115, 0, 0) 55%
+      ),
+      radial-gradient(
+        1000px 700px at 94% 60%,
+        rgba(177, 224, 23, 0.2) 0%,
+        rgba(177, 224, 23, 0) 55%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.2) 40%,
+        rgba(255, 255, 255, 0.2) 100%
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: screen;
+    filter: saturate(1.04);
+
+    @include respond-to(mobile) {
+      padding: theme-get(spaces, md) theme-get(spaces, sm);
+    }
+
+    .make-that-move {
+      display: none; // hide by default; only show when body has .show-move
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: theme-get(spaces, md);
+      padding: theme-get(spaces, md);
+
+      @include respond-to(mobile) {
+        margin-left: theme-get(spaces, md);
+        margin-right: theme-get(spaces, md);
+      }
+
+      .title {
+        font-size: theme-get(fontSizes, sm);
+        font-weight: theme-get(weights, bold);
+        font-family: 'Graduate', serif;
+      }
+
+      small {
+        max-width: 500px;
+        text-align: center;
+        font-size: theme-get(fontSizes, xs);
+        color: theme-get(colors, textColor);
+      }
+
+      .explore-button {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid theme-get(colors, primary);
+        padding: theme-get(spaces, ss);
+        border-radius: theme-get(spaces, s);
+        color: theme-get(colors, primary);
+        cursor: pointer;
+
+        @include respond-to(mobile) {
+          font-size: theme-get(fontSizes, s);
+        }
+
+        &:hover {
+          background-color: theme-get(colors, activeHoveColor);
+        }
+      }
+    }
+  }
+}
+
+/* show-move helper: when body has .show-move make the block visible */
+body.show-move .main-layout .footer .make-that-move {
+  display: flex !important;
+}
