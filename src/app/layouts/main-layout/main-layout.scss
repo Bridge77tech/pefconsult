@@ -24,8 +24,8 @@
       z-index: 100;
 
       @include respond-to(mobile) {
-        left: theme-get(spaces, sm);
-        right: theme-get(spaces, sm);
+        left: theme-get(spaces, s);
+        right: theme-get(spaces, s);
       }
     }
 

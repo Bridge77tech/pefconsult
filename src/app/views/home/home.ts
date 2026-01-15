@@ -15,7 +15,7 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
   platformId = inject(PLATFORM_ID)
   private zone = inject(NgZone);
 
-  homeContent: string = "PF Consults offers risk management training and consultancy for business. We are continually shaping the future of business, side by side with you. We equip leaders and organizations with the knowledge and systems needed to turn risk into opportunity. Our expertise ensures your strategies remain sound, secure, and sustainable."
+  homeContent: string = "PEF Consults offers risk management training and consultancy for business. We are continually shaping the future of business, side by side with you. We equip leaders and organizations with the knowledge and systems needed to turn risk into opportunity. Our expertise ensures your strategies remain sound, secure, and sustainable."
   ourReachContent: string = "Business do not stand still, and neither do we! At PEF Consults, we design solutions that move with you; anticipating every market shift, integrating innovation and crafting implementation. Our world wide experience helps us anticipate and act. In the midst of constant change, your organization thrives."
 
   @ViewChild('titleRef') titleRef!: ElementRef;

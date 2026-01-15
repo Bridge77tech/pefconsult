@@ -16,21 +16,25 @@ section {
       width: 100%;
       height: 40rem;
 
+      @include respond-to(mobile) {
+        height: 21.5rem;
+      }
+
       .laptop {
         display: block;
 
-        @include respond-to(mobile) {
-          display: none;
-        }
+        // @include respond-to(mobile) {
+        //   display: none;
+        // }
       }
 
-      .mobile {
-        display: none;
+      // .mobile {
+      //   display: none;
 
-        @include respond-to(mobile) {
-          display: block;
-        }
-      }
+      //   @include respond-to(mobile) {
+      //     display: block;
+      //   }
+      // }
 
       img {
         width: 100%;
@@ -38,10 +42,10 @@ section {
         object-fit: cover;
         position: relative;
         z-index: 0;
-      }
 
-      @include respond-to(mobile) {
-        height: 30rem;
+        @include respond-to(mobile) {
+          height: 20rem;
+        }
       }
 
       /* lazy blur-up for large hero images */
@@ -86,11 +90,16 @@ section {
         position: absolute;
         top: 30%;
         left: theme-get(spaces, x5l);
+        right: theme-get(spaces, x5l);
         z-index: 3;
+        box-sizing: border-box;
+        max-width: 900px;
 
         @include respond-to(mobile) {
-          top: 25%;
+          top: 35%;
           left: 3%;
+          right: 3%;
+          max-width: none;
         }
 
         .content-header {
@@ -99,16 +108,29 @@ section {
           gap: theme-get(spaces, xs);
 
           @include respond-to(mobile) {
-            gap: theme-get(spaces, md);
+            gap: theme-get(spaces, xs);
+          }
+
+          small {
+            font-size: theme-get(fontSizes, sm);
+            color: theme-get(colors, primary);
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, xs);
+            }
           }
 
           h3 {
             font-size: theme-get(fontSizes, xl);
             font-family: 'Graduate', serif;
             color: theme-get(textColorBrown);
+            margin: 0 0 theme-get(spaces, xs) 0;
+            line-height: 1.05;
+            max-width: 100%;
 
             @include respond-to(mobile) {
               font-size: theme-get(fontSizes, sm);
+              line-height: 1.1;
             }
           }
 
@@ -123,9 +145,10 @@ section {
             color: theme-get(colors, textColor);
 
             @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, xs);
-              max-width: 350px;
-              color: theme-get(colors, textColor);
+              // font-size: theme-get(fontSizes, xs);
+              // max-width: 350px;
+              // color: theme-get(colors, textColor);
+              display: none;
             }
           }
         }
@@ -140,20 +163,38 @@ section {
           padding: theme-get(spaces, ss);
           width: auto;
           align-self: flex-start;
+          flex-wrap: nowrap;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 
           p {
             font-size: theme-get(fontSizes, mm);
             font-weight: theme-get(weights, light);
+            margin: 0;
+            white-space: nowrap;
           }
 
           @include respond-to(mobile) {
-            margin-top: theme-get(spaces, md);
+            margin-top: theme-get(spaces, sm);
+            padding: theme-get(spaces, xxs);
+            justify-content: space-between;
 
             p {
               font-size: theme-get(fontSizes, s);
+              white-space: normal;
             }
           }
         }
+      }
+    }
+
+    .mobi {
+      display: none;
+      padding: 0 theme-get(spaces, s);
+      color: theme-get(colors, textColor);
+      font-size: theme-get(fontSizes, s);
+
+      @include respond-to(mobile) {
+        display: block;
       }
     }
 
@@ -188,6 +229,10 @@ section {
             p {
               color: theme-get(colors, primary);
               font-size: theme-get(fontSizes, sm);
+
+              @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xs);
+              }
             }
           }
 
@@ -281,6 +326,10 @@ section {
           h3 {
             color: theme-get(colors, primary);
             font-size: theme-get(fontSizes, sm);
+
+            @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xs);
+              }
           }
         }
 
@@ -339,7 +388,7 @@ section {
           font-weight: theme-get(weights, bold);
 
           @include respond-to(mobile) {
-            font-size: theme-get(fontSizes, sm);
+            font-size: theme-get(fontSizes, xs);
           }
         }
 
@@ -479,6 +528,10 @@ section {
       .title {
         color: theme-get(colors, primary);
         font-size: theme-get(fontSizes, mm);
+
+        @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xs);
+              }
       }
 
       .sub-content,

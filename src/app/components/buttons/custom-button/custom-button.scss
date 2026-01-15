@@ -8,7 +8,7 @@
     cursor: pointer;
 
     @include respond-to(mobile) {
-        padding: theme-get(spaces, ss);
+        padding: theme-get(spaces, s);
     }
 
     .btn-row {
@@ -20,11 +20,10 @@
         small {
             color: theme-get(colors, whiteColor);
             letter-spacing: -4%;
-        }
+            font-size: theme-get(fontSizes, xs);
 
-        @include respond-to(mobile) {
-            small {
-                font-size: theme-get(fontSizes, s);
+            @include respond-to(mobile) {
+                font-size: theme-get(fontSizes, xxs);
             }
         }
     }

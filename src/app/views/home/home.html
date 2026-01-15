@@ -2,21 +2,25 @@
   <div class="home-body">
     <div class="hero-section">
       <img [src]="_images.landingpageBackgroundImage" alt="" class="laptop" />
-      <img [src]="_images.homeHeroBgImg" alt="" class="mobile" />
+      <!-- <img [src]="_images.homeHeroBgImg" alt="" class="mobile" /> -->
       <div class="content">
         <div class="content-header">
+          <small>Enterprise Risk Management</small>
           <h3>RETHINK BUSINESS WITH <br />BALANCE, EQUITY AND GROWTH</h3>
-          <p>{{ homeContent }}</p>
+          <p class="laptop">{{ homeContent }}</p>
         </div>
         <div class="reach-out">
           <p>We are readily available to assist!</p>
           <app-custom-button 
           [label]="'Reach out, Call Us Now'"
           (onClickEvent)="scrollToTheFooter()"
+          [labelFontSize]="14"
           ></app-custom-button>
         </div>
       </div>
     </div>
+
+     <p class="mobi">{{ homeContent }}</p>
 
     <div class="body">
       <div class="our-reach">
