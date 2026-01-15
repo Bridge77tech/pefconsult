@@ -43,3 +43,4 @@ __screenshots__/
 Thumbs.db
 public/images/*.dmg
 git-backup*.tar.gz
+git-backup-*.tar.gz
