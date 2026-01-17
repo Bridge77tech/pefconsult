@@ -8,7 +8,8 @@
     </section>
   </div>
   <div class="footer">
-    <div *ngIf="isHomeRoute" class="make-that-move">
+    @if (isHomeRoute) {
+    <div class="make-that-move">
       <div class="title">MAKE THAT MOVE</div>
       <small
         >Don't wait for the future to unfold-shape it. Through our risk management consultancy
@@ -17,7 +18,8 @@
       </small>
       <div class="explore-button">Explore Our Services Now!</div>
     </div>
-    
+    }
+
     <app-footer></app-footer>
   </div>
 </section>

@@ -26,26 +26,29 @@ export class MainLayout {
   private router = inject(Router);
   private routerSub: Subscription | null = null;
 
-  private checks(path?: string) {
-    // prefer an explicit path when provided, otherwise use the router URL
-    // avoid using `window` directly so this runs under SSR
-    const currentRoute = path ?? (this.router?.url ?? '/');
-    this.isHomeRoute = currentRoute === '/home';
-  }
+  private checkRoute(path?: string) {
+  const currentRoute = path ?? this.router.url;
 
-  ngOnInit() {
-    // initial check
-    this.checks();
+  // Handle /home, /home?, /home#, etc.
+  this.isHomeRoute =
+    currentRoute === '/home' || currentRoute.startsWith('/home') || currentRoute === '/';
+}
 
-    // Listen to router navigation end events to update `isHomeRoute` on client-side route changes
-    this.routerSub = this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe((ev: NavigationEnd) => this.checks(ev.urlAfterRedirects || ev.url));
-  }
+ngOnInit() {
+  // Initial check
+  this.checkRoute();
 
-  ngOnDestroy() {
-    this.routerSub?.unsubscribe();
-  }
+  // Update on navigation
+  this.routerSub = this.router.events
+    .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+    .subscribe(event => {
+      this.checkRoute(event.urlAfterRedirects);
+    });
+}
+
+ngOnDestroy() {
+  this.routerSub?.unsubscribe();
+}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

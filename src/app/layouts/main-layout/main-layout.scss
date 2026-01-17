@@ -80,39 +80,44 @@
     }
 
     .make-that-move {
-      display: none; // hide by default; only show when body has .show-move
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: theme-get(spaces, md);
+      gap: theme-get(spaces, md); // spacing between title, text, button
       padding: theme-get(spaces, md);
+      text-align: center; // centers all text inside
 
       @include respond-to(mobile) {
-        margin-left: theme-get(spaces, md);
-        margin-right: theme-get(spaces, md);
+        padding: theme-get(spaces, xxs);
+        margin-bottom: theme-get(spaces, md);
       }
 
       .title {
         font-size: theme-get(fontSizes, sm);
         font-weight: theme-get(weights, bold);
         font-family: 'Graduate', serif;
+        text-align: center;
       }
 
       small {
         max-width: 500px;
-        text-align: center;
         font-size: theme-get(fontSizes, xs);
-        color: theme-get(colors, textColor);
+        line-height: 1.5;
+        text-align: center;
       }
 
       .explore-button {
-        display: flex;
-        flex-direction: column;
+        display: inline-flex; // content-based width
+        align-items: center;
+        justify-content: center;
         border: 1px solid theme-get(colors, primary);
-        padding: theme-get(spaces, ss);
+        padding: theme-get(spaces, ss) theme-get(spaces, md);
         border-radius: theme-get(spaces, s);
         color: theme-get(colors, primary);
+        width: auto; // auto width
         cursor: pointer;
+        text-align: center;
 
         @include respond-to(mobile) {
           font-size: theme-get(fontSizes, s);
