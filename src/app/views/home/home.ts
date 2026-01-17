@@ -190,19 +190,19 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
   
   clients = [
     {
-      name: 'vin consult',
+      name: 'Vin Consult',
       imageUrl: this._images.viuConsult,
     },
     {
-      name: 'ecobank',
+      name: 'Ecobank',
       imageUrl: this._images.ecobank,
     },
     {
-      name: 'absa',
+      name: 'Absa',
       imageUrl: this._images.absa,
     },
     {
-      name: 'total energies',
+      name: 'Total Energies',
       imageUrl: this._images.totalEnergies,
     },
     {

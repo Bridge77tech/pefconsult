@@ -1,6 +1,6 @@
 <section class="main-layout">
   <div class="main">
-    <div class="menu">
+    <div class="menu" [class.hidden]="isMobileMenuHidden">
       <app-menu></app-menu>
     </div>
     <section class="body">
@@ -8,17 +8,16 @@
     </section>
   </div>
   <div class="footer">
-    @if (isHomeRoute) {
-    <div class="make-that-move">
+    <div *ngIf="isHomeRoute" class="make-that-move">
       <div class="title">MAKE THAT MOVE</div>
       <small
         >Don't wait for the future to unfold-shape it. Through our risk management consultancy
-        services. we help you aniticipate challenges, align strategies, and act with precision and
+        services. we help you anticipate challenges, align strategies, and act with precision and
         purpose.
       </small>
-      <div class="explore-button">Eplore Our Services Now!</div>
+      <div class="explore-button">Explore Our Services Now!</div>
     </div>
-    }
+    
     <app-footer></app-footer>
   </div>
 </section>

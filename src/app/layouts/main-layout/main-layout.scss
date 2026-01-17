@@ -23,9 +23,20 @@
       right: theme-get(spaces, x5l);
       z-index: 100;
 
+      /* enable smooth hide/show on mobile when scrolling */
+      transition: transform 220ms ease, opacity 220ms ease;
+      will-change: transform, opacity;
+
       @include respond-to(mobile) {
         left: theme-get(spaces, s);
         right: theme-get(spaces, s);
+        transform: translateY(0);
+
+        &.hidden {
+          transform: translateY(-120%);
+          opacity: 0;
+          pointer-events: none;
+        }
       }
     }
 
