@@ -299,9 +299,6 @@ section {
     .footprint {
       width: 100%;
       background-color: theme-get(colors, backgroundColor);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><filter id='noise'><feTurbulence baseFrequency='0.5' type='fractalNoise' numOctaves='1' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='mono'/><feFlood flood-color='%23E3E1E1' flood-opacity='0.15' result='c'/><feComposite in='c' in2='mono' operator='in' result='noise'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
-      background-repeat: repeat;
-      background-size: auto;
       margin: 0px;
 
       .content {
@@ -359,9 +356,7 @@ section {
     .who-we-are {
       display: flex;
       flex-direction: column;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><filter id='noise'><feTurbulence baseFrequency='0.5' type='fractalNoise' numOctaves='1' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='mono'/><feFlood flood-color='%23E3E1E1' flood-opacity='0.1' result='c'/><feComposite in='c' in2='mono' operator='in' result='noise'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
-      background-repeat: repeat;
-      background-size: auto;
+      background-color: theme-get(colors, backgroundColor);
 
       .content {
         display: flex;
