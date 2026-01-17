@@ -1,14 +1,19 @@
 @use '../../../styles/theme' as *;
 
 section {
-  margin: 0;
-  padding: auto;
-  box-sizing: border-box;
   width: 100%;
-  background-color: rgba(theme-get(colors, menuBackgroundColor), 0.6);
+  box-sizing: border-box;
   border-radius: theme-get(spaces, xs);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+
+  // Make background mostly solid (KEY FIX)
+  background-color: rgba(theme-get(colors, menuBackgroundColor), 0.92);
+
+  // Glass blur (subtle)
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  // Visible depth shadow (filter-style)
+  filter: drop-shadow(0px 4px 9.4px rgba(0, 0, 0, 0.18));
 
   .menu-row {
     display: flex;
