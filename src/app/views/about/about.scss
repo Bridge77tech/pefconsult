@@ -368,6 +368,10 @@ section {
         .con {
           width: 70%;
 
+          @include respond-to(mobile) {
+            width: 100%;
+          }
+
           p {
             font-size: theme-get(fontSizes, xs);
             line-height: 1.8;
