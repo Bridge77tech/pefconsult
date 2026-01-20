@@ -1,14 +1,14 @@
 <div class="service-card" [style.backgroundColor]="backgroundColor()">
-    <div class="info">
-        <h4>{{ label() }}</h4>
-        <div class="learn-more-button" (click)="onClick()">
-            <div class="image"[style.backgroundColor]="learnButtonColor()">
-                <img [src]="_images.learnMoreIcon" alt="">
-            </div>
-            <p [style.color]="learnButtonColor()">Learn More</p>
-        </div>
+  <div class="info">
+    <h4>{{ label() }}</h4>
+    <div class="learn-more-button" (click)="onClick()">
+      <div class="image" [style.backgroundColor]="learnButtonColor()">
+        <img [src]="_images.learnMoreIcon" alt="" />
+      </div>
+      <p [style.color]="learnButtonColor()">Learn More</p>
     </div>
-    <div class="icon">
-        <img [src]="iconUrl()" alt="{{ label() }} icon" />
-    </div>
+  </div>
+  <div class="icon">
+    <img [src]="iconUrl()" alt="{{ label() }} icon" />
+  </div>
 </div>
