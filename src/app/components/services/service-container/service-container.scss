@@ -1,51 +1,50 @@
-@use "../../../../styles/theme" as *;
+@use '../../../../styles/theme' as *;
 
 .service-container {
+  display: flex;
+  flex-direction: column;
+  gap: theme-get(spaces, lg);
+  width: 100%;
+  padding: 7%;
+
+  @include respond-to(tablet) {
+    padding: 3.5%;
+  }
+
+  .content {
     display: flex;
     flex-direction: column;
-    gap: theme-get(spaces, lg);
-    width: 100%;
-    padding: theme-get(spaces, lg) theme-get(spaces, x5l);
+    gap: theme-get(spaces, xxs);
 
-    @include respond-to(tablet) {
-        padding: theme-get(spaces, md);
+    h4 {
+      font-size: theme-get(fontSizes, sm);
+      font-weight: theme-get(weights, semiBold);
+      letter-spacing: 0%;
+      font-weight: 200;
+
+      @include respond-to(mobile) {
+        font-size: theme-get(fontSizes, xs);
+      }
     }
 
-    .content {
-        display: flex;
-        flex-direction: column;
-        gap: theme-get(spaces, xxs);
+    p {
+      font-size: theme-get(fontSizes, xs);
+      color: theme-get(colors, textColor);
+      line-height: 1.2;
+      font-weight: theme-get(weights, light);
+      letter-spacing: 0%;
 
-        h4 {
-            font-size: theme-get(fontSizes, sm);
-            font-weight: theme-get(weights, semiBold);
-            letter-spacing: 0%;
-            font-weight: 200;
-
-            @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xs);
-            }
-        }
-
-        p {
-            font-size: theme-get(fontSizes, xs);
-            color: theme-get(colors, textColor);
-            line-height: 1.2;
-            font-weight: theme-get(weights, light);
-            letter-spacing: 0%;
-
-            @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, s);
-                margin-top: theme-get(spaces, xs);
-            }
-        }
-
-
-        .service {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: theme-get(spaces, sm);
-            margin-top: theme-get(spaces, md);
-        }
+      @include respond-to(mobile) {
+        font-size: theme-get(fontSizes, s);
+        margin-top: theme-get(spaces, xs);
+      }
     }
+
+    .service {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: theme-get(spaces, sm);
+      margin-top: theme-get(spaces, md);
+    }
+  }
 }
