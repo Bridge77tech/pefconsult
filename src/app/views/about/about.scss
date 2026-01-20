@@ -12,7 +12,10 @@
     object-fit: cover;
     background-size: cover;
     background-position: center;
-    transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+    transition:
+      filter 600ms ease,
+      transform 600ms ease,
+      opacity 600ms ease;
     filter: blur(16px);
     transform: scale(1.02);
     opacity: 0.98;
@@ -63,8 +66,8 @@ section {
       .content {
         position: absolute;
         bottom: theme-get(spaces, lg);
-        left: theme-get(spaces, xxl);
-        right: theme-get(spaces, xxl);
+        left: 7%;
+        right: 7%;
         z-index: 1;
         display: flex;
         flex-direction: column;
@@ -88,8 +91,8 @@ section {
         }
 
         @include respond-to(mobile) {
-          left: theme-get(spaces, md);
-          right: theme-get(spaces, md);
+          left: 3.5%;
+          right: 3.5%;
           align-items: start;
 
           h2 {
@@ -109,11 +112,11 @@ section {
 
     .body {
       margin: 0 auto;
-      padding: theme-get(spaces, xl) theme-get(spaces, x5l);
+      padding: 7%;
       width: 100%;
 
       @include respond-to(mobile) {
-        padding: theme-get(spaces, md);
+        padding: 3.5%;
       }
 
       .topic {
@@ -177,7 +180,7 @@ section {
           align-items: center;
           justify-content: center;
           width: 40%;
-          margin-right: 7%;
+          margin-right: 3.5%;
 
           @include respond-to(mobile) {
             flex-direction: column;
@@ -212,13 +215,13 @@ section {
         }
 
         .card {
-          width: 575px;
-          height: 500px;
+          width: 45%;
+          height: 48vh;
           position: relative;
           z-index: 0;
 
           @include respond-to(mobile) {
-            width: 358px;
+            width: 100%;
             height: 311.3px;
           }
 
@@ -288,7 +291,7 @@ section {
         .grid-view {
           width: 50%;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           column-gap: theme-get(spaces, lg);
           row-gap: theme-get(spaces, xxxl);
 
@@ -303,8 +306,7 @@ section {
     .message-section {
       .content {
         width: 100%;
-        padding: 4rem 0;
-        
+
         @include respond-to(mobile) {
           padding: 0rem;
         }
@@ -313,58 +315,68 @@ section {
           font-size: 0.9rem;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #9c6b2f; // gold-ish heading
+          color: #9c6b2f;
           margin-bottom: 3rem;
         }
 
         .message-row {
-          display: grid;
-          grid-template-columns: 320px 1fr;
-          column-gap: 3rem;
-          align-items: flex-start;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .image {
+            height: 30vh;
+            width: 30%;
+            margin-right: 2rem;
+
+            @include respond-to(mobile) {
+              height: auto;
+              width: 100%;
+              margin-right: 0;
+              margin-bottom: 1rem;
+            }
+
+            img {
+              height: 100%;
+              width: auto;
+              border-radius: 8px;
+              object-fit: cover;
+            }
+
+            small {
+              display: block;
+              font-weight: 600;
+              font-size: 1rem;
+              color: #111;
+              margin-top: 0.5rem;
+            }
+
+            p {
+              margin: 0.25rem 0 0;
+              font-size: 0.9rem;
+              color: #666;
+            }
+          }
 
           @media (max-width: 900px) {
-            grid-template-columns: 1fr;
+            flex-direction: column;
+            align-items: center;
             row-gap: 2rem;
           }
         }
 
-        .image {
-          text-align: left;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-          }
-
-          small {
-            display: block;
-            font-weight: 600;
-            font-size: 1rem;
-            color: #111;
-            margin-top: 0.5rem;
-          }
-
-          p {
-            margin: 0.25rem 0 0;
-            font-size: 0.9rem;
-            color: #666;
-          }
-        }
-
         .con {
+          width: 70%;
+
           p {
-            font-size: 1rem;
+            font-size: theme-get(fontSizes, xs);
             line-height: 1.8;
             color: #444;
-            max-width: 900px;
+
+            @include respond-to(mobile) {
+              font-size: theme-get(fontSizes, s);
+              width: 100%;
+            }
           }
         }
       }
