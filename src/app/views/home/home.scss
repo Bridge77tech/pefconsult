@@ -43,7 +43,10 @@ section {
         height: 100%;
         object-fit: cover;
         display: block;
-        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+        transition:
+          filter 600ms ease,
+          transform 600ms ease,
+          opacity 600ms ease;
         filter: blur(18px);
         transform: scale(1.02);
         opacity: 0.98;
@@ -63,7 +66,10 @@ section {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
+        transition:
+          filter 600ms ease,
+          transform 600ms ease,
+          opacity 600ms ease;
         filter: blur(18px);
         transform: scale(1.02);
         opacity: 0.98;
@@ -77,16 +83,16 @@ section {
       .content {
         position: absolute;
         top: 30%;
-        left: theme-get(spaces, x5l);
-        right: theme-get(spaces, x5l);
+        left: 7%;
+        right: 8%;
         z-index: 3;
         box-sizing: border-box;
         max-width: 900px;
 
         @include respond-to(mobile) {
           top: 35%;
-          left: 3%;
-          right: 3%;
+          left: 3.5%;
+          right: 3.5%;
           max-width: none;
         }
 
@@ -133,9 +139,6 @@ section {
             color: theme-get(colors, textColor);
 
             @include respond-to(mobile) {
-              // font-size: theme-get(fontSizes, xs);
-              // max-width: 350px;
-              // color: theme-get(colors, textColor);
               display: none;
             }
           }
@@ -152,7 +155,7 @@ section {
           width: auto;
           align-self: flex-start;
           flex-wrap: nowrap;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
           p {
             font-size: theme-get(fontSizes, mm);
@@ -177,9 +180,9 @@ section {
 
     .mobi {
       display: none;
-      padding: 0 theme-get(spaces, s);
+      padding: 0 3.5%;
       color: theme-get(colors, textColor);
-      font-size: theme-get(fontSizes, s);
+      font-size: theme-get(fontSizes, xs);
 
       @include respond-to(mobile) {
         display: block;
@@ -187,10 +190,10 @@ section {
     }
 
     .body {
-      padding: theme-get(spaces, md) theme-get(spaces, x5l);
+      padding: 7%;
 
       @include respond-to(mobile) {
-        padding: theme-get(spaces, sm);
+        padding: 3.5%;
       }
 
       .our-reach {
@@ -312,8 +315,8 @@ section {
             font-size: theme-get(fontSizes, sm);
 
             @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xs);
-              }
+              font-size: theme-get(fontSizes, xs);
+            }
           }
         }
 
@@ -511,8 +514,8 @@ section {
         font-size: theme-get(fontSizes, mm);
 
         @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xs);
-              }
+          font-size: theme-get(fontSizes, xs);
+        }
       }
 
       .sub-content,
@@ -632,7 +635,9 @@ section {
   background-color: rgba(theme-get(colors, whiteColor), 0.95); /* fallback to light overlay */
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
-  transition: opacity 300ms ease, visibility 300ms ease;
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
   visibility: visible;
   opacity: 1;
 

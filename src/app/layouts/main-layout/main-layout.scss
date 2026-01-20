@@ -18,13 +18,15 @@
 
     .menu {
       position: fixed;
-      top: theme-get(spaces, xs);
-      left: theme-get(spaces, x5l);
-      right: theme-get(spaces, x5l);
+      top: 2vh;
+      left: 7%;
+      right: 7%;
       z-index: 100;
 
       /* enable smooth hide/show on mobile when scrolling */
-      transition: transform 220ms ease, opacity 220ms ease;
+      transition:
+        transform 220ms ease,
+        opacity 220ms ease;
       will-change: transform, opacity;
 
       @include respond-to(mobile) {
@@ -52,13 +54,10 @@
   .footer {
     width: 100%;
     margin-top: auto;
-    padding: theme-get(spaces, md) theme-get(spaces, x5l);
+    padding: 7%;
     z-index: 0;
-    background: radial-gradient(
-        1100px 700px at 0% 60%,
-        rgba(255, 115, 0, 0.2) 0%,
-        rgba(255, 115, 0, 0) 55%
-      ),
+    background:
+      radial-gradient(1100px 700px at 0% 60%, rgba(255, 115, 0, 0.2) 0%, rgba(255, 115, 0, 0) 55%),
       radial-gradient(
         1000px 700px at 94% 60%,
         rgba(177, 224, 23, 0.2) 0%,
