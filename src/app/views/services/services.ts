@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ServiceCard } from '../../components/services/service-card/service-card';
+import { ServiceContainer } from '../../components/services/service-container/service-container';
 import { ImageService } from '../../services/general/image-service';
-import { ServiceContainer } from "../../components/services/service-container/service-container";
-import { ServiceCard } from "../../components/services/service-card/service-card";
 
 @Component({
   selector: 'app-services',
@@ -11,138 +12,139 @@ import { ServiceCard } from "../../components/services/service-card/service-card
 })
 export class Services {
   _images = inject(ImageService);
+  _route = inject(Router);
 
   riskManagement = [
     {
-      label: "Enterprise Risk Management",
+      label: 'Enterprise Risk Management',
       iconUrl: this._images.riskImage,
-      path: "/enterprise-risk-management",
+      path: '/enterprise-risk-management',
     },
     {
-      label: "Operational Risk Management Framework",
+      label: 'Operational Risk Management Framework',
       iconUrl: this._images.riskImage,
-      path: "/operational-risk-management",
+      path: '/operational-risk-management',
     },
     {
-      label: "Credit Risk Management",
+      label: 'Credit Risk Management',
       iconUrl: this._images.riskImage,
-      path: "/credit-risk-management",
+      path: '/credit-risk-management',
     },
     {
-      label: "Fraud Risk Management",
+      label: 'Fraud Risk Management',
       iconUrl: this._images.riskImage,
-      path: "/fraud-risk-management",
+      path: '/fraud-risk-management',
     },
     {
-      label: "Business Continuity Management",
+      label: 'Business Continuity Management',
       iconUrl: this._images.riskImage,
-      path: "/business-continuity-management",
+      path: '/business-continuity-management',
     },
-  ]
+  ];
 
   corporateGovernances = [
     {
-      label: "Board Evaluation",
+      label: 'Board Evaluation',
       iconUrl: this._images.coporateGovernance,
-      path: "/board-evaluation",
+      path: '/board-evaluation',
     },
     {
-      label: "Governance, Risk & Compliance",
+      label: 'Governance, Risk & Compliance',
       iconUrl: this._images.coporateGovernance,
-      path: "/governance-risk-compliance",
+      path: '/governance-risk-compliance',
     },
     {
-      label: "Corporate Governance & Role of Directors",
+      label: 'Corporate Governance & Role of Directors',
       iconUrl: this._images.coporateGovernance,
-      path: "/corporate-governance-role-of-directors",
+      path: '/corporate-governance-role-of-directors',
     },
     {
-      label: "Corporate Governance & Training (Bank Directors)",
+      label: 'Corporate Governance & Training (Bank Directors)',
       iconUrl: this._images.coporateGovernance,
-      path: "/coporate-governance-training-bank-directors",
+      path: '/coporate-governance-training-bank-directors',
     },
     {
-      label: "Risk Culture, Governance & Balanced Incentives",
+      label: 'Risk Culture, Governance & Balanced Incentives',
       iconUrl: this._images.coporateGovernance,
-      path: "/risk-culture-governance-balanced-incentives",
+      path: '/risk-culture-governance-balanced-incentives',
     },
     {
-      label: "Environment, Social and Governance Framework",
+      label: 'Environment, Social and Governance Framework',
       iconUrl: this._images.coporateGovernance,
-      path: "/environment-social-governance-framework",
+      path: '/environment-social-governance-framework',
     },
     {
-      label: "Combined Assurance Framework",
+      label: 'Combined Assurance Framework',
       iconUrl: this._images.coporateGovernance,
-      path: "/combined-assurance-framework",
+      path: '/combined-assurance-framework',
     },
-  ]
+  ];
 
   strategyOrgs = [
     {
-      label: "Exploring Strategy",
+      label: 'Exploring Strategy',
       iconUrl: this._images.strategy,
-      path: "/exploring-strategy",
+      path: '/exploring-strategy',
     },
     {
-      label: "Competitive & Growth Strategies",
+      label: 'Competitive & Growth Strategies',
       iconUrl: this._images.strategy,
-      path: "/competitive-growth-strategies",
+      path: '/competitive-growth-strategies',
     },
     {
-      label: "Sustainable Financing",
+      label: 'Sustainable Financing',
       iconUrl: this._images.strategy,
-      path: "/sustainable-financing",
+      path: '/sustainable-financing',
     },
     {
-      label: "Strategy Formulation & Implementation",
+      label: 'Strategy Formulation & Implementation',
       iconUrl: this._images.strategy,
-      path: "/strategy-formulation-implementation",
+      path: '/strategy-formulation-implementation',
     },
     {
-      label: "Framework for Monitoring & Evaluation",
+      label: 'Framework for Monitoring & Evaluation',
       iconUrl: this._images.strategy,
-      path: "/framework-monitoring-evaluation",
+      path: '/framework-monitoring-evaluation',
     },
-  ]
+  ];
 
   informations = [
     {
-      label: "Risk Management Frameworks for Information Systems",
+      label: 'Risk Management Frameworks for Information Systems',
       iconUrl: this._images.infoRing,
-      path: "/risk-management-frameworks-information-systems",
+      path: '/risk-management-frameworks-information-systems',
     },
     {
-      label: "Information Systems Risk Management",
+      label: 'Information Systems Risk Management',
       iconUrl: this._images.infoRing,
-      path: "/information-systems-risk-management",
+      path: '/information-systems-risk-management',
     },
     {
-      label: "Information Technology Governance",
+      label: 'Information Technology Governance',
       iconUrl: this._images.infoRing,
-      path: "/information-technology-governance",
+      path: '/information-technology-governance',
     },
     {
-      label: "Information Technology General Controls",
+      label: 'Information Technology General Controls',
       iconUrl: this._images.infoRing,
-      path: "/information-technology-general-controls",
+      path: '/information-technology-general-controls',
     },
     {
-      label: "Auditing Information Technology Projects",
+      label: 'Auditing Information Technology Projects',
       iconUrl: this._images.infoRing,
-      path: "/auditing-information-technology-projects",
+      path: '/auditing-information-technology-projects',
     },
     {
-      label: "Auditing Information Technology",
+      label: 'Auditing Information Technology',
       iconUrl: this._images.infoRing,
-      path: "/auditing-information-technology",
+      path: '/auditing-information-technology',
     },
     {
-      label: "Internal Audit Process",
+      label: 'Internal Audit Process',
       iconUrl: this._images.infoRing,
-      path: "/internal-audit-process",
+      path: '/internal-audit-process',
     },
-  ]
+  ];
 
   onButtonClick(path: string) {
     console.log('Navigating to:', path);
