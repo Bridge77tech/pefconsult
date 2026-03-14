@@ -1,0 +1,404 @@
+<section>
+  <div class="erm-body">
+    <!-- ===== HERO: Title & Subtitle ===== -->
+    <div class="hero-section">
+      <h1 class="page-title">Enterprise Risk Management</h1>
+      <p class="page-subtitle">
+        Our Enterprise Risk Management consultancy course helps businesses identify, assess and
+        manage risks so they bring your teams and company forward, profitably.
+      </p>
+    </div>
+
+    <!-- ===== CAROUSEL (auto-scrolling marquee) ===== -->
+    <div class="carousel-section">
+      <div class="carousel-track">
+        <!-- Set 1 -->
+        @for (img of carouselImages; track $index) {
+          <div class="carousel-slide">
+            <img [src]="img.src" [alt]="img.alt" />
+          </div>
+        }
+        <!-- Set 2 — duplicate for seamless infinite loop -->
+        @for (img of carouselImages; track $index) {
+          <div class="carousel-slide">
+            <img [src]="img.src" [alt]="img.alt" />
+          </div>
+        }
+      </div>
+    </div>
+
+      <!-- ===== CTA BUTTONS ===== -->
+      <div class="cta-section">
+        <button class="btn-outline" (click)="bookCourse()">Book This Course &nbsp; &#8594;</button>
+        <button class="btn-outline" (click)="downloadManual()">
+          Download Course Manual &nbsp;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </button>
+      </div>
+    <!-- ===== COURSE OVERVIEW ===== -->
+    <div class="course-overview">
+      <div class="overview-card">
+        <div class="overview-badge">Course Overview</div>
+        <h2>ENTERPRISE RISK MANAGEMENT</h2>
+        <p>
+          Enterprise Risk Management (ERM) is a holistic approach that organizations use to
+          identify, assess, prioritize, and manage risks across the entire enterprise. ERM involves
+          a coordinated effort to understand and manage risks in a way that aligns with the
+          organization's strategic objectives and enhances its ability to achieve sustainable
+          success.
+        </p>
+        <div class="overview-stats">
+          <span class="stat">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="#fff"
+              stroke="#8888"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+
+            &nbsp; Duration: 3 days
+          </span>
+
+          <span class="stat">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <!-- shortest bar on left, tallest on right -->
+              <line x1="4" y1="20" x2="4" y2="14" />
+              <line x1="12" y1="20" x2="12" y2="10" />
+              <line x1="20" y1="20" x2="20" y2="4" />
+            </svg>
+
+            &nbsp; Level Executive, Senior and Middle Level Management
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EXPECTED OUTCOMES ===== -->
+    <div class="section outcomes-section">
+      <h3 class="section-label">EXPECTED OUTCOMES</h3>
+      <p class="section-desc">
+        By the end of this course, participants will have the knowledge and practical, mentally
+        needed to understand, implement and utilize a robust Enterprise Risk Management (ERM)
+        framework within their organizations. The attendees will have developed the following
+        competencies:
+      </p>
+      <div class="outcomes-grid">
+        @for (outcome of expectedOutcomes; track $index) {
+          <div class="outcome-card">
+            <div class="outcome-icon">
+              @switch (outcome.icon) {
+                @case ('speaker') {
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.8808 4.34501C14.1361 5.44362 11.2062 6.00544 8.24978 6.00001H7.49978C6.18252 5.99811 4.91267 6.49146 3.9422 7.38218C2.97174 8.27291 2.37157 9.4959 2.2608 10.8085C2.15002 12.1211 2.53672 13.4274 3.34418 14.4681C4.15163 15.5089 5.32083 16.2081 6.61978 16.427C6.9508 17.7818 7.41229 19.1013 7.99778 20.367C8.46178 21.371 9.67178 21.687 10.5798 21.163L11.2368 20.784C12.1168 20.276 12.4018 19.191 12.0088 18.316C11.7726 17.7912 11.563 17.2549 11.3808 16.709C13.2988 16.967 15.1408 17.459 16.8808 18.155C17.6243 15.9289 18.0022 13.597 17.9998 11.25C17.9998 8.83601 17.6068 6.51501 16.8808 4.34501ZM18.2598 3.74001C19.0834 6.1581 19.5024 8.69551 19.4998 11.25C19.5026 13.9761 19.0253 16.6814 18.0898 19.242C18.0559 19.3345 18.0406 19.4328 18.0447 19.5313C18.0488 19.6297 18.0722 19.7264 18.1137 19.8157C18.1551 19.9051 18.2138 19.9854 18.2863 20.0522C18.3588 20.1189 18.4438 20.1706 18.5363 20.2045C18.6288 20.2384 18.7271 20.2537 18.8255 20.2496C18.924 20.2455 19.0206 20.2221 19.11 20.1806C19.1994 20.1391 19.2797 20.0805 19.3464 20.008C19.4131 19.9355 19.4649 19.8505 19.4988 19.758C20.257 17.6879 20.7329 15.5251 20.9138 13.328C21.451 12.7697 21.7507 12.0248 21.7498 11.25C21.7498 10.443 21.4308 9.71001 20.9138 9.17201C20.7318 6.97505 20.2558 4.81243 19.4988 2.74201C19.4649 2.6495 19.4131 2.56456 19.3464 2.49205C19.2797 2.41954 19.1994 2.36088 19.11 2.31942C18.9295 2.23569 18.7231 2.22709 18.5363 2.29551C18.3494 2.36394 18.1974 2.50379 18.1137 2.68429C18.03 2.86479 18.0214 3.07117 18.0898 3.25801C18.1488 3.41801 18.2058 3.57801 18.2598 3.74001Z"
+                      fill="#957909"
+                    />
+                  </svg>
+                }
+                @case ('lock') {
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_1_3101)">
+                      <path
+                        d="M16.2188 6.32812V7.78125C16.2188 8.17495 15.9094 8.48438 15.5156 8.48438H14.1094C13.7156 8.48438 13.4062 8.17495 13.4062 7.78125V6.32812C13.4062 4.3875 11.8313 2.8125 9.89062 2.8125C9.76402 2.8125 9.65161 2.8125 9.525 2.82656C7.69687 3.00937 6.375 4.68272 6.375 6.525V11.2969H3.5625V6.60938C3.5625 3.30464 5.96723 0.351562 9.25781 0.0280781C9.46875 0.0140625 9.67964 0 9.89062 0C13.3781 0 16.2188 2.84058 16.2188 6.32812Z"
+                        fill="#E8E3D4"
+                      />
+                      <path
+                        d="M18.975 18.6422L18.1594 13.7296C17.7937 11.5078 15.8813 9.89062 13.6172 9.89062H6.16402C3.9 9.89062 1.9875 11.5078 1.62187 13.7296L0.806203 18.6422C0.778172 18.8953 0.75 19.1484 0.75 19.4015C0.75 21.9328 2.81714 24 5.34848 24H14.4328C16.9641 24 19.0312 21.9328 19.0312 19.4015C19.0312 19.1484 19.0031 18.8953 18.975 18.6422Z"
+                        fill="#C6B085"
+                      />
+                      <path
+                        d="M22.5469 11.2969H20.4375C20.0489 11.2969 19.7344 10.9824 19.7344 10.5938C19.7344 10.2051 20.0489 9.89062 20.4375 9.89062H22.5469C22.9355 9.89062 23.25 10.2051 23.25 10.5938C23.25 10.9824 22.9355 11.2969 22.5469 11.2969Z"
+                        fill="#955D09"
+                      />
+                      <path
+                        d="M19.2372 8.27837C18.9626 8.00373 18.9626 7.55875 19.2372 7.28411L20.6435 5.87786C20.9181 5.60321 21.3631 5.60321 21.6377 5.87786C21.9124 6.1525 21.9124 6.59748 21.6377 6.87212L20.2315 8.27837C19.9568 8.55306 19.5119 8.55306 19.2372 8.27837Z"
+                        fill="#955D09"
+                      />
+                      <path
+                        d="M20.6435 15.3096L19.2372 13.9034C18.9626 13.6287 18.9626 13.1837 19.2372 12.9091C19.5119 12.6345 19.9569 12.6345 20.2315 12.9091L21.6377 14.3154C21.9124 14.59 21.9124 15.035 21.6377 15.3096C21.3631 15.5843 20.9181 15.5843 20.6435 15.3096Z"
+                        fill="#955D09"
+                      />
+                      <path
+                        d="M10.5938 17.625V19.0781C10.5938 19.4718 10.2844 19.7812 9.89062 19.7812C9.49683 19.7812 9.1875 19.4718 9.1875 19.0781V17.625C9.1875 17.2312 9.49683 16.9219 9.89062 16.9219C10.2844 16.9219 10.5938 17.2312 10.5938 17.625Z"
+                        fill="#4D5A68"
+                      />
+                      <path
+                        d="M19.0312 19.4015C19.0312 21.9328 16.9641 24 14.4328 24H9.89062V9.89062H13.6172C15.8813 9.89062 17.7937 11.5078 18.1594 13.7296L18.975 18.6422C19.0031 18.8953 19.0312 19.1484 19.0312 19.4015Z"
+                        fill="#957909"
+                      />
+                      <path
+                        d="M16.2188 6.32812V7.78125C16.2188 8.17495 15.9094 8.48438 15.5156 8.48438H14.1094C13.7156 8.48438 13.4062 8.17495 13.4062 7.78125V6.32812C13.4062 4.3875 11.8313 2.8125 9.89062 2.8125V0C13.3781 0 16.2188 2.84058 16.2188 6.32812Z"
+                        fill="#304653"
+                      />
+                      <path
+                        d="M10.5938 17.625V19.0781C10.5938 19.4718 10.2844 19.7812 9.89062 19.7812V16.9219C10.2844 16.9219 10.5938 17.2312 10.5938 17.625Z"
+                        fill="#304653"
+                      />
+                      <path
+                        d="M9.89062 14.1094C8.72339 14.1094 7.78125 15.0515 7.78125 16.2188C7.78125 17.3859 8.72339 18.375 9.89062 18.375C11.0579 18.375 12 17.3859 12 16.2188C12 15.0515 11.0579 14.1094 9.89062 14.1094Z"
+                        fill="#4D5A68"
+                      />
+                      <path
+                        d="M12 16.2188C12 17.3859 11.0579 18.375 9.89062 18.375V14.1094C11.0579 14.1094 12 15.0515 12 16.2188Z"
+                        fill="#304653"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_1_3101">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                }
+                @case ('map') {
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.911 0.198186C6.17148 0.0678556 6.45874 0 6.75 0C7.04126 0 7.32852 0.0678556 7.589 0.198186L12.582 2.69619C12.688 2.74819 12.812 2.74819 12.918 2.69619L16.787 0.761186C17.0728 0.618378 17.3904 0.550987 17.7096 0.565411C18.0288 0.579835 18.3391 0.675595 18.6109 0.843602C18.8827 1.01161 19.107 1.24629 19.2626 1.52536C19.4182 1.80444 19.4999 2.11866 19.5 2.43819V14.9232C19.5 15.6332 19.099 16.2832 18.463 16.6002L13.588 19.0372C13.3278 19.1672 13.0409 19.2349 12.75 19.2349C12.4591 19.2349 12.1722 19.1672 11.912 19.0372L6.918 16.5402C6.86585 16.5141 6.80833 16.5005 6.75 16.5005C6.69167 16.5005 6.63415 16.5141 6.582 16.5402L2.714 18.4752C2.42812 18.6182 2.11042 18.6858 1.79107 18.6715C1.47173 18.6572 1.16134 18.5615 0.8894 18.3934C0.61746 18.2254 0.392996 17.9906 0.237331 17.7114C0.0816653 17.4322 -3.1763e-05 17.1179 9.26371e-09 16.7982V4.31319C9.26371e-09 3.60319 0.401 2.95319 1.036 2.63619L5.911 0.199187V0.198186ZM6.75 3.61819C6.94891 3.61819 7.13968 3.6972 7.28033 3.83786C7.42098 3.97851 7.5 4.16927 7.5 4.36819V12.6182C7.5 12.8171 7.42098 13.0079 7.28033 13.1485C7.13968 13.2892 6.94891 13.3682 6.75 13.3682C6.55109 13.3682 6.36032 13.2892 6.21967 13.1485C6.07902 13.0079 6 12.8171 6 12.6182V4.36819C6 4.16927 6.07902 3.97851 6.21967 3.83786C6.36032 3.6972 6.55109 3.61819 6.75 3.61819ZM13.5 6.61819C13.5 6.41927 13.421 6.22851 13.2803 6.08786C13.1397 5.9472 12.9489 5.86819 12.75 5.86819C12.5511 5.86819 12.3603 5.9472 12.2197 6.08786C12.079 6.22851 12 6.41927 12 6.61819V14.8682C12 15.0671 12.079 15.2579 12.2197 15.3985C12.3603 15.5392 12.5511 15.6182 12.75 15.6182C12.9489 15.6182 13.1397 15.5392 13.2803 15.3985C13.421 15.2579 13.5 15.0671 13.5 14.8682V6.61819Z"
+                      fill="#957909"
+                    />
+                    <path
+                      d="M6.75 3.61819C6.94891 3.61819 7.13968 3.6972 7.28033 3.83786C7.42098 3.97851 7.5 4.16927 7.5 4.36819V12.6182C7.5 12.8171 7.42098 13.0079 7.28033 13.1485C7.13968 13.2892 6.94891 13.3682 6.75 13.3682C6.55109 13.3682 6.36032 13.2892 6.21967 13.1485C6.07902 13.0079 6 12.8171 6 12.6182V4.36819C6 4.16927 6.07902 3.97851 6.21967 3.83786C6.36032 3.6972 6.55109 3.61819 6.75 3.61819Z"
+                      fill="#E8E3D4"
+                    />
+                    <path
+                      d="M13.5 6.61819C13.5 6.41927 13.421 6.22851 13.2803 6.08786C13.1397 5.9472 12.9489 5.86819 12.75 5.86819C12.5511 5.86819 12.3603 5.9472 12.2197 6.08786C12.079 6.22851 12 6.41927 12 6.61819V14.8682C12 15.0671 12.079 15.2579 12.2197 15.3985C12.3603 15.5392 12.5511 15.6182 12.75 15.6182C12.9489 15.6182 13.1397 15.5392 13.2803 15.3985C13.421 15.2579 13.5 15.0671 13.5 14.8682V6.61819Z"
+                      fill="#304653"
+                    />
+                  </svg>
+                }
+                @case ('key') {
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M15.75 1.5C14.7657 1.49989 13.7932 1.71508 12.9008 2.13046C12.0084 2.54585 11.2177 3.15139 10.584 3.90464C9.9503 4.65789 9.48903 5.54061 9.23251 6.49094C8.97599 7.44127 8.93042 8.4362 9.099 9.406C9.166 9.796 9.067 10.123 8.878 10.312L2.378 16.811C1.81572 17.3736 1.4999 18.1366 1.5 18.932V21.75C1.5 22.164 1.836 22.5 2.25 22.5H6C6.19891 22.5 6.38968 22.421 6.53033 22.2803C6.67098 22.1397 6.75 21.9489 6.75 21.75V20.25H8.25C8.44891 20.25 8.63968 20.171 8.78033 20.0303C8.92098 19.8897 9 19.6989 9 19.5V18H10.5C10.6988 17.9998 10.8895 17.9207 11.03 17.78L13.688 15.122C13.878 14.933 14.205 14.834 14.594 14.902C15.5149 15.0607 16.4587 15.0264 17.3657 14.8013C18.2727 14.5762 19.123 14.1653 19.8629 13.5945C20.6028 13.0237 21.2161 12.3055 21.6641 11.4854C22.112 10.6653 22.3847 9.76108 22.465 8.83006C22.5453 7.89905 22.4314 6.9615 22.1306 6.07678C21.8297 5.19206 21.3484 4.37945 20.7172 3.6904C20.086 3.00135 19.3185 2.45088 18.4635 2.07383C17.6085 1.69679 16.6845 1.50139 15.75 1.5ZM15.75 4.5C15.5511 4.5 15.3603 4.57902 15.2197 4.71967C15.079 4.86032 15 5.05109 15 5.25C15 5.44891 15.079 5.63968 15.2197 5.78033C15.3603 5.92098 15.5511 6 15.75 6C16.3467 6 16.919 6.23705 17.341 6.65901C17.7629 7.08097 18 7.65326 18 8.25C18 8.44891 18.079 8.63968 18.2197 8.78033C18.3603 8.92098 18.5511 9 18.75 9C18.9489 9 19.1397 8.92098 19.2803 8.78033C19.421 8.63968 19.5 8.44891 19.5 8.25C19.5 7.25544 19.1049 6.30161 18.4017 5.59835C17.6984 4.89509 16.7446 4.5 15.75 4.5Z"
+                      fill="#957909"
+                    />
+                    <path
+                      d="M15.75 4.5C15.5511 4.5 15.3603 4.57902 15.2197 4.71967C15.079 4.86032 15 5.05109 15 5.25C15 5.44891 15.079 5.63968 15.2197 5.78033C15.3603 5.92098 15.5511 6 15.75 6C16.3467 6 16.919 6.23705 17.341 6.65901C17.7629 7.08097 18 7.65326 18 8.25C18 8.44891 18.079 8.63968 18.2197 8.78033C18.3603 8.92098 18.5511 9 18.75 9C18.9489 9 19.1397 8.92098 19.2803 8.78033C19.421 8.63968 19.5 8.44891 19.5 8.25C19.5 7.25544 19.1049 6.30161 18.4017 5.59835C17.6984 4.89509 16.7446 4.5 15.75 4.5Z"
+                      fill="#304653"
+                    />
+                    <path d="M3.1225 16.7779L8.87814 11.0227" stroke="#C6B085" />
+                  </svg>
+                }
+              }
+            </div>
+            <div class="card-text">
+              <span class="outcome-title">{{ outcome.title }}</span>
+              <span class="outcome-desc">{{ outcome.description }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ===== WHO SHOULD ATTEND ===== -->
+    <div class="section attend-section">
+      <h3 class="section-label">WHO SHOULD ATTEND?</h3>
+      <p class="section-desc">
+        By the end of this course, participants will gain the knowledge and practical insights
+        needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM)
+        framework within their organizations. The attendees will have developed the following
+        competencies:
+      </p>
+      <div class="attend-grid">
+        @for (attendee of whoShouldAttend; track $index) {
+          <div class="attend-card">
+            <span class="attend-icon"
+              ><svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#paint0_angular_1_3138_clip_path)" data-figma-skip-parse="true">
+                  <g transform="matrix(0 0.0105 -0.00824912 0 12.0001 12)">
+                    <foreignObject x="-1121.23" y="-1121.23" width="2242.45" height="2242.45"
+                      ><div
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        style="
+                          background: conic-gradient(
+                            from 90deg,
+                            rgba(149, 121, 9, 1) 0deg,
+                            rgba(218, 187, 65, 1) 360deg
+                          );
+                          height: 100%;
+                          width: 100%;
+                          opacity: 1;
+                        "
+                      ></div
+                    ></foreignObject>
+                  </g>
+                </g>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M7.5001 6C7.5001 4.80653 7.9742 3.66193 8.81812 2.81802C9.66203 1.97411 10.8066 1.5 12.0001 1.5C13.1936 1.5 14.3382 1.97411 15.1821 2.81802C16.026 3.66193 16.5001 4.80653 16.5001 6C16.5001 7.19347 16.026 8.33807 15.1821 9.18198C14.3382 10.0259 13.1936 10.5 12.0001 10.5C10.8066 10.5 9.66203 10.0259 8.81812 9.18198C7.9742 8.33807 7.5001 7.19347 7.5001 6ZM3.7511 20.105C3.78482 17.9395 4.66874 15.8741 6.21206 14.3546C7.75538 12.8351 9.83431 11.9834 12.0001 11.9834C14.1659 11.9834 16.2448 12.8351 17.7881 14.3546C19.3315 15.8741 20.2154 17.9395 20.2491 20.105C20.2517 20.2508 20.2117 20.3942 20.1341 20.5176C20.0565 20.641 19.9446 20.7392 19.8121 20.8C17.3613 21.9237 14.6963 22.5037 12.0001 22.5C9.2141 22.5 6.5671 21.892 4.1881 20.8C4.05558 20.7392 3.94367 20.641 3.86606 20.5176C3.78844 20.3942 3.74849 20.2508 3.7511 20.105Z"
+                  data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.58431375026702881,&#34;g&#34;:0.47450983524322510,&#34;b&#34;:0.035294119268655777,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.85576921701431274,&#34;g&#34;:0.73629069328308105,&#34;b&#34;:0.25837641954421997,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.58431375026702881,&#34;g&#34;:0.47450983524322510,&#34;b&#34;:0.035294119268655777,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.85576921701431274,&#34;g&#34;:0.73629069328308105,&#34;b&#34;:0.25837641954421997,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:1.0102258088832213e-15,&#34;m01&#34;:-16.498239517211914,&#34;m02&#34;:20.249216079711914,&#34;m10&#34;:21.000017166137695,&#34;m11&#34;:1.2858802937102797e-15,&#34;m12&#34;:1.50},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"
+                />
+                <defs>
+                  <clipPath id="paint0_angular_1_3138_clip_path">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.5001 6C7.5001 4.80653 7.9742 3.66193 8.81812 2.81802C9.66203 1.97411 10.8066 1.5 12.0001 1.5C13.1936 1.5 14.3382 1.97411 15.1821 2.81802C16.026 3.66193 16.5001 4.80653 16.5001 6C16.5001 7.19347 16.026 8.33807 15.1821 9.18198C14.3382 10.0259 13.1936 10.5 12.0001 10.5C10.8066 10.5 9.66203 10.0259 8.81812 9.18198C7.9742 8.33807 7.5001 7.19347 7.5001 6ZM3.7511 20.105C3.78482 17.9395 4.66874 15.8741 6.21206 14.3546C7.75538 12.8351 9.83431 11.9834 12.0001 11.9834C14.1659 11.9834 16.2448 12.8351 17.7881 14.3546C19.3315 15.8741 20.2154 17.9395 20.2491 20.105C20.2517 20.2508 20.2117 20.3942 20.1341 20.5176C20.0565 20.641 19.9446 20.7392 19.8121 20.8C17.3613 21.9237 14.6963 22.5037 12.0001 22.5C9.2141 22.5 6.5671 21.892 4.1881 20.8C4.05558 20.7392 3.94367 20.641 3.86606 20.5176C3.78844 20.3942 3.74849 20.2508 3.7511 20.105Z"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <div class="card-text">
+              <span class="attendee-role">{{ attendee.role }}</span>
+              <span class="attendee-description">{{ attendee.description }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <div class="section testimonials-section">
+      <h3 class="section-label">TESTIMONIALS</h3>
+      <p class="section-desc">
+        Our training and implementations have transformed thousands of businesses across the
+        continent. This is what a few of them have to say about us.
+      </p>
+      <div class="testimonials-grid">
+        @for (t of testimonials; track $index) {
+          <div class="testimonial-card">
+            <p class="quote">"{{ t.quote }}"</p>
+            <div class="testimonial-author">
+              <div>
+                <span class="author-title">{{ t.name }}</span>
+                <span class="author-role">{{ t.role }}</span>
+                <span class="author-location">{{ t.org }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ===== READY TO TRANSFORM ===== -->
+    <div class="transform-section">
+      <h2>Ready to Transform?</h2>
+      <p>
+        Bring your team in front of the Risk Management masters and equip them with top-class
+        expertise
+      </p>
+      <div class="transform-btns">
+        <button class="btn-primary" (click)="bookCourse()">Book This Course &nbsp; &#8594;</button>
+        <button class="btn-outline" (click)="downloadManual()">
+          Download Course Manual &nbsp;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== BROWSE OTHER PROGRAMS ===== -->
+    <div class="section browse-section">
+      <h3 class="section-label">Browse Other Programs</h3>
+      <div
+        class="browse-grid"
+        #browseGrid
+        (mousedown)="onDragStart($event)"
+        (mousemove)="onDragMove($event)"
+        (mouseup)="onDragEnd()"
+        (mouseleave)="onDragEnd()"
+      >
+        @for (prog of otherPrograms; track $index) {
+          <div class="browse-card" (click)="navigateTo(prog.path)">
+            <div class="card-text">
+              <span class="prog-title">{{ prog.title }}</span>
+              <span class="prog-desc">{{ prog.description }}</span>
+            </div>
+            <span class="arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12.75 15L15.75 12M15.75 12L12.75 9M15.75 12H8.25M21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z"
+                  stroke="#3F3C36"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

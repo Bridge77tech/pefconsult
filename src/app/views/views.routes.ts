@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { Home } from "./home/home";
 import { About } from "./about/about";
 import { Services } from "./services/services";
+import { EnterpriseRiskManagement } from "./enterprise-risk-management/enterprise-risk-management";
 
 export const viewsRoutes: Routes = [
     // Home
@@ -11,7 +12,7 @@ export const viewsRoutes: Routes = [
         data: {title: 'home'}
     },
 
-    // redirect to home page 
+    // redirect to home page
     {
         path: '',
         redirectTo: 'home',
@@ -28,5 +29,11 @@ export const viewsRoutes: Routes = [
         path: 'about',
         component: About,
         data: {title: 'about'}
+    },
+    {
+    path: 'enterprise-risk-management',
+    component: EnterpriseRiskManagement,
+    data: {title: 'Enterprise Risk Management'}
     }
+
 ];

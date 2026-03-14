@@ -147,6 +147,6 @@ export class Services {
   ];
 
   onButtonClick(path: string) {
-    console.log('Navigating to:', path);
+    this._route.navigate([path]);
   }
 }
