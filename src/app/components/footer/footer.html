@@ -1,74 +1,95 @@
 <section class="footer">
-    <div class="footer-main-content">
-        <div class="left-section">
-            <div class="branding">
-                <h1 class="company-name">PATRICK FISCIAN <br> <span>CONSULTING</span> </h1>
-            </div>
-            
-            <div class="email-subscription">
-                <div class="subscription-form">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email here" 
-                        class="email-input"
-                    >
-                    <button class="request-button">Request Course Book</button>
-                </div>
-                <p class="disclaimer">
-                    By sending your email, you agree to allow us send you messages via email
-                </p>
-            </div>
+  <div class="footer-main-content">
+    <div class="left-section">
+      <div class="branding">
+        <h1 class="company-name">
+          PATRICK FISCIAN <br />
+          <span>CONSULTING</span>
+        </h1>
+      </div>
 
-            <div class="navigation-buttons desktop" style="display:flex;gap:24px;justify-content:space-between;width:70%;margin-top:24px;">
-                <button class="nav-btn" (click)="navigateTo('/home')" style="flex:1;max-width:none;">Home</button>
-                <button class="nav-btn" (click)="navigateTo('/about')" style="flex:1;max-width:none;">About Us</button>
-                <button class="nav-btn" (click)="navigateTo('/services')" style="flex:1;max-width:none;">Services</button>
-            </div>
+      <div class="email-subscription">
+        <div class="subscription-form">
+          <input type="email" placeholder="Enter your email here" class="email-input" />
+          <button class="request-button">Request Course Book</button>
         </div>
+        <p class="disclaimer">
+          By sending your email, you agree to allow us send you messages via email
+        </p>
+      </div>
 
-        <div class="right-section">
-            <div class="contact-section">
-                <h2 class="contact-heading">Get In Touch!</h2>
-                <p class="contact-description">
-                    Our customer service reps are available around the clock to attend to your every need! 
-                    Reach out to us and we will get back to you with a tailored, well planned solution
-                </p>
-                
-                <form class="contact-form">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        class="form-input"
-                    >
-                    <textarea 
-                        placeholder="Type your message" 
-                        class="form-textarea"
-                        rows="4"
-                    ></textarea>
-                    <app-custom-button 
-                    [label]="'Send you message'"
-                    [labelFontSize]="16"
-                    ></app-custom-button>
-                </form>
-            </div>
-
-            <div class="navigation-buttons mobile" style="display:flex;gap:16px;justify-content:space-between;width:100%;margin-top:16px;">
-                <button class="nav-btn" (click)="navigateTo('/home')" style="flex:1;max-width:none;">Home</button>
-                <button class="nav-btn" (click)="navigateTo('/about')" style="flex:1;max-width:none;">About Us</button>
-                <button class="nav-btn" (click)="navigateTo('/services')" style="flex:1;max-width:none;">Services</button>
-            </div>
-        </div>
+      <div
+        class="navigation-buttons desktop"
+        style="
+          display: flex;
+          gap: 24px;
+          justify-content: space-between;
+          width: 70%;
+          margin-top: 24px;
+        "
+      >
+        <button class="nav-btn" (click)="navigateTo('/home')" style="flex: 1; max-width: none">
+          Home
+        </button>
+        <button class="nav-btn" (click)="navigateTo('/about')" style="flex: 1; max-width: none">
+          About Us
+        </button>
+        <button class="nav-btn" (click)="navigateTo('/services')" style="flex: 1; max-width: none">
+          Services
+        </button>
+      </div>
     </div>
 
-    <div class="footer-bottom">
-        <div class="footer-item address">
-            <p>35 Patrice Lumumba Road, Airport Residential Area, Accra.</p>
-        </div>
-        <div class="footer-item phone">
-            <p>Phone: <a href="tel:+233208141985">+233 20 8141985</a> / <a href="tel:+233263012514">+233 26 301 2514</a></p>
-        </div>
-        <div class="footer-item email">
-            <p>Email: <a href="mailto:info@pefconsult.com">info@pefconsult.com</a></p>
-        </div>
+    <div class="right-section">
+      <div class="contact-section">
+        <h2 class="contact-heading">Get In Touch!</h2>
+        <p class="contact-description">
+          Our customer service reps are available around the clock to attend to your every need!
+          Reach out to us and we will get back to you with a tailored, well planned solution
+        </p>
+
+        <form class="contact-form">
+          <input type="email" placeholder="Enter your email" class="form-input" />
+          <textarea placeholder="Type your message" class="form-textarea" rows="4"></textarea>
+          <app-custom-button [label]="'Send you message'" [labelFontSize]="16"></app-custom-button>
+        </form>
+      </div>
+
+      <div
+        class="navigation-buttons mobile"
+        style="
+          display: flex;
+          gap: 16px;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 16px;
+        "
+      >
+        <button class="nav-btn" (click)="navigateTo('/home')" style="flex: 1; max-width: none">
+          Home
+        </button>
+        <button class="nav-btn" (click)="navigateTo('/about')" style="flex: 1; max-width: none">
+          About Us
+        </button>
+        <button class="nav-btn" (click)="navigateTo('/services')" style="flex: 1; max-width: none">
+          Services
+        </button>
+      </div>
     </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-item address">
+      <p>35 Patrice Lumumba Road, Airport Residential Area, Accra.</p>
+    </div>
+    <div class="footer-item phone">
+      <p>
+        Phone: <a href="tel:+233208141985">+233 20 8141985</a> /
+        <a href="tel:+233263012514">+233 26 301 2514</a>
+      </p>
+    </div>
+    <div class="footer-item email">
+      <p>Email: <a href="mailto:info@pefconsult.com">info@pefconsult.com</a></p>
+    </div>
+  </div>
 </section>

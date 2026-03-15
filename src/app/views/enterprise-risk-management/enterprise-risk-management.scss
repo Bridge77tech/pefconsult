@@ -53,16 +53,16 @@ section {
       width: 90%;
       margin: 0 auto theme-get(spaces, md);
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 5px;
 
       .carousel-track {
         display: flex;
         gap: 16px;
-        width: max-content;         // expands to fit all 8 slides naturally
+        width: max-content;
         animation: carousel-scroll 14s linear infinite;
 
         &:hover {
-          animation-play-state: paused; // pause on hover for readability
+          animation-play-state: paused;
         }
 
         .carousel-slide {
@@ -73,7 +73,6 @@ section {
             height: 300px;
             object-fit: cover;
             display: block;
-            border-radius: 8px;
           }
         }
       }
@@ -83,8 +82,6 @@ section {
         .carousel-slide img { height: 200px; }
       }
     }
-
-    // 4 slides × (380px + 16px gap) = 1584px per set → translate left by that amount
     @keyframes carousel-scroll {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-1584px); }
@@ -170,7 +167,6 @@ section {
         position: relative;
         overflow: hidden;
 
-        // All text content sits above the ellipses
         & > * {
           position: relative;
           z-index: 1;
@@ -502,12 +498,27 @@ section {
         flex-direction: row;
         gap: theme-get(spaces, sm);
         overflow-x: auto;
-// space for scrollbar
+        padding-bottom: theme-get(spaces, sm);
         scroll-snap-type: x mandatory;
 
-        // hide scrollbar visually but keep functionality
-        &::-webkit-scrollbar { display:none; }
-        scrollbar-width: none;
+        // Custom scrollbar styling
+        &::-webkit-scrollbar {
+          height: 6px;
+          display: block;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: theme-get(colors, primary);
+          border-radius: 10px;
+        }
+
+        scrollbar-width: thin;
+        scrollbar-color: theme-get(colors, primary) #f1f1f1;
 
         .browse-card {
           flex-shrink: 0;
@@ -563,5 +574,120 @@ section {
       }
     }
 
+    // ===== CUSTOM DOWNLOAD MODAL =====
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 450px;
+      border-radius: 20px;
+      position: relative;
+      padding: theme-get(spaces, lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(theme-get(colors, primary), 0.1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      color: theme-get(colors, primary);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .modal-body {
+      text-align: center;
+
+      .modal-icon {
+        margin-bottom: theme-get(spaces, md);
+        color: theme-get(colors, primary);
+        display: inline-flex;
+        padding: 20px;
+        background: rgba(theme-get(colors, primary), 0.05);
+        border-radius: 50%;
+        animation: iconPulse 2s infinite;
+
+        svg {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      h3 {
+        margin-bottom: theme-get(spaces, sm);
+        color: theme-get(colors, primary);
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      p {
+        margin-bottom: theme-get(spaces, sm);
+        color: #4b5563;
+        line-height: 1.6;
+
+        strong {
+          color: theme-get(colors, primary);
+        }
+
+        &.secondary-text {
+          font-size: 0.9rem;
+          opacity: 0.8;
+          margin-bottom: theme-get(spaces, md);
+        }
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-size: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 15px -3px rgba(theme-get(colors, primary), 0.2);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes iconPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0.2); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(theme-get(colors, primary), 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0); }
+    }
   }
 }

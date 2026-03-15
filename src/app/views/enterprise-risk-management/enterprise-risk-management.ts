@@ -14,6 +14,8 @@ export class EnterpriseRiskManagement {
 
   @ViewChild('browseGrid') browseGridRef!: ElementRef<HTMLElement>;
 
+  showDownloadModal = false;
+
   // drag-to-scroll state (browse grid)
   private isDragging = false;
   private dragStartX = 0;
@@ -124,11 +126,15 @@ export class EnterpriseRiskManagement {
   ];
 
   bookCourse() {
-    document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = 'mailto:info@pefconsult.com?subject=Inquiry: Enterprise Risk Management Course';
   }
 
   downloadManual() {
-    alert('Course manual download coming soon!');
+    this.showDownloadModal = true;
+  }
+
+  closeModal() {
+    this.showDownloadModal = false;
   }
 
   navigateTo(path: string) {
