@@ -22,7 +22,6 @@ section {
       background-color: theme-get(colors, backgroundColor);
       width: 100%;
 
-
       .page-title {
         font-family: 'Satoshi', sans-serif;
         font-weight: 500;
@@ -42,15 +41,19 @@ section {
 
       @include respond-to(mobile) {
         padding: 80px theme-get(spaces, main-app-space-mobile) 30px;
-        .page-title { font-size: theme-get(fontSizes, lg); }
-        .page-subtitle { font-size: theme-get(fontSizes, s); }
+        .page-title {
+          font-size: theme-get(fontSizes, lg);
+        }
+        .page-subtitle {
+          font-size: theme-get(fontSizes, s);
+        }
       }
     }
 
     // ===== CAROUSEL (auto-scrolling marquee) =====
     .carousel-section {
       position: relative;
-      width: 90%;
+      width: 86%;
       margin: 0 auto theme-get(spaces, md);
       overflow: hidden;
       border-radius: 5px;
@@ -79,21 +82,26 @@ section {
 
       @include respond-to(mobile) {
         width: 95%;
-        .carousel-slide img { height: 200px; }
+        .carousel-slide img {
+          height: 200px;
+        }
       }
     }
     @keyframes carousel-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-1584px); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-1584px);
+      }
     }
-
 
     // ===== CTA BUTTONS =====
     .cta-section {
       display: flex;
       gap: theme-get(spaces, sm);
       justify-content: center;
-      padding-top:  70px;
+      padding-top: 70px;
       padding-bottom: theme-get(spaces, sm);
       padding-left: theme-get(spaces, main-app-space);
       padding-right: theme-get(spaces, main-app-space);
@@ -115,7 +123,9 @@ section {
       border-radius: 6px;
       font-size: theme-get(fontSizes, xs);
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition:
+        background 0.2s,
+        transform 0.1s;
       font-weight: theme-get(weights, semiBold);
 
       &:hover {
@@ -150,10 +160,11 @@ section {
       &.dark {
         color: white;
         border-color: white;
-        &:hover { background: rgba(255,255,255,0.15); }
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
       }
     }
-
 
     // ===== COURSE OVERVIEW =====
     .course-overview {
@@ -181,7 +192,7 @@ section {
           width: 320px;
           height: 320px;
           border-radius: 50%;
-          background: #E5BDAB;
+          background: #e5bdab;
           z-index: 0;
         }
 
@@ -194,13 +205,13 @@ section {
           width: 320px;
           height: 320px;
           border-radius: 50%;
-          background: #6D3700;
+          background: #6d3700;
           z-index: 0;
         }
 
         .overview-badge {
           display: inline-block;
-          background: #F0EADA;
+          background: #f0eada;
           border: 1px solid rgba(255, 255, 255, 0.3);
           border-radius: 4px;
           padding: 0.25rem 0.8rem;
@@ -222,7 +233,7 @@ section {
         p {
           font-size: theme-get(fontSizes, xs);
           line-height: 1.7;
-          color: rgba(255,255,255,0.85);
+          color: rgba(255, 255, 255, 0.85);
           max-width: 700px;
           margin-bottom: theme-get(spaces, md);
         }
@@ -231,15 +242,14 @@ section {
           display: flex;
           gap: theme-get(spaces, md);
           flex-wrap: wrap;
-          padding-top:  45px;
+          padding-top: 45px;
 
           .stat {
             font-size: theme-get(fontSizes, s);
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             display: inline-flex;
             align-items: center;
             gap: 6px;
-
           }
         }
       }
@@ -248,7 +258,9 @@ section {
         padding: theme-get(spaces, md) theme-get(spaces, main-app-space-mobile);
         .overview-card {
           padding: theme-get(spaces, md);
-          h2 { font-size: theme-get(fontSizes, md); }
+          h2 {
+            font-size: theme-get(fontSizes, md);
+          }
         }
       }
     }
@@ -291,7 +303,7 @@ section {
           align-items: center;
           gap: theme-get(spaces, sm);
           padding: theme-get(spaces, md);
-          background: #F5F5E1;
+          background: #f5f5e1;
           border-radius: 12px;
           border: 1px solid theme-get(colors, borderColor);
 
@@ -324,7 +336,6 @@ section {
           }
         }
 
-
         @include respond-to(tablet) {
           grid-template-columns: 1fr;
         }
@@ -339,7 +350,7 @@ section {
         gap: theme-get(spaces, sm);
 
         .attend-card {
-          background: #F5F5E1;
+          background: #f5f5e1;
           border-radius: 12px;
           padding: 7px;
           border: 1px solid theme-get(colors, borderColor);
@@ -352,7 +363,7 @@ section {
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            font-size: theme-get(fontSizes, sm)
+            font-size: theme-get(fontSizes, sm);
           }
 
           .card-text {
@@ -441,7 +452,6 @@ section {
             color: theme-get(colors, textColor);
             line-height: 1.4;
           }
-
         }
 
         @include respond-to(tablet) {
@@ -452,7 +462,7 @@ section {
 
     // ===== READY TO TRANSFORM =====
     .transform-section {
-      background: #E0DAC926;
+      background: #e0dac926;
       padding: theme-get(spaces, xl) theme-get(spaces, main-app-space);
       display: flex;
       flex-direction: column;
@@ -486,10 +496,11 @@ section {
 
       @include respond-to(mobile) {
         padding: theme-get(spaces, lg) theme-get(spaces, main-app-space-mobile);
-        h2 { font-size: theme-get(fontSizes, md); }
+        h2 {
+          font-size: theme-get(fontSizes, md);
+        }
       }
     }
-
 
     // ===== BROWSE OTHER PROGRAMS =====
     .browse-section {
@@ -533,11 +544,15 @@ section {
           gap: theme-get(spaces, sm);
           cursor: grab;
           background: white;
-          transition: border-color 0.2s, background 0.2s;
+          transition:
+            border-color 0.2s,
+            background 0.2s;
           scroll-snap-align: start;
           user-select: none;
 
-          &:active { cursor: grabbing; }
+          &:active {
+            cursor: grabbing;
+          }
 
           .card-text {
             display: flex;
@@ -675,19 +690,38 @@ section {
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes modalSlideUp {
-      from { opacity: 0; transform: translateY(30px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     @keyframes iconPulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0.2); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(theme-get(colors, primary), 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0); }
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0.2);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 15px rgba(theme-get(colors, primary), 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(theme-get(colors, primary), 0);
+      }
     }
   }
 }
