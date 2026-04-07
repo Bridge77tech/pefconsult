@@ -3,22 +3,22 @@
         <div class="hero-section">
             <img [src]="_images.serviceHeroBgImg" alt="">
             <div class="content">
-                <p>SOLUTIONS THAT MOVE YOUR BUSINESS FORWARD</p>
-                <small>
-                    Our consulting services help organizations 
-                    anticipate risks, strengthen governance and 
-                    improve decision-making. Browse through our 
-                    carefully curated, expert-led training courses 
-                    designed to empower your organization with 
-                    actionable strategies and compliance excellence. 
-                    We support your organization in achieving 
+                <p #heroTitle>SOLUTIONS THAT MOVE YOUR BUSINESS FORWARD</p>
+                <small #heroSubtitle>
+                    Our consulting services help organizations
+                    anticipate risks, strengthen governance and
+                    improve decision-making. Browse through our
+                    carefully curated, expert-led training courses
+                    designed to empower your organization with
+                    actionable strategies and compliance excellence.
+                    We support your organization in achieving
                     lasting excellence at every level.
                 </small>
             </div>
         </div>
 
         <div class="body col-container">
-            <div class="service">
+            <div class="service" #serviceIntro>
                 <h3>Expert Services, Stronger organizations</h3>
                 <p>
                     Our services span enterprise risk, audit, compliance
@@ -30,7 +30,7 @@
                 </p>
             </div>
             <div class="services-list">
-                <div class="service-item">
+                <div class="service-item" #svcItem>
                     <app-service-container
                     [label]="'Enterprise and Operational Risk Management'"
                     [description]="'We Help Businesses Identify, Assess, and Manage Key Risk, Building Resilient Systems That Safeguard Value And Ensure Stability in Dynamic Operating Environments.'"
@@ -47,7 +47,7 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item">
+                <div class="service-item" #svcItem>
                     <app-service-container
                     [label]="'Corporate Governance & Board Effectivenes'"
                     [description]="'We strengthen governance structures and leadership oversight, helping boards operate with clarity, accountability, and confidence in a rapidly evolving regulatory landscape.'"
@@ -64,7 +64,7 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item">
+                <div class="service-item" #svcItem>
                     <app-service-container
                     [label]="'Strategy & Organized Performance'"
                     [description]="'We support organizations in shaping clear, competitive strategies that drive growth, sharpen focus, and enable sustained performance across all levels.'"
@@ -81,7 +81,7 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item">
+                <div class="service-item" #svcItem>
                     <app-service-container
                     [label]="'Information Systems, IT Governance and Audit'"
                     [description]="'We provide guidance and assurance across IT environments, empowering organizations to manage technology risks, strengthen controls, and align systems with enterprise objectives.'"
@@ -99,7 +99,7 @@
                     </app-service-container>
                 </div>
             </div>
-            <div class="make-move">
+            <div class="make-move" #makeMoveRef>
                 <p>Make The Move Towards Better Decisions</p>
                 <small>
                     Transform uncertainty to opportunity with 

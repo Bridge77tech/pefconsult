@@ -60,6 +60,11 @@ section {
           font-weight: theme-get(fontWeights, bold);
           font-family: 'Graduate', serif;
           text-align: center;
+          opacity: 0;
+
+          &.hero-animate {
+            animation: svcSlideDown 1.1s ease-out 0.2s both;
+          }
         }
 
         @include respond-to(tablet) {
@@ -89,6 +94,11 @@ section {
           font-weight: theme-get(fontWeights, normal);
           text-align: center;
           max-width: 900px;
+          opacity: 0;
+
+          &.hero-animate-sub {
+            animation: svcSlideDown 1.1s ease-out 0.55s both;
+          }
 
           @include respond-to(mobile) {
             text-align: start;
@@ -144,6 +154,14 @@ section {
         padding: 7%;
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1.1s ease-out, transform 1.1s ease-out;
+
+        &.fade-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
         @include respond-to(mobile) {
           padding: theme-get(spaces, md);
@@ -179,6 +197,17 @@ section {
         display: flex;
         flex-direction: column;
         width: 100%;
+
+        .service-item {
+          opacity: 0;
+          transform: translateY(60px);
+          transition: opacity 1.1s ease-out, transform 1.1s ease-out;
+
+          &.fade-up {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       }
 
       .make-move {
@@ -186,6 +215,14 @@ section {
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
         padding: 7%;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1.1s ease-out, transform 1.1s ease-out;
+
+        &.fade-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -212,5 +249,16 @@ section {
         }
       }
     }
+  }
+}
+
+@keyframes svcSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
