@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceCard } from '../../components/services/service-card/service-card';
 import { ServiceContainer } from '../../components/services/service-container/service-container';
@@ -10,9 +11,60 @@ import { ImageService } from '../../services/general/image-service';
   templateUrl: './services.html',
   styleUrl: './services.scss',
 })
-export class Services {
+export class Services implements AfterViewInit, OnDestroy {
   _images = inject(ImageService);
   _route = inject(Router);
+  platformId = inject(PLATFORM_ID);
+
+  @ViewChild('heroTitle') heroTitle!: ElementRef;
+  @ViewChild('heroSubtitle') heroSubtitle!: ElementRef;
+  @ViewChild('serviceIntro') serviceIntro!: ElementRef;
+  @ViewChild('makeMoveRef') makeMoveRef!: ElementRef;
+  @ViewChildren('svcItem') svcItems!: QueryList<ElementRef>;
+
+  private observers: IntersectionObserver[] = [];
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Hero title & subtitle — CSS keyframe animations handle these on load
+    this.heroTitle?.nativeElement.classList.add('hero-animate');
+    this.heroSubtitle?.nativeElement.classList.add('hero-animate-sub');
+
+    const inViewOpts: IntersectionObserverInit = { threshold: 0.3 };
+
+    // Intro block
+    this.observeOnce(this.serviceIntro, 'fade-up', inViewOpts);
+
+    // Each service item observed individually with staggered delay via CSS
+    this.svcItems?.forEach((item, i) => {
+      const node = item.nativeElement as HTMLElement;
+      node.style.transitionDelay = `${i * 0.2}s`;
+      this.observeOnce(item, 'fade-up', inViewOpts);
+    });
+
+    // Make the move
+    this.observeOnce(this.makeMoveRef, 'fade-up', inViewOpts);
+  }
+
+  private observeOnce(ref: ElementRef | undefined, cls: string, opts: IntersectionObserverInit) {
+    const node = ref?.nativeElement;
+    if (!node) return;
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          node.classList.add(cls);
+          o.unobserve(node);
+        }
+      });
+    }, opts);
+    obs.observe(node);
+    this.observers.push(obs);
+  }
+
+  ngOnDestroy(): void {
+    this.observers.forEach(o => o.disconnect());
+  }
 
   riskManagement = [
     {

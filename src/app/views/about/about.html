@@ -3,12 +3,12 @@
     <div class="hero-section">
       <img [src]="_images.aboutHeroBgImg" alt="" />
       <div class="content">
-        <h2>PROFESSIONAL RISK MANAGEMENT TRAINING AND CONSULTANCY</h2>
-        <P
+        <h2 #heroTitle>PROFESSIONAL RISK MANAGEMENT TRAINING AND CONSULTANCY</h2>
+        <p #heroSubtitle
           >PF Consults offers risk management training and consultancy for business. We are
           continually shaping the future of business, side by side with you. We equip leaders and
           organizations with the knowledge and systems needed to turn risk into opportunity. Our
-          expertise ensures your strategies remain sound, secure, and sustainable.</P
+          expertise ensures your strategies remain sound, secure, and sustainable.</p
         >
       </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="body company">
       <h3 class="topic">OUR COMPANY</h3>
       <div class="row">
-        <div class="left">
+        <div class="left" #companyLeft>
           <h2 class="title">How We Started</h2>
           <p class="content">
             Patrick Fiscian Consulting is a home-grown indigenous firm made of professionals who are
@@ -27,7 +27,7 @@
             covering a wide range of industries
           </p>
         </div>
-        <div class="right">
+        <div class="right" #companyRight>
           <img [src]="_images.africanMan" alt="" class="img1" />
           <img [src]="_images.femaleImage" alt="" class="img2" />
           <img [src]="_images.groupImage" alt="" class="img3" />
@@ -37,7 +37,7 @@
 
     <div class="body our-mission">
       <div class="mission-row">
-        <div class="card">
+        <div class="card" #missionCard>
           <img [src]="_images.yelloBackground" alt="" />
           <div class="content">
             <h2 class="title">OUR MISSION</h2>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="grid-view">
-          <div class="card1">
+          <div class="card1" #gridItem>
             <app-text-content
               [icon]="_images.professionIcon"
               [titleText]="'Professional Excellence'"
@@ -64,7 +64,7 @@
               "
             ></app-text-content>
           </div>
-          <div class="card1">
+          <div class="card1" #gridItem>
             <app-text-content
               [icon]="_images.diversityIcon"
               [titleText]="'Diversity'"
@@ -73,7 +73,7 @@
               "
             ></app-text-content>
           </div>
-          <div class="card1">
+          <div class="card1" #gridItem>
             <app-text-content
               [icon]="_images.clientIcon"
               [titleText]="'Client Centric'"
@@ -82,7 +82,7 @@
               "
             ></app-text-content>
           </div>
-          <div class="card1">
+          <div class="card1" #gridItem>
             <app-text-content
               [icon]="_images.expertiseIcon"
               [titleText]="'Proven Expertise'"
@@ -99,12 +99,12 @@
       <div class="content">
         <h2>MESSAGE FROM OUR CHIEF EXECUTIVE OFFICER</h2>
         <div class="message-row">
-          <div class="image">
+          <div class="image" #msgImage>
             <img [src]="_images.ceoPicuture" alt="" />
             <small>Dr. Patrick Edwin Fiscian</small>
             <p>CEO & Lead Consultant</p>
           </div>
-          <div class="con">
+          <div class="con" #msgContent>
             <p>
               Patrick Fiscian Consulting is a home-grown management consulting firm made up of
               seasoned professionals with extensive experience in the banking and financial services

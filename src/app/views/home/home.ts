@@ -1,6 +1,5 @@
 import { isPlatformBrowser, UpperCasePipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, NgZone, OnDestroy, OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { CustomButton } from "../../components/buttons/custom-button/custom-button";
 import { ImageService } from '../../services/general/image-service';
 
@@ -20,13 +19,18 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChild('titleRef') titleRef!: ElementRef;
   @ViewChild('contentRef') contentRef!: ElementRef;
+  @ViewChild('globeRef') globeRef!: ElementRef;
+  @ViewChild('whoWeAreLeft') whoWeAreLeft!: ElementRef;
+  @ViewChild('whoWeAreMiddle') whoWeAreMiddle!: ElementRef;
+  @ViewChild('whoWeAreRight') whoWeAreRight!: ElementRef;
+  @ViewChild('servicesLeft') servicesLeft!: ElementRef;
+  @ViewChild('servicesMiddle') servicesMiddle!: ElementRef;
+  @ViewChild('servicesRight') servicesRight!: ElementRef;
   @ViewChildren('countBox', { read: ElementRef }) countBoxes!: QueryList<ElementRef>;
 
   animatedCounts: number[] = [];
   hasAnimated: boolean[] = [];
   private observer?: IntersectionObserver;
-  private countBoxesSub?: Subscription;
-  private animatedEls = new WeakSet<HTMLElement>();
 
 
   ngOnInit(): void {
@@ -42,23 +46,80 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
 
     if (!this.countBoxes) return;
   
+    // Shared observer options — fires only when element is well inside the viewport
+    const inViewOpts: IntersectionObserverInit = { threshold: 0.4, rootMargin: '0px 0px -120px 0px' };
+
     // Title animation
     const titleEl = this.titleRef?.nativeElement;
     if (titleEl) {
       const titleObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => entry.isIntersecting && titleEl.classList.add('visible'));
-      });
+      }, inViewOpts);
       titleObserver.observe(titleEl);
     }
-  
+
     // Content animation
     const contentEl = this.contentRef?.nativeElement;
     if (contentEl) {
       const contentObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => entry.isIntersecting && contentEl.classList.add('visible-right'));
-      });
+      }, inViewOpts);
       contentObserver.observe(contentEl);
     }
+
+    // Globe bubble animation
+    const globeEl = this.globeRef?.nativeElement;
+    if (globeEl) {
+      const globeObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            globeEl.classList.add('bubble-in');
+            obs.unobserve(globeEl);
+          }
+        });
+      }, inViewOpts);
+      globeObserver.observe(globeEl);
+    }
+
+    // Who We Are — panel animations
+    const whoWeArePanels: { el: ElementRef | undefined; cls: string }[] = [
+      { el: this.whoWeAreLeft,   cls: 'slide-from-left'  },
+      { el: this.whoWeAreMiddle, cls: 'slide-from-top'   },
+      { el: this.whoWeAreRight,  cls: 'slide-from-right' },
+    ];
+    whoWeArePanels.forEach(({ el, cls }) => {
+      const node = el?.nativeElement;
+      if (!node) return;
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            node.classList.add(cls);
+            o.unobserve(node);
+          }
+        });
+      }, inViewOpts);
+      obs.observe(node);
+    });
+
+    // Our Services — panel animations
+    const servicesPanels: { el: ElementRef | undefined; cls: string }[] = [
+      { el: this.servicesLeft,   cls: 'slide-from-left'  },
+      { el: this.servicesMiddle, cls: 'slide-from-top'   },
+      { el: this.servicesRight,  cls: 'slide-from-right' },
+    ];
+    servicesPanels.forEach(({ el, cls }) => {
+      const node = el?.nativeElement;
+      if (!node) return;
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            node.classList.add(cls);
+            o.unobserve(node);
+          }
+        });
+      }, inViewOpts);
+      obs.observe(node);
+    });
   
     /** -------------------------------
      *  COUNT ANIMATION FIX
@@ -70,15 +131,6 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
 
     // delay ensures @for has rendered
     setTimeout(() => this.initCounterObserver(), 50);
-
-    // run once after view init (short delay to let bindings populate)
-    setTimeout(() => this.setupCountObserver(), 50);
-
-    // watch for dynamic changes (e.g., after async data arrives)
-    this.countBoxesSub = this.countBoxes.changes.subscribe(() => {
-      // small delay to let DOM update
-      setTimeout(() => this.setupCountObserver(), 50);
-    });
   }
   
   ngOnDestroy(): void {
@@ -86,34 +138,10 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
     if (this.observer) {
       this.observer.disconnect();
     }
-    if (this.countBoxesSub) this.countBoxesSub.unsubscribe();
-
     // remove helper class when leaving Home
     if (isPlatformBrowser(this.platformId)) {
       try { document.body.classList.remove('show-move'); } catch {}
     }
-  }
-
-  private easeOut(t: number) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  private animateNumber(el: HTMLElement, target: number, duration = 1200) {
-    if (this.animatedEls.has(el)) return; // already animated
-    this.animatedEls.add(el);
-
-    const start = performance.now();
-    const startVal = 0;
-    const step = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = this.easeOut(progress);
-      const current = Math.round(startVal + (target - startVal) * eased);
-      el.textContent = `${current} +`;
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    };
-    requestAnimationFrame(step);
   }
 
   private initCounterObserver() {
@@ -134,7 +162,7 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.4, rootMargin: '0px 0px -120px 0px' }
     );
 
     this.countBoxes.forEach(box => observer.observe(box.nativeElement));
@@ -154,40 +182,6 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
     }, 30);
   }
 
-  private setupCountObserver() {
-    // cleanup existing observer to avoid duplicates
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = undefined;
-    }
-
-    const boxes = this.countBoxes ? this.countBoxes.toArray() : [];
-    if (!boxes.length) return;
-
-    this.observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const box = entry.target as HTMLElement;
-        const p = box.querySelector('p') as HTMLElement | null;
-        if (!p) {
-          obs.unobserve(box);
-          return;
-        }
-        const raw = p.getAttribute('data-target') || p.textContent || '0';
-        const target = parseInt(String(raw).replace(/\D/g, ''), 10) || 0;
-        this.animateNumber(p, target);
-        obs.unobserve(box);
-      });
-    }, { threshold: 0.4 });
-
-    boxes.forEach(q => {
-      const el = q.nativeElement as HTMLElement;
-      const p = el.querySelector('p') as HTMLElement | null;
-      if (p) p.textContent = '0 +';
-      this.observer!.observe(el);
-    });
-  }
-  
   clients = [
     {
       name: 'Vin Consult',
