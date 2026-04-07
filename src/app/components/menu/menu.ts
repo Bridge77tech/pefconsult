@@ -1,4 +1,5 @@
-import { Component, inject, HostListener, ElementRef } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, HostListener, ElementRef, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomButton } from "../buttons/custom-button/custom-button";
 import { ImageService } from '../../services/general/image-service';
@@ -11,7 +12,8 @@ import { ImageService } from '../../services/general/image-service';
 })
 export class Menu {
 
-  private readonly router = inject(Router)
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
   isShowMenu: boolean = false;
 
   _images = inject(ImageService);
@@ -39,6 +41,14 @@ export class Menu {
 
   protected onMenuClick() {
     this.isShowMenu = !this.isShowMenu;
+  }
+
+  scrollToFooter() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const footer = document.querySelector('app-footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   @HostListener('document:click', ['$event'])

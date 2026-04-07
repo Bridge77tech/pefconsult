@@ -32,7 +32,7 @@
             <p>{{ ourReachContent }}</p>
           </div>
         </div>
-        <div class="globe-image">
+        <div class="globe-image" #globeRef>
           <img [src]="_images.globalMapImage" alt="" />
         </div>
         <small>Trusted by companies in over 30 countries across the globe.</small>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="container-row">
-          <div class="cont-1">
+          <div class="cont-1" #whoWeAreLeft>
             <div class="title">Who we are</div>
             <small>
               PEF Consulting was founded in response 
@@ -94,13 +94,13 @@
                operating on the continent.
             </small>
           </div>
-          <div class="cont-2">
+          <div class="cont-2" #whoWeAreMiddle>
             <img [src]="_images.diversityAndInclusive" alt="diversity" class="diversity-image" />
             <div class="text">
               <p>Diversity and Inclusion</p>
             </div>
           </div>
-          <div class="cont-3">
+          <div class="cont-3" #whoWeAreRight>
             <div class="number">
               <h3>50+ years</h3>
             </div>
@@ -125,7 +125,7 @@
         </p>
       </div>
       <div class="container-row-1">
-        <div class="cont-1">
+        <div class="cont-1" #servicesLeft>
           <img [src]="_images.riskManagementIcon" alt="" />
           <div class="sub">Market Risk Management</div>
           <div class="content">
@@ -133,7 +133,7 @@
             and exposed to the banking environment. We bring to bear a rich experience and exposure
           </div>
         </div>
-        <div class="cont-2">
+        <div class="cont-2" #servicesMiddle>
           <img [src]="_images.peopleIcon" alt="" />
           <div class="sub">Corporate Governance, Risk and Compliance</div>
           <div class="content">
@@ -142,7 +142,7 @@
             accountability, transparency, and long-term resilience.
           </div>
         </div>
-        <div class="cont-3">
+        <div class="cont-3" #servicesRight>
           <img [src]="_images.developmentIcon" alt="" />
           <div class="sub">Corporate Strategy Development</div>
           <div class="content">
@@ -151,33 +151,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="container-row-1">
-        <div class="cont-2">
-          <img [src]="_images.peopleIcon" alt="" />
-          <div class="sub">Corporate Governance, Risk and Compliance</div>
-          <div class="content">
-            GRC strategies help align processes and people to foster ethical conduct, strengthen
-            coordination, for sustainable business success. A well-structured GRC framework promotes
-            accountability, transparency, and long-term resilience.
-          </div>
-        </div>
-        <div class="cont-1">
-          <img [src]="_images.riskManagementIcon" alt="" />
-          <div class="sub">Market Risk Management</div>
-          <div class="content">
-            ...across our home-grown indigenous firm made of professionals who are well-experienced
-            and exposed to the banking environment. We bring to bear a rich experience and exposure
-          </div>
-        </div>
-        <div class="cont-3">
-          <img [src]="_images.developmentIcon" alt="" />
-          <div class="sub">Corporate Strategy Development</div>
-          <div class="content">
-            ...across our home-grown indigenous firm made of professionals who are well-experienced
-            and exposed to the banking environment. We bring to bear a rich experience and exposure
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </section>
