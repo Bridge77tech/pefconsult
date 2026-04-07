@@ -59,7 +59,7 @@ section {
         background: linear-gradient(0deg, #000000 22.49%, rgba(0, 8, 33, 0) 59.79%);
 
         @include respond-to(mobile) {
-          height: 30rem;
+          height: 30rem; /* ~51% of 932px iPhone 17 Pro Max viewport */
         }
       }
 
@@ -101,20 +101,20 @@ section {
         }
 
         @include respond-to(mobile) {
-          left: 3.5%;
-          right: 3.5%;
+          left: 5%;
+          right: 5%;
           align-items: start;
 
           h2 {
-            font-size: theme-get(fontSizes, sm);
+            font-size: theme-get(fontSizes, md);
             text-align: start;
-            max-width: 300px;
+            max-width: 380px;
           }
 
           p {
             font-size: theme-get(fontSizes, xs);
             text-align: start;
-            font-weight: 200;
+            font-weight: 300;
           }
         }
       }
@@ -126,7 +126,7 @@ section {
       width: 100%;
 
       @include respond-to(mobile) {
-        padding: 3.5%;
+        padding: 3% 5%;
       }
 
       .topic {

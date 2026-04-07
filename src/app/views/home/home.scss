@@ -17,7 +17,7 @@ section {
       height: 40rem;
 
       @include respond-to(mobile) {
-        height: 21.5rem;
+        height: 30rem; /* ~52% of 932px iPhone 17 Pro Max viewport */
       }
 
       .laptop {
@@ -32,7 +32,7 @@ section {
         z-index: 0;
 
         @include respond-to(mobile) {
-          height: 20rem;
+          height: 30rem;
         }
       }
 
@@ -90,9 +90,9 @@ section {
         max-width: 900px;
 
         @include respond-to(mobile) {
-          top: 35%;
-          left: 3.5%;
-          right: 3.5%;
+          top: 25%;
+          left: 5%;
+          right: 5%;
           max-width: none;
         }
 
@@ -111,7 +111,7 @@ section {
             animation: heroSlideDown 1.1s ease-out 0.15s both;
 
             @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, xs);
+              font-size: theme-get(fontSizes, sm);
             }
           }
 
@@ -125,7 +125,7 @@ section {
             animation: heroSlideDown 1.1s ease-out 0.45s both;
 
             @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, sm);
+              font-size: theme-get(fontSizes, lg);
               line-height: 1.1;
             }
           }
@@ -170,12 +170,14 @@ section {
 
           @include respond-to(mobile) {
             margin-top: theme-get(spaces, sm);
-            padding: theme-get(spaces, xxs);
-            justify-content: space-between;
+            padding: theme-get(spaces, s) theme-get(spaces, xs);
+            gap: theme-get(spaces, xs);
+            flex-wrap: nowrap;
+            align-items: center;
 
             p {
               font-size: theme-get(fontSizes, s);
-              white-space: normal;
+              white-space: nowrap;
             }
           }
         }
@@ -184,9 +186,11 @@ section {
 
     .mobi {
       display: none;
-      padding: 0 3.5%;
+      padding: 0 5%;
       color: theme-get(colors, textColor);
       font-size: theme-get(fontSizes, xs);
+      line-height: 1.6;
+      margin-top: theme-get(spaces, sm);
 
       @include respond-to(mobile) {
         display: block;
