@@ -5,10 +5,10 @@
   flex-direction: column;
   gap: theme-get(spaces, lg);
   width: 100%;
-  padding: 7%;
+  padding: 3.5% 7%;
 
   @include respond-to(tablet) {
-    padding: 3.5%;
+    padding: 1.75% 3.5%;
   }
 
   .content {

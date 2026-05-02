@@ -382,8 +382,8 @@
         @for (prog of otherPrograms; track $index) {
           <div class="browse-card" (click)="navigateTo(prog.path)">
             <div class="card-text">
-              <span class="prog-title">{{ prog.title }}</span>
-              <span class="prog-desc">{{ prog.description }}</span>
+              <span class="prog-title">{{ prog.category }}</span>
+              <span class="prog-desc">{{ prog.label }}</span>
             </div>
             <span class="arrow">
               <svg

@@ -1,6 +1,7 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageService } from '../../services/general/image-service';
+import { CourseBrowseItem, CourseDataService } from '../../services/course/course-data.service';
 
 @Component({
   selector: 'app-enterprise-risk-management',
@@ -8,13 +9,15 @@ import { ImageService } from '../../services/general/image-service';
   templateUrl: './enterprise-risk-management.html',
   styleUrl: './enterprise-risk-management.scss',
 })
-export class EnterpriseRiskManagement {
+export class EnterpriseRiskManagement implements OnInit {
   _images = inject(ImageService);
   _router = inject(Router);
+  private courseDataService = inject(CourseDataService);
 
   @ViewChild('browseGrid') browseGridRef!: ElementRef<HTMLElement>;
 
   showDownloadModal = false;
+  otherPrograms: CourseBrowseItem[] = [];
 
   // drag-to-scroll state (browse grid)
   private isDragging = false;
@@ -99,31 +102,9 @@ export class EnterpriseRiskManagement {
     },
   ];
 
-  otherPrograms = [
-    {
-      title: 'Enterprise & Operational Risk Management',
-      description: 'Enterprise Risk Management',
-      path: '/enterprise-risk-management',
-    },
-
-    {
-      title: 'Enterprise & Operational Risk Management',
-      description: 'Operational Risk Management',
-      path: '/operational-risk-management',
-    },
-
-    {
-      title: 'Enterprise & Operational Risk Management',
-      description: 'Credit Risk Management',
-      path: '/credit-risk-management',
-    },
-
-    {
-      title: 'Enterprise & Operational Risk Management',
-      description: 'Fraud Risk Management',
-      path: '/fraud-risk-management',
-    },
-  ];
+  ngOnInit() {
+    this.otherPrograms = this.courseDataService.getBrowseListExcluding('enterprise-risk-management');
+  }
 
   bookCourse() {
     window.location.href = 'mailto:info@pefconsult.com?subject=Inquiry: Enterprise Risk Management Course';
