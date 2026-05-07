@@ -1,38 +1,7 @@
 @use '../../../styles/theme' as *;
 
-/* hero helpers for About page */
-.hero-section {
-  position: relative;
-
-  .hero-section,
-  img.hero-section,
-  .bg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-size: cover;
-    background-position: center;
-    transition:
-      filter 600ms ease,
-      transform 600ms ease,
-      opacity 600ms ease;
-    filter: blur(16px);
-    transform: scale(1.02);
-    opacity: 0.98;
-  }
-
-  .hero-section.loaded,
-  img.hero-section.loaded,
-  .bg-image.loaded {
-    filter: blur(0);
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
 section {
   width: 100%;
-  padding: auto;
   box-sizing: border-box;
   background-color: theme-get(colors, backgroundColor);
 
@@ -42,10 +11,10 @@ section {
     gap: theme-get(spaces, md);
     width: 100%;
 
-    @include respond-to(mobile) {
-      gap: theme-get(spaces, xs);
-    }
+    @include respond-to(tablet)  { gap: theme-get(spaces, sm); }
+    @include respond-to(mobile)  { gap: theme-get(spaces, xs); }
 
+    // ─── HERO ───────────────────────────────────────────────────────────────
     .hero-section {
       position: relative;
       z-index: 0;
@@ -59,9 +28,8 @@ section {
         object-fit: cover;
         object-position: center;
 
-        @include respond-to(mobile) {
-          height: 30rem; /* ~51% of 932px iPhone 17 Pro Max viewport */
-        }
+        @include respond-to(tablet) { height: 32rem; }
+        @include respond-to(mobile) { height: 26rem; }
       }
 
       &::after {
@@ -109,15 +77,26 @@ section {
           }
         }
 
-        @include respond-to(mobile) {
+        @include respond-to(tablet) {
+          bottom: 5%;
           left: 5%;
           right: 5%;
-          align-items: start;
+          gap: theme-get(spaces, xs);
+
+          h2 { font-size: theme-get(fontSizes, md); }
+          p  { font-size: theme-get(fontSizes, xs); }
+        }
+
+        @include respond-to(mobile) {
+          bottom: 4%;
+          left: 5%;
+          right: 5%;
+          align-items: flex-start;
 
           h2 {
-            font-size: theme-get(fontSizes, md);
+            font-size: theme-get(fontSizes, sm);
             text-align: start;
-            max-width: 380px;
+            max-width: 100%;
           }
 
           p {
@@ -129,39 +108,50 @@ section {
       }
     }
 
+    // ─── SHARED BODY WRAPPER ─────────────────────────────────────────────────
     .body {
       margin: 0 auto;
       padding: 7%;
       width: 100%;
+      box-sizing: border-box;
 
-      @include respond-to(mobile) {
-        padding: 3% 5%;
-      }
+      @include respond-to(laptop) { padding: 5% 6%; }
+      @include respond-to(tablet) { padding: 4% 5%; }
+      @include respond-to(mobile) { padding: 3% 5%; }
 
       .topic {
         font-size: theme-get(fontSizes, s);
         color: theme-get(colors, primary);
+        margin-bottom: theme-get(spaces, sm);
 
         @include respond-to(mobile) {
+          font-size: theme-get(fontSizes, xs);
           padding: theme-get(spaces, xs) 0;
-          font-size: them-get(fontSizes, sm);
         }
       }
+    }
 
+    // ─── OUR COMPANY ─────────────────────────────────────────────────────────
+    .company {
       .row {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         gap: theme-get(spaces, md);
-        margin: 0 auto;
+
+        @include respond-to(tablet) {
+          flex-direction: column;
+          gap: theme-get(spaces, lg);
+        }
 
         @include respond-to(mobile) {
           flex-direction: column;
+          gap: theme-get(spaces, md);
         }
 
         .left {
-          width: 60%;
+          width: 55%;
           display: flex;
           flex-direction: column;
           gap: theme-get(spaces, sm);
@@ -174,18 +164,16 @@ section {
             transform: translateX(0);
           }
 
-          @include respond-to(mobile) {
-            width: 100%;
-          }
+          @include respond-to(tablet) { width: 100%; }
+          @include respond-to(mobile) { width: 100%; }
 
           .title {
             font-size: theme-get(fontSizes, md);
             font-weight: theme-get(weights, semiBold);
             letter-spacing: -0.04em;
 
-            @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, xs);
-            }
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, sm); }
+            @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
           }
 
           .content {
@@ -194,10 +182,9 @@ section {
             color: theme-get(colors, textColor);
             letter-spacing: -0.04em;
             font-weight: 300;
+            line-height: 1.7;
 
-            @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, s);
-            }
+            @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
           }
         }
 
@@ -206,8 +193,7 @@ section {
           gap: theme-get(spaces, xs);
           align-items: center;
           justify-content: center;
-          width: 40%;
-          margin-right: 3.5%;
+          width: 45%;
           opacity: 0;
           transform: translateX(60px);
           transition: opacity 1.1s ease-out 0.2s, transform 1.1s ease-out 0.2s;
@@ -217,23 +203,44 @@ section {
             transform: translateX(0);
           }
 
+          @include respond-to(tablet) {
+            width: 100%;
+            margin-right: 0;
+          }
+
           @include respond-to(mobile) {
             flex-direction: column;
+            width: 100%;
+            margin-right: 0;
           }
 
           .img1 {
             height: 297px;
             border-radius: theme-get(spaces, sm);
             object-fit: cover;
+
+            @include respond-to(laptop) { height: 220px; }
+            @include respond-to(tablet) { height: 200px; flex: 1; }
+            @include respond-to(mobile) { height: 180px; width: 100%; }
           }
 
           .img2 {
             height: 362px;
+            object-fit: cover;
+
+            @include respond-to(laptop) { height: 260px; }
+            @include respond-to(tablet) { height: 200px; flex: 1; }
+            @include respond-to(mobile) { height: 180px; width: 100%; }
+          }
+
+          .img3 {
+            display: none;
           }
         }
       }
     }
 
+    // ─── OUR MISSION ─────────────────────────────────────────────────────────
     .our-mission {
       width: 100%;
 
@@ -244,6 +251,15 @@ section {
         width: 100%;
         gap: theme-get(spaces, lg);
 
+        @include respond-to(laptop) {
+          gap: theme-get(spaces, md);
+        }
+
+        @include respond-to(tablet) {
+          flex-direction: column;
+          gap: theme-get(spaces, md);
+        }
+
         @include respond-to(mobile) {
           flex-direction: column;
           gap: theme-get(spaces, md);
@@ -252,6 +268,7 @@ section {
         .card {
           width: 45%;
           height: 48vh;
+          min-height: 320px;
           position: relative;
           z-index: 0;
           opacity: 0;
@@ -263,16 +280,25 @@ section {
             transform: scale(1);
           }
 
+          @include respond-to(tablet) {
+            width: 100%;
+            height: 280px;
+            min-height: unset;
+          }
+
           @include respond-to(mobile) {
             width: 100%;
-            height: 311.3px;
+            height: 260px;
+            min-height: unset;
           }
 
           img {
-            position: relative;
+            position: absolute;
             z-index: 0;
             height: 100%;
             width: 100%;
+            object-fit: cover;
+            border-radius: theme-get(spaces, sm);
           }
 
           .content {
@@ -288,6 +314,11 @@ section {
             padding: theme-get(spaces, xl) theme-get(spaces, sm);
             gap: theme-get(spaces, lg);
 
+            @include respond-to(tablet) {
+              padding: theme-get(spaces, lg) theme-get(spaces, md);
+              gap: theme-get(spaces, sm);
+            }
+
             @include respond-to(mobile) {
               padding: theme-get(spaces, lg) theme-get(spaces, xs);
               gap: theme-get(spaces, sm);
@@ -299,34 +330,26 @@ section {
               border-radius: theme-get(spaces, xs);
               font-size: theme-get(fontSizes, xs);
               color: theme-get(colors, primary);
-
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, s);
-              }
             }
 
             p {
               text-align: center;
               font-size: theme-get(fontSizes, sm);
               color: theme-get(colors, whiteColor);
-              letter-spacing: 0%;
               font-weight: theme-get(weights, bold);
 
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xs);
-              }
+              @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
             }
 
             small {
               font-size: theme-get(fontSizes, xs);
               font-weight: theme-get(weights, semiBold);
-              letter-spacing: 0%;
               text-align: center;
               color: theme-get(colors, whiteColor);
 
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, s);
-              }
+              @include respond-to(tablet) { font-size: theme-get(fontSizes, s); }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
             }
           }
         }
@@ -334,9 +357,26 @@ section {
         .grid-view {
           width: 50%;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: repeat(2, 1fr);
           column-gap: theme-get(spaces, lg);
           row-gap: theme-get(spaces, xxxl);
+
+          @include respond-to(laptop) {
+            row-gap: theme-get(spaces, xl);
+          }
+
+          @include respond-to(tablet) {
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: theme-get(spaces, md);
+            column-gap: theme-get(spaces, md);
+          }
+
+          @include respond-to(mobile) {
+            width: 100%;
+            grid-template-columns: 1fr;
+            row-gap: theme-get(spaces, md);
+          }
 
           .card1 {
             opacity: 0;
@@ -348,22 +388,14 @@ section {
               transform: translateY(0);
             }
           }
-
-          @include respond-to(mobile) {
-            width: 70%;
-            row-gap: theme-get(spaces, md);
-          }
         }
       }
     }
 
+    // ─── CEO MESSAGE ─────────────────────────────────────────────────────────
     .message-section {
       .content {
         width: 100%;
-
-        @include respond-to(mobile) {
-          padding: 0rem;
-        }
 
         h2 {
           font-size: 0.9rem;
@@ -371,17 +403,31 @@ section {
           text-transform: uppercase;
           color: #9c6b2f;
           margin-bottom: 3rem;
+
+          @include respond-to(tablet) { margin-bottom: 1.5rem; }
+          @include respond-to(mobile) { margin-bottom: 1rem; }
         }
 
         .message-row {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
+          gap: theme-get(spaces, lg);
+
+          @include respond-to(tablet) {
+            flex-direction: column;
+            align-items: center;
+            gap: theme-get(spaces, md);
+          }
+
+          @include respond-to(mobile) {
+            flex-direction: column;
+            gap: theme-get(spaces, sm);
+          }
 
           .image {
-            height: 30vh;
-            width: 30%;
-            margin-right: 2rem;
+            width: 28%;
+            flex-shrink: 0;
             opacity: 0;
             transform: translateX(-60px);
             transition: opacity 1.1s ease-out, transform 1.1s ease-out;
@@ -391,16 +437,19 @@ section {
               transform: translateX(0);
             }
 
+            @include respond-to(tablet) {
+              width: 60%;
+              margin-right: 0;
+            }
+
             @include respond-to(mobile) {
-              height: auto;
               width: 100%;
               margin-right: 0;
-              margin-bottom: 1rem;
             }
 
             img {
-              height: 100%;
-              width: auto;
+              width: 100%;
+              height: auto;
               border-radius: 8px;
               object-fit: cover;
             }
@@ -410,46 +459,41 @@ section {
               font-weight: 600;
               font-size: 1rem;
               color: #111;
-              margin-top: 0.5rem;
+              margin-top: 0.75rem;
+
+              @include respond-to(mobile) { font-size: 0.9rem; }
             }
 
             p {
               margin: 0.25rem 0 0;
               font-size: 0.9rem;
               color: #666;
+
+              @include respond-to(mobile) { font-size: 0.8rem; }
             }
           }
 
-          @media (max-width: 900px) {
-            flex-direction: column;
-            align-items: center;
-            row-gap: 2rem;
-          }
-        }
+          .con {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 1.1s ease-out 0.2s, transform 1.1s ease-out 0.2s;
 
-        .con {
-          width: 70%;
-          opacity: 0;
-          transform: translateX(60px);
-          transition: opacity 1.1s ease-out 0.2s, transform 1.1s ease-out 0.2s;
+            &.slide-from-right {
+              opacity: 1;
+              transform: translateX(0);
+            }
 
-          &.slide-from-right {
-            opacity: 1;
-            transform: translateX(0);
-          }
+            @include respond-to(tablet) { width: 100%; }
+            @include respond-to(mobile) { width: 100%; }
 
-          @include respond-to(mobile) {
-            width: 100%;
-          }
+            p {
+              font-size: theme-get(fontSizes, xs);
+              line-height: 1.8;
+              color: #444;
 
-          p {
-            font-size: theme-get(fontSizes, xs);
-            line-height: 1.8;
-            color: #444;
-
-            @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, s);
-              width: 100%;
+              @include respond-to(tablet) { font-size: theme-get(fontSizes, s); }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
             }
           }
         }

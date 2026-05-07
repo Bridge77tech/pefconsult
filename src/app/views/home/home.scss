@@ -2,27 +2,25 @@
 
 section {
   width: 100%;
-  padding: auto;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 
   .home-body {
     width: 100%;
-    padding: auto;
+    overflow-x: hidden;
 
+    // ─── HERO ───────────────────────────────────────────────────────────────
     .hero-section {
       position: relative;
       z-index: 0;
       width: 100%;
-      height: 40rem;
+      height: 22rem;
+      overflow: hidden;
 
-      @include respond-to(mobile) {
-        height: 30rem; /* ~52% of 932px iPhone 17 Pro Max viewport */
-      }
-
-      .laptop {
-        display: block;
-      }
+      @include respond-to(tablet) { height: 20rem; }
+      @include respond-to(mobile) { height: 60svh; min-height: 18rem; max-height: 24rem; }
 
       img {
         width: 100%;
@@ -30,30 +28,22 @@ section {
         object-fit: cover;
         position: relative;
         z-index: 0;
-
-        @include respond-to(mobile) {
-          height: 30rem;
-        }
       }
 
-      /* lazy blur-up for large hero images */
+      /* lazy blur-up */
       .hero-section,
       img.hero-section {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
-        transition:
-          filter 600ms ease,
-          transform 600ms ease,
-          opacity 600ms ease;
+        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
         filter: blur(18px);
         transform: scale(1.02);
         opacity: 0.98;
         will-change: filter, transform, opacity;
       }
 
-      /* when the image is fully loaded, add `loaded` to remove blur */
       .hero-section.loaded,
       img.hero-section.loaded {
         filter: blur(0);
@@ -61,15 +51,11 @@ section {
         opacity: 1;
       }
 
-      /* fallback: if using background-image, support same pattern */
       .bg-image {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        transition:
-          filter 600ms ease,
-          transform 600ms ease,
-          opacity 600ms ease;
+        transition: filter 600ms ease, transform 600ms ease, opacity 600ms ease;
         filter: blur(18px);
         transform: scale(1.02);
         opacity: 0.98;
@@ -88,12 +74,27 @@ section {
         z-index: 3;
         box-sizing: border-box;
         max-width: 900px;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: theme-get(spaces, xs);
+        padding: theme-get(spaces, md) theme-get(spaces, lg);
+
+        @include respond-to(tablet) {
+          top: 20%;
+          left: 5%;
+          right: 5%;
+          max-width: 100%;
+          padding: theme-get(spaces, sm) theme-get(spaces, md);
+        }
 
         @include respond-to(mobile) {
-          top: 25%;
+          top: auto;
+          bottom: 8%;
           left: 5%;
           right: 5%;
           max-width: none;
+          padding: theme-get(spaces, sm);
         }
 
         .content-header {
@@ -101,39 +102,40 @@ section {
           flex-direction: column;
           gap: theme-get(spaces, xs);
 
-          @include respond-to(mobile) {
-            gap: theme-get(spaces, xs);
-          }
+          @include respond-to(mobile) { gap: theme-get(spaces, xxs); }
 
           small {
             font-size: theme-get(fontSizes, sm);
             color: theme-get(colors, primary);
             animation: heroSlideDown 1.1s ease-out 0.15s both;
 
-            @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, sm);
-            }
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+            @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
           }
 
           h3 {
             font-size: theme-get(fontSizes, xl);
             font-family: 'Graduate', serif;
-            color: theme-get(textColorBrown);
+            color: theme-get(colors, textColorBrown);
             margin: 0 0 theme-get(spaces, xs) 0;
             line-height: 1.05;
             max-width: 100%;
             animation: heroSlideDown 1.1s ease-out 0.45s both;
 
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: 1.1; }
             @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, lg);
-              line-height: 1.1;
+              font-size: theme-get(fontSizes, sm);
+              line-height: 1.2;
+              margin-bottom: theme-get(spaces, xxs);
+              word-break: break-word;
+              overflow-wrap: break-word;
+              max-width: 100%;
             }
           }
 
           p {
             font-family: Satoshi;
             font-weight: theme-get(weights, normal);
-            font-style: Light;
             font-size: theme-get(fontSizes, sm);
             line-height: 27px;
             letter-spacing: -4%;
@@ -141,9 +143,8 @@ section {
             color: theme-get(colors, textColor);
             animation: heroSlideDown 1.1s ease-out 0.75s both;
 
-            @include respond-to(mobile) {
-              display: none;
-            }
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); max-width: 100%; }
+            @include respond-to(mobile) { display: none; }
           }
         }
 
@@ -168,22 +169,27 @@ section {
             white-space: nowrap;
           }
 
-          @include respond-to(mobile) {
-            margin-top: theme-get(spaces, sm);
+          @include respond-to(tablet) {
+            margin-top: theme-get(spaces, md);
             padding: theme-get(spaces, s) theme-get(spaces, xs);
             gap: theme-get(spaces, xs);
-            flex-wrap: nowrap;
-            align-items: center;
 
-            p {
-              font-size: theme-get(fontSizes, s);
-              white-space: nowrap;
-            }
+            p { font-size: theme-get(fontSizes, s); }
+          }
+
+          @include respond-to(mobile) {
+            margin-top: theme-get(spaces, xs);
+            padding: theme-get(spaces, s) theme-get(spaces, sm);
+            gap: 0;
+            width: fit-content;
+
+            p { display: none; }
           }
         }
       }
     }
 
+    // ─── MOBILE DESCRIPTION ─────────────────────────────────────────────────
     .mobi {
       display: none;
       padding: 0 5%;
@@ -192,169 +198,155 @@ section {
       line-height: 1.6;
       margin-top: theme-get(spaces, sm);
 
-      @include respond-to(mobile) {
-        display: block;
-      }
+      @include respond-to(mobile) { display: block; }
     }
 
+    // ─── SHARED BODY WRAPPER ─────────────────────────────────────────────────
     .body {
       padding: 4% 7%;
+      box-sizing: border-box;
 
-      @include respond-to(mobile) {
-        padding: 2.5% 3.5%;
+      @include respond-to(tablet) { padding: 4% 5%; }
+      @include respond-to(mobile) { padding: 3% 5%; }
+    }
+
+    // ─── OUR REACH ──────────────────────────────────────────────────────────
+    .body .our-reach {
+      display: flex;
+      flex-direction: column;
+      gap: theme-get(spaces, xl);
+
+      @include respond-to(tablet)  { gap: theme-get(spaces, lg); }
+      @include respond-to(mobile)  { gap: theme-get(spaces, md); }
+
+      .top-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        @include respond-to(tablet) { flex-direction: column; gap: theme-get(spaces, sm); }
+        @include respond-to(mobile) { flex-direction: column; gap: theme-get(spaces, sm); }
+
+        .title {
+          width: 70%;
+          opacity: 0;
+          transform: translateX(-50px);
+          transition: all 1.1s ease-out;
+
+          p {
+            color: theme-get(colors, primary);
+            font-size: theme-get(fontSizes, sm);
+            @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
+          }
+
+          @include respond-to(tablet) { width: 100%; }
+          @include respond-to(mobile) { width: 100%; }
+        }
+
+        .title.visible { opacity: 1; transform: translateX(0); }
+
+        .content {
+          width: 100%;
+          opacity: 0;
+          transform: translateX(60px);
+          transition: all 1s ease-in-out;
+
+          p {
+            font-size: theme-get(fontSizes, xs);
+            color: theme-get(colors, textColor);
+          }
+        }
+
+        .content.visible-right { opacity: 1; transform: translateX(0); }
       }
 
-      .our-reach {
-        display: flex;
-        flex-direction: column;
-        gap: theme-get(spaces, xl);
+      .globe-image {
+        padding: 0 theme-get(spaces, xl);
+        opacity: 0;
+        transform: scale(0.7);
+        transition: none;
 
-        .top-content {
+        &.bubble-in {
+          animation: globeBubble 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @include respond-to(tablet) { padding: 0 theme-get(spaces, md); }
+        @include respond-to(mobile) { padding: 0; }
+
+        img { width: 100%; height: auto; }
+      }
+
+      small {
+        font-size: theme-get(fontSizes, sm);
+        color: theme-get(colors, primary);
+
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
+      }
+
+      .clients {
+        width: 100%;
+        overflow: hidden;
+
+        .cli-row {
           display: flex;
-          justify-content: space-between;
           width: 100%;
-
-          @include respond-to(mobile) {
-            flex-direction: column;
-            gap: theme-get(spaces, sm);
-          }
-
-          .title {
-            width: 70%;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 1.1s ease-out;
-
-            p {
-              color: theme-get(colors, primary);
-              font-size: theme-get(fontSizes, sm);
-
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xs);
-              }
-            }
-          }
-
-          .title.visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          .content {
-            width: 100%;
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 1s ease-in-out;
-
-            p {
-              font-size: theme-get(fontSizes, xs);
-              letter-spacing: 0%;
-              color: theme-get(colors, textColor);
-            }
-          }
-
-          .content.visible-right {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        .globe-image {
-          padding: 0px theme-get(spaces, xl);
-          opacity: 0;
-          transform: scale(0.7);
-          transition: none;
-
-          &.bubble-in {
-            animation: globeBubble 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-          }
-
-          @include respond-to(mobile) {
-            padding: 0px;
-          }
-        }
-
-        small {
-          font-size: theme-get(fontSizes, sm);
-          letter-spacing: 0px;
-          color: theme-get(colors, primary);
-        }
-
-        .clients {
-          width: 100%;
+          align-items: center;
+          gap: theme-get(spaces, xxl);
+          animation: slideLoop 20s linear infinite;
           overflow: hidden;
 
-          .cli-row {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            gap: theme-get(spaces, xxl);
-            animation: slideLoop 20s linear infinite;
-            overflow: hidden;
-
-            @include respond-to(mobile) {
-              gap: theme-get(spaces, xs);
-
-              .client img {
-                height: 64px;
-                width: auto;
-              }
-            }
+          @include respond-to(tablet) { gap: theme-get(spaces, lg); }
+          @include respond-to(mobile) {
+            gap: theme-get(spaces, xs);
+            .client img { height: 48px; width: auto; }
           }
+        }
 
-          @keyframes slideLoop {
-            0% {
-              transform: translateX(100%);
-            }
-            100% {
-              transform: translateX(-100%);
-            }
-          }
+        @keyframes slideLoop {
+          0%   { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
         }
       }
     }
 
+    // ─── FOOTPRINT ───────────────────────────────────────────────────────────
     .footprint {
       width: 100%;
       background-color: theme-get(colors, backgroundColor);
-      margin: 0px;
 
       .content {
         display: flex;
         flex-direction: column;
         gap: theme-get(spaces, md);
 
-        .logo {
-          h3 {
-            color: theme-get(colors, primary);
-            font-size: theme-get(fontSizes, sm);
+        .logo h3 {
+          color: theme-get(colors, primary);
+          font-size: theme-get(fontSizes, sm);
 
-            @include respond-to(mobile) {
-              font-size: theme-get(fontSizes, xs);
-            }
-          }
+          @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
         }
 
         .count-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          flex-wrap: wrap;
+          gap: theme-get(spaces, md);
+
+          @include respond-to(mobile) { gap: theme-get(spaces, sm); }
 
           .count {
-            width: 100%;
+            width: auto;
 
-            p,
-            h3 {
+            p, h3 {
               font-family: 'Graduate', serif;
               color: theme-get(colors, primary);
             }
 
             p {
               font-size: theme-get(fontSizes, xxl);
-
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, md);
-              }
+              @include respond-to(tablet) { font-size: theme-get(fontSizes, xl); }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, md); }
             }
 
             h3 {
@@ -362,15 +354,15 @@ section {
               border-bottom: 2px solid theme-get(colors, primary);
               display: inline-block;
 
-              @include respond-to(mobile) {
-                font-size: theme-get(fontSizes, xxs);
-              }
+              @include respond-to(tablet) { font-size: theme-get(fontSizes, sm); }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, xxs); }
             }
           }
         }
       }
     }
 
+    // ─── WHO WE ARE ─────────────────────────────────────────────────────────
     .who-we-are {
       display: flex;
       flex-direction: column;
@@ -386,31 +378,32 @@ section {
           font-size: theme-get(fontSizes, sm);
           font-weight: theme-get(weights, bold);
 
-          @include respond-to(mobile) {
-            font-size: theme-get(fontSizes, xs);
-          }
+          @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
         }
 
         .sub-text {
           font-size: theme-get(fontSizes, sm);
           font-weight: theme-get(weights, bold);
 
-          @include respond-to(mobile) {
-            font-size: theme-get(fontSizes, xs);
-          }
+          @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+          @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
         }
 
         .container-row {
           display: flex;
           gap: theme-get(spaces, sm);
           width: 100%;
-          align-items: center;
+          align-items: stretch;
           height: 277px;
           margin-top: theme-get(spaces, sm);
 
+          @include respond-to(tablet) {
+            height: auto;
+            flex-wrap: wrap;
+          }
+
           @include respond-to(mobile) {
             flex-direction: column;
-            width: 100%;
             height: auto;
           }
 
@@ -427,9 +420,12 @@ section {
             transform: translateX(-60px);
             transition: opacity 1.1s ease-out, transform 1.1s ease-out;
 
-            &.slide-from-left {
-              opacity: 1;
-              transform: translateX(0);
+            &.slide-from-left { opacity: 1; transform: translateX(0); }
+
+            @include respond-to(tablet) {
+              width: 100%;
+              height: auto;
+              padding: theme-get(spaces, md);
             }
 
             @include respond-to(mobile) {
@@ -441,10 +437,9 @@ section {
               font-size: theme-get(fontSizes, xs);
               color: theme-get(colors, textColor);
               max-width: 800px;
+              line-height: 1.6;
 
-              span {
-                color: theme-get(colors, textColorBrown);
-              }
+              span { color: theme-get(colors, textColorBrown); }
             }
           }
 
@@ -456,9 +451,11 @@ section {
             transform: translateY(-60px);
             transition: opacity 1.1s ease-out 0.25s, transform 1.1s ease-out 0.25s;
 
-            &.slide-from-top {
-              opacity: 1;
-              transform: translateY(0);
+            &.slide-from-top { opacity: 1; transform: translateY(0); }
+
+            @include respond-to(tablet) {
+              width: calc(50% - theme-get(spaces, sm) / 2);
+              height: 240px;
             }
 
             @include respond-to(mobile) {
@@ -467,22 +464,20 @@ section {
               justify-content: center;
               align-items: center;
               flex-direction: column;
-              align-content: center;
             }
 
             .diversity-image {
               z-index: 0;
               width: 100%;
-              height: 277px;
+              height: 100%;
               position: relative;
               border-radius: theme-get(spaces, xs);
-              object-fit: fill;
+              object-fit: cover;
 
               @include respond-to(mobile) {
                 width: 80%;
                 height: 20rem;
                 object-fit: cover;
-                align-content: center;
               }
             }
 
@@ -490,13 +485,12 @@ section {
               z-index: 1;
               position: absolute;
               bottom: 10px;
-              display: flex;
               right: 10px;
               left: 10px;
+              display: flex;
               align-items: center;
               justify-content: center;
               background-color: theme-get(colors, menuBackgroundColor);
-              margin-right: theme-get(spaces, xs);
               border-radius: theme-get(spaces, sm);
               padding: theme-get(spaces, s);
 
@@ -517,9 +511,12 @@ section {
             transform: translateX(60px);
             transition: opacity 1.1s ease-out 0.5s, transform 1.1s ease-out 0.5s;
 
-            &.slide-from-right {
-              opacity: 1;
-              transform: translateX(0);
+            &.slide-from-right { opacity: 1; transform: translateX(0); }
+
+            @include respond-to(tablet) {
+              width: calc(50% - theme-get(spaces, sm) / 2);
+              height: 240px;
+              padding: theme-get(spaces, md);
             }
 
             @include respond-to(mobile) {
@@ -527,22 +524,22 @@ section {
               padding: theme-get(spaces, md);
             }
 
-            .number {
-              h3 {
-                font-size: theme-get(fontSizes, sm);
-                margin-bottom: theme-get(spaces, xs);
-              }
+            .number h3 {
+              font-size: theme-get(fontSizes, sm);
+              margin-bottom: theme-get(spaces, xs);
             }
 
             small {
               color: theme-get(colors, textColor);
               font-size: theme-get(fontSizes, xs);
+              line-height: 1.6;
             }
           }
         }
       }
     }
 
+    // ─── OUR SERVICES ────────────────────────────────────────────────────────
     .services {
       display: flex;
       flex-direction: column;
@@ -553,30 +550,35 @@ section {
         color: theme-get(colors, primary);
         font-size: theme-get(fontSizes, mm);
 
-        @include respond-to(mobile) {
-          font-size: theme-get(fontSizes, xs);
-        }
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
       }
 
-      .sub-content,
-      p {
+      .sub-content, p {
         font-size: theme-get(fontSizes, sm);
         font-weight: theme-get(weights, bold);
+
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
       }
 
       .container-row-1 {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         gap: theme-get(spaces, sm);
         height: 325px;
+
+        @include respond-to(tablet) {
+          height: auto;
+          flex-wrap: wrap;
+        }
 
         @include respond-to(mobile) {
           flex-direction: column;
           height: auto;
-          width: 100%;
         }
 
-        .cont-1 {
+        .cont-1,
+        .cont-3 {
           width: 25%;
           height: 100%;
           border: 2px solid theme-get(colors, borderColor);
@@ -587,23 +589,15 @@ section {
           align-items: center;
           justify-content: center;
           gap: theme-get(spaces, md);
-          opacity: 0;
-          transform: translateX(-60px);
-          transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 
-          &.slide-from-left {
-            opacity: 1;
-            transform: translateX(0);
+          @include respond-to(tablet) {
+            width: calc(50% - theme-get(spaces, sm) / 2);
+            height: 240px;
           }
 
-          @include respond-to(mobile) {
-            width: 100%;
-          }
+          @include respond-to(mobile) { width: 100%; height: auto; padding: theme-get(spaces, md); }
 
-          img {
-            height: 18.33px;
-            width: 40px;
-          }
+          img { height: 40px; width: 40px; }
 
           .content {
             text-align: center;
@@ -612,8 +606,17 @@ section {
           }
         }
 
+        .cont-1 {
+          opacity: 0;
+          transform: translateX(-60px);
+          transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+          &.slide-from-left { opacity: 1; transform: translateX(0); }
+
+          img { height: 18.33px; width: 40px; }
+        }
+
         .cont-2 {
-          width: 60%;
+          width: 50%;
           height: 100%;
           border: 2px solid theme-get(colors, borderColor);
           border-radius: theme-get(spaces, xs);
@@ -627,19 +630,12 @@ section {
           transform: translateY(-60px);
           transition: opacity 0.7s ease-out 0.15s, transform 0.7s ease-out 0.15s;
 
-          &.slide-from-top {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          &.slide-from-top { opacity: 1; transform: translateY(0); }
 
-          @include respond-to(mobile) {
-            width: 100%;
-          }
+          @include respond-to(tablet) { width: 100%; height: auto; order: -1; }
+          @include respond-to(mobile) { width: 100%; height: auto; padding: theme-get(spaces, md); }
 
-          img {
-            height: 40px;
-            width: 40px;
-          }
+          img { height: 40px; width: 40px; }
 
           .content {
             text-align: center;
@@ -649,46 +645,17 @@ section {
         }
 
         .cont-3 {
-          width: 25%;
-          height: 100%;
-          border: 2px solid theme-get(colors, borderColor);
-          border-radius: theme-get(spaces, xs);
-          padding: theme-get(spaces, xs);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: theme-get(spaces, md);
           opacity: 0;
           transform: translateX(60px);
           transition: opacity 0.7s ease-out 0.3s, transform 0.7s ease-out 0.3s;
-
-          &.slide-from-right {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          @include respond-to(mobile) {
-            width: 100%;
-          }
-
-          img {
-            height: 40px;
-            width: 40px;
-          }
-
-          .content {
-            text-align: center;
-            font-size: theme-get(fontSizes, s);
-            color: theme-get(colors, textColor);
-          }
+          &.slide-from-right { opacity: 1; transform: translateX(0); }
         }
       }
     }
   }
 }
 
-/* global loader overlay (page-level) */
+/* ─── Global loader ──────────────────────────────────────────────────────────*/
 .app-loader {
   position: fixed;
   inset: 0;
@@ -696,12 +663,10 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(theme-get(colors, whiteColor), 0.95); /* fallback to light overlay */
+  background-color: rgba(theme-get(colors, whiteColor), 0.95);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
-  transition:
-    opacity 300ms ease,
-    visibility 300ms ease;
+  transition: opacity 300ms ease, visibility 300ms ease;
   visibility: visible;
   opacity: 1;
 
@@ -734,48 +699,21 @@ section {
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes spin        { to { transform: rotate(360deg); } }
 
 @keyframes heroSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes heroSlideLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes globeBubble {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  80% {
-    transform: scale(0.97);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%   { opacity: 0; transform: scale(0.7); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  80%  {             transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
 }

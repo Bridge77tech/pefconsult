@@ -471,6 +471,104 @@
           "path": "/fraud-risk-management"
         }
       ]
+    },
+    {
+      "id": "business-continuity-management",
+      "title": "Business Continuity Management",
+      "route": "/business-continuity-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Business Continuity Management",
+        "subtitle": "Our Business Continuity Management course equips organizations with the tools to identify threats, maintain critical operations, and recover swiftly from disruptions.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "BUSINESS CONTINUITY MANAGEMENT",
+        "description": "Business Continuity Management is defined as a holistic management process that identifies potential threats to an organisation and the impacts to business operations those threats.",
+        "duration": "2 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "By the end of this course, participants will gain the knowledge and practical tools to design, implement, and maintain an effective Business Continuity Management framework. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "icon": "speaker",
+            "title": "Recovery & Resilience Building",
+            "description": "Develop expertise in restoring operations efficiently and strengthening long-term organizational resilience."
+          },
+          {
+            "icon": "person",
+            "title": "Risk & Impact Assessment",
+            "description": "Sharpen your skill in identifying potential disruptions and evaluating their impact on the business."
+          },
+          {
+            "icon": "map",
+            "title": "Business Continuity Planning",
+            "description": "Grow and sharpen your ability to design and implement effective continuity plans for critical operations."
+          },
+          {
+            "icon": "key",
+            "title": "Crisis Response & Coordination",
+            "description": "Build the capacity to respond quickly and coordinate actions during disruptions or emergencies."
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "Designed for professionals responsible for ensuring organizational resilience, including risk, operations, IT, and senior management teams involved in disruption planning and recovery.",
+        "items": [
+          {
+            "role": "Internal Control Professionals",
+            "description": "Teams ensuring controls and safeguarding assets"
+          },
+          {
+            "role": "Internal Audit Professionals",
+            "description": "Professionals who evaluate controls and governance."
+          },
+          {
+            "role": "Risk & Compliance Professionals",
+            "description": "Teams managing risk and compliance adherence."
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us:",
+        "items": [
+          {
+            "quote": "This course gave me a clear, practical understanding of how to build and sustain an effective business continuity framework.",
+            "name": "Mark Oteng Adjei",
+            "role": "CTO, This Financial Institution",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "Highly relevant and well-structured. This course helped our team improve preparedness and response planning for disruptions.",
+            "name": "Angela Ubanu",
+            "role": "Financial Manager, This Financial Institution",
+            "location": "Kampala, Uganda"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Book your place in our Business Continuity Management session and equip your team with world-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Business Continuity Management course module.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": []
     }
   ]
 }

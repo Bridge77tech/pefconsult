@@ -56,4 +56,10 @@ export const viewsRoutes: Routes = [
         data: {title: 'Operational Risk Management Framework', courseId: 'operational-risk-management'}
     },
 
+    {
+        path: 'business-continuity-management',
+        component: Course,
+        data: {title: 'Business Continuity Management', courseId: 'business-continuity-management'}
+    },
+
 ];

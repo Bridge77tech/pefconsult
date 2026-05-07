@@ -21,6 +21,8 @@ section {
     align-items: center;
     position: relative;
     padding: 0.8rem 1.6rem;
+    width: 100%;
+    box-sizing: border-box;
 
     .left-row {
       cursor: pointer;
@@ -40,7 +42,7 @@ section {
     .menu-icon {
       display: none;
 
-      @include respond-to(mobile) {
+      @include respond-to(tablet) {
         display: block;
       }
     }
@@ -48,15 +50,21 @@ section {
     .middle-row {
       display: flex;
       align-items: center;
-      gap: theme-get(spaces, xxl);
+      gap: theme-get(spaces, lg);
 
-      @include respond-to(mobile) {
+      @include respond-to(laptop) {
+        gap: theme-get(spaces, md);
+      }
+
+      @include respond-to(tablet) {
         flex-direction: column;
         position: absolute;
         left: 0;
         right: 0;
         top: calc(100% + theme-get(spaces, s));
         background-color: rgba(theme-get(colors, menuBackgroundColor), 0.95);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
         border-radius: theme-get(spaces, xs);
         padding: theme-get(spaces, s) theme-get(spaces, sm);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
@@ -88,7 +96,7 @@ section {
           }
         }
 
-        @include respond-to(mobile) {
+        @include respond-to(tablet) {
           width: 100%;
           padding: theme-get(spaces, s) theme-get(spaces, sm);
           opacity: 0;
@@ -97,7 +105,7 @@ section {
         }
       }
 
-      @include respond-to(mobile) {
+      @include respond-to(tablet) {
         &.show {
           .menu-item {
             opacity: 1;
@@ -114,7 +122,7 @@ section {
       background-color: theme-get(colors, whiteColor);
       border-radius: theme-get(spaces, xs);
 
-      @include respond-to(mobile) {
+      @include respond-to(tablet) {
         display: none;
       }
 
