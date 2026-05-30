@@ -2,24 +2,21 @@
   <div class="erm-body">
     <!-- ===== HERO: Title & Subtitle ===== -->
     <div class="hero-section">
-      <h1 class="page-title">Enterprise Risk Management</h1>
-      <p class="page-subtitle">
-        Our Enterprise Risk Management consultancy course helps businesses identify, assess and
-        manage risks so they bring your teams and company forward, profitably.
-      </p>
+      <h1 class="page-title">{{ content.pageTitle }}</h1>
+      <p class="page-subtitle">{{ content.pageSubtitle }}</p>
     </div>
 
     <!-- ===== CAROUSEL (auto-scrolling marquee) ===== -->
     <div class="carousel-section">
       <div class="carousel-track">
         <!-- Set 1 -->
-        @for (img of carouselImages; track $index) {
+        @for (img of content.carouselImages; track $index) {
           <div class="carousel-slide">
             <img [src]="img.src" [alt]="img.alt" />
           </div>
         }
         <!-- Set 2 — duplicate for seamless infinite loop -->
-        @for (img of carouselImages; track $index) {
+        @for (img of content.carouselImages; track $index) {
           <div class="carousel-slide">
             <img [src]="img.src" [alt]="img.alt" />
           </div>
@@ -49,18 +46,13 @@
         </svg>
       </button>
     </div>
+
     <!-- ===== COURSE OVERVIEW ===== -->
     <div class="course-overview">
       <div class="overview-card">
         <div class="overview-badge">Course Overview</div>
-        <h2>ENTERPRISE RISK MANAGEMENT</h2>
-        <p>
-          Enterprise Risk Management (ERM) is a holistic approach that organizations use to
-          identify, assess, prioritize, and manage risks across the entire enterprise. ERM involves
-          a coordinated effort to understand and manage risks in a way that aligns with the
-          organization's strategic objectives and enhances its ability to achieve sustainable
-          success.
-        </p>
+        <h2>{{ content.overviewTitle }}</h2>
+        <p>{{ content.overviewBody }}</p>
         <div class="overview-stats">
           <span class="stat">
             <svg
@@ -78,7 +70,7 @@
               <polyline points="12 6 12 12 16 14" />
             </svg>
 
-            &nbsp; Duration: 3 days
+            &nbsp; Duration: {{ content.overviewDuration }}
           </span>
 
           <span class="stat">
@@ -99,7 +91,7 @@
               <line x1="20" y1="20" x2="20" y2="4" />
             </svg>
 
-            &nbsp; Level Executive, Senior and Middle Level Management
+            &nbsp; Level {{ content.overviewLevel }}
           </span>
         </div>
       </div>
@@ -108,14 +100,9 @@
     <!-- ===== EXPECTED OUTCOMES ===== -->
     <div class="section outcomes-section">
       <h3 class="section-label">EXPECTED OUTCOMES</h3>
-      <p class="section-desc">
-        By the end of this course, participants will have the knowledge and practical, mentally
-        needed to understand, implement and utilize a robust Enterprise Risk Management (ERM)
-        framework within their organizations. The attendees will have developed the following
-        competencies:
-      </p>
+      <p class="section-desc">{{ content.outcomesIntro }}</p>
       <div class="outcomes-grid">
-        @for (outcome of expectedOutcomes; track $index) {
+        @for (outcome of content.expectedOutcomes; track $index) {
           <div class="outcome-card">
             <div class="outcome-icon">
               @switch (outcome.icon) {
@@ -253,14 +240,9 @@
     <!-- ===== WHO SHOULD ATTEND ===== -->
     <div class="section attend-section">
       <h3 class="section-label">WHO SHOULD ATTEND?</h3>
-      <p class="section-desc">
-        By the end of this course, participants will gain the knowledge and practical insights
-        needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM)
-        framework within their organizations. The attendees will have developed the following
-        competencies:
-      </p>
+      <p class="section-desc">{{ content.attendeesIntro }}</p>
       <div class="attend-grid">
-        @for (attendee of whoShouldAttend; track $index) {
+        @for (attendee of content.whoShouldAttend; track $index) {
           <div class="attend-card">
             <span class="attend-icon"
               ><svg
@@ -293,7 +275,7 @@
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M7.5001 6C7.5001 4.80653 7.9742 3.66193 8.81812 2.81802C9.66203 1.97411 10.8066 1.5 12.0001 1.5C13.1936 1.5 14.3382 1.97411 15.1821 2.81802C16.026 3.66193 16.5001 4.80653 16.5001 6C16.5001 7.19347 16.026 8.33807 15.1821 9.18198C14.3382 10.0259 13.1936 10.5 12.0001 10.5C10.8066 10.5 9.66203 10.0259 8.81812 9.18198C7.9742 8.33807 7.5001 7.19347 7.5001 6ZM3.7511 20.105C3.78482 17.9395 4.66874 15.8741 6.21206 14.3546C7.75538 12.8351 9.83431 11.9834 12.0001 11.9834C14.1659 11.9834 16.2448 12.8351 17.7881 14.3546C19.3315 15.8741 20.2154 17.9395 20.2491 20.105C20.2517 20.2508 20.2117 20.3942 20.1341 20.5176C20.0565 20.641 19.9446 20.7392 19.8121 20.8C17.3613 21.9237 14.6963 22.5037 12.0001 22.5C9.2141 22.5 6.5671 21.892 4.1881 20.8C4.05558 20.7392 3.94367 20.641 3.86606 20.5176C3.78844 20.3942 3.74849 20.2508 3.7511 20.105Z"
-                  data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.58431375026702881,&#34;g&#34;:0.47450983524322510,&#34;b&#34;:0.035294119268655777,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.85576921701431274,&#34;g&#34;:0.73629069328308105,&#34;b&#34;:0.25837641954421997,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.58431375026702881,&#34;g&#34;:0.47450983524322510,&#34;b&#34;:0.035294119268655777,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.85576921701431274,&#34;g&#34;:0.73629069328308105,&#34;b&#34;:0.25837641954421997,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:1.0102258088832213e-15,&#34;m01&#34;:-16.498239517211914,&#34;m02&#34;:20.249216079711914,&#34;m10&#34;:21.000017166137695,&#34;m11&#34;:1.2858802937102797e-15,&#34;m12&#34;:1.50},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"
+                  data-figma-gradient-fill="..."
                 />
                 <defs>
                   <clipPath id="paint0_angular_1_3138_clip_path">
@@ -323,7 +305,7 @@
         continent. This is what a few of them have to say about us.
       </p>
       <div class="testimonials-grid">
-        @for (t of testimonials; track $index) {
+        @for (t of content.testimonials; track $index) {
           <div class="testimonial-card">
             <p class="quote">"{{ t.quote }}"</p>
             <div class="testimonial-author">
@@ -340,11 +322,8 @@
 
     <!-- ===== READY TO TRANSFORM ===== -->
     <div class="transform-section">
-      <h2>Ready to Transform?</h2>
-      <p>
-        Bring your team in front of the Risk Management masters and equip them with top-class
-        expertise
-      </p>
+      <h2>{{ content.transformHeading }}</h2>
+      <p>{{ content.transformSubtext }}</p>
       <div class="transform-btns">
         <button class="btn-primary" (click)="bookCourse()">Book This Course &nbsp; &#8594;</button>
         <button class="btn-outline" (click)="downloadManual()">
@@ -379,7 +358,7 @@
         (mouseup)="onDragEnd()"
         (mouseleave)="onDragEnd()"
       >
-        @for (prog of otherPrograms; track $index) {
+        @for (prog of content.otherPrograms; track $index) {
           <div class="browse-card" (click)="navigateTo(prog.path)">
             <div class="card-text">
               <span class="prog-title">{{ prog.category }}</span>
@@ -435,19 +414,16 @@
             <h3>Coming Soon!</h3>
             <p>
               We are currently putting the finishing touches on the
-              <strong>Enterprise Risk Management</strong> course manual.
+              <strong>{{ content.courseManualName }}</strong> course manual.
             </p>
             <p class="secondary-text">
               Check back soon or contact us on our email
-              <a href="mailto:[info@pefconsult.com]">
-                <strong>
-                  info@pefconsult.com
-                </strong>
-              </a> to be notified when it's ready.
+              <a [href]="'mailto:' + content.bookingEmail">
+                <strong>{{ content.bookingEmail }}</strong>
+              </a>
+              to be notified when it's ready.
             </p>
-            <button class="btn-primary" (click)="closeModal()">
-              Stay Tuned
-            </button>
+            <button class="btn-primary" (click)="closeModal()">Stay Tuned</button>
           </div>
         </div>
       </div>
