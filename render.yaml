@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: patrick-fiscian-consulting
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: yarn install --frozen-lockfile && yarn build
+    startCommand: node dist/patrick_fiscian_consulting_web/server/server.mjs
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=512

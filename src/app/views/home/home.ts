@@ -31,9 +31,12 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
   animatedCounts: number[] = [];
   hasAnimated: boolean[] = [];
   private observer?: IntersectionObserver;
+  private counterObserver?: IntersectionObserver;
 
 
   ngOnInit(): void {
+    this.animatedCounts = this.ourFootPrint.map(() => 0);
+    this.hasAnimated = this.ourFootPrint.map(() => false);
     if (isPlatformBrowser(this.platformId)) {
       try { document.body.classList.add('show-move'); } catch {}
     }
@@ -44,10 +47,8 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
-    if (!this.countBoxes) return;
-  
     // Shared observer options — fires only when element is well inside the viewport
-    const inViewOpts: IntersectionObserverInit = { threshold: 0.4, rootMargin: '0px 0px -120px 0px' };
+    const inViewOpts: IntersectionObserverInit = { threshold: 0 };
 
     // Title animation
     const titleEl = this.titleRef?.nativeElement;
@@ -125,19 +126,12 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
      *  COUNT ANIMATION FIX
      *  -------------------------------- */
   
-    // initialize counts
-    this.animatedCounts = this.ourFootPrint.map(() => 0);
-    this.hasAnimated = this.ourFootPrint.map(() => false);
-
-    // delay ensures @for has rendered
-    setTimeout(() => this.initCounterObserver(), 50);
+    setTimeout(() => this.initCounterObserver(), 100);
   }
   
   ngOnDestroy(): void {
-    // cleanup observers
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+    this.observer?.disconnect();
+    this.counterObserver?.disconnect();
     // remove helper class when leaving Home
     if (isPlatformBrowser(this.platformId)) {
       try { document.body.classList.remove('show-move'); } catch {}
@@ -145,7 +139,9 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private initCounterObserver() {
-    const observer = new IntersectionObserver(
+    if (!this.countBoxes?.length) return;
+
+    this.counterObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
@@ -156,16 +152,14 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
 
           if (index !== -1 && !this.hasAnimated[index]) {
             this.hasAnimated[index] = true;
-
-            // 👇 RUN INSIDE ANGULAR
             this.zone.run(() => this.startCounting(index));
           }
         });
       },
-      { threshold: 0.4, rootMargin: '0px 0px -120px 0px' }
+      { threshold: 0 }
     );
 
-    this.countBoxes.forEach(box => observer.observe(box.nativeElement));
+    this.countBoxes.forEach(box => this.counterObserver!.observe(box.nativeElement));
   }
   
   startCounting(index: number) {

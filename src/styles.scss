@@ -106,8 +106,10 @@
   html,
   body {
     height: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
   }
-  
+
   body {
     margin: 0;
     font-family: "Satoshi", sans-serif;

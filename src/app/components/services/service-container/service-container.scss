@@ -5,11 +5,11 @@
   flex-direction: column;
   gap: theme-get(spaces, lg);
   width: 100%;
-  padding: 7%;
+  padding: 3.5% 7%;
+  box-sizing: border-box;
 
-  @include respond-to(tablet) {
-    padding: 3.5%;
-  }
+  @include respond-to(tablet) { padding: 3% 5%; gap: theme-get(spaces, md); }
+  @include respond-to(mobile) { padding: 4% 5%; gap: theme-get(spaces, sm); }
 
   .content {
     display: flex;
@@ -18,26 +18,22 @@
 
     h4 {
       font-size: theme-get(fontSizes, sm);
-      font-weight: theme-get(weights, semiBold);
-      letter-spacing: 0%;
       font-weight: 200;
+      letter-spacing: 0%;
 
-      @include respond-to(mobile) {
-        font-size: theme-get(fontSizes, xs);
-      }
+      @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+      @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
     }
 
     p {
       font-size: theme-get(fontSizes, xs);
       color: theme-get(colors, textColor);
-      line-height: 1.2;
+      line-height: 1.5;
       font-weight: theme-get(weights, light);
       letter-spacing: 0%;
 
-      @include respond-to(mobile) {
-        font-size: theme-get(fontSizes, s);
-        margin-top: theme-get(spaces, xs);
-      }
+      @include respond-to(tablet) { font-size: theme-get(fontSizes, s); }
+      @include respond-to(mobile) { font-size: theme-get(fontSizes, s); margin-top: theme-get(spaces, xs); }
     }
 
     .service {
@@ -45,6 +41,9 @@
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: theme-get(spaces, sm);
       margin-top: theme-get(spaces, md);
+
+      @include respond-to(tablet)  { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      @include respond-to(mobile)  { grid-template-columns: 1fr; }
     }
   }
 }

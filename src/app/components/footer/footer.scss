@@ -94,6 +94,18 @@
           }
         }
 
+        .form-error {
+          font-size: theme-get(fontSizes, s);
+          color: #c0392b;
+          margin: 0;
+        }
+
+        .form-success {
+          font-size: theme-get(fontSizes, s);
+          color: #27ae60;
+          margin: 0;
+        }
+
         .disclaimer {
           font-size: theme-get(fontSizes, s);
           color: theme-get(colors, secondaryTextColor);
@@ -173,6 +185,18 @@
 
           .form-textarea {
             min-height: 120px;
+          }
+
+          .form-error {
+            font-size: theme-get(fontSizes, s);
+            color: #c0392b;
+            margin: 0;
+          }
+
+          .form-success {
+            font-size: theme-get(fontSizes, s);
+            color: #27ae60;
+            margin: 0;
           }
         }
       }

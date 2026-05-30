@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ImageService {
-  aboutHeroBgImg = 'images/about-hero-bg-img.webp';
+  aboutHeroBgImg = 'images/about-hero-img.png';
   landingpageBackgroundImage = 'images/landing-page-background-pic-img.webp';
-  serviceHeroBgImg = 'images/services-hero-bg.webp';
+  serviceHeroBgImg = 'images/service-hero-img.png';
   diversityAndInclusive = "images/diversity-and-inclusive.svg";
   africanMan = 'images/african-man-black-suit.webp';
   femaleImage = 'images/female-image.webp';

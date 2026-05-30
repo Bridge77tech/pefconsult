@@ -1,1 +1,70 @@
-<p>error-page works!</p>
+<div class="error-page">
+
+  <!-- Background decorative circles -->
+  <div class="bg-circle bg-circle--1"></div>
+  <div class="bg-circle bg-circle--2"></div>
+  <div class="bg-circle bg-circle--3"></div>
+
+  <div class="error-content">
+
+    <!-- Top label -->
+    <div class="error-label">404 ERROR</div>
+
+    <!-- Big number -->
+    <div class="error-number">
+      <span class="num">4</span>
+      <span class="num zero">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="zero-svg">
+          <circle cx="60" cy="60" r="54" stroke="#955D09" stroke-width="10"/>
+          <circle cx="60" cy="60" r="32" fill="#F4EDCB"/>
+          <!-- search icon inside the 0 -->
+          <circle cx="57" cy="57" r="14" stroke="#955D09" stroke-width="5"/>
+          <line x1="67" y1="67" x2="78" y2="78" stroke="#955D09" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="num">4</span>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="error-heading">Oops! Page Not Found</h1>
+
+    <!-- Sub-message -->
+    <p class="error-message">
+      The page you are looking for may have been moved, renamed,
+      or does not exist. Let's get you back on track.
+    </p>
+
+    <!-- Divider -->
+    <div class="error-divider"></div>
+
+    <!-- Action buttons -->
+    <div class="error-actions">
+      <button class="btn-primary" (click)="goHome()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        &nbsp; Go to Homepage
+      </button>
+      <button class="btn-outline" (click)="goServices()">
+        Browse Our Services &nbsp; &#8594;
+      </button>
+    </div>
+
+    <!-- Suggestion links -->
+    <div class="error-suggestions">
+      <p class="suggestions-label">Quick links</p>
+      <div class="suggestions-list">
+        <button class="suggestion-link" (click)="goHome()">Home</button>
+        <span class="dot"></span>
+        <button class="suggestion-link" (click)="goServices()">Services</button>
+        <span class="dot"></span>
+        <button class="suggestion-link" (click)="goAbout()">About Us</button>
+        <span class="dot"></span>
+        <button class="suggestion-link" (click)="goERM()">Enterprise Risk Management</button>
+      </div>
+    </div>
+
+  </div>
+</div>

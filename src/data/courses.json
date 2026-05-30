@@ -1,0 +1,574 @@
+{
+  "metadata": {
+    "project": "PEF Consult",
+    "description": "Course page content for Risk Management training programs",
+    "category": "Enterprise and Operational Risk Management",
+    "contactEmail": "info@pefconsult.com"
+  },
+  "courses": [
+    {
+      "id": "enterprise-risk-management",
+      "title": "Enterprise Risk Management",
+      "route": "/enterprise-risk-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Enterprise Risk Management",
+        "subtitle": "Our Enterprise Risk Management consultancy course helps businesses identify, assess and manage risks so they bring your teams and company forward, profitably.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "ENTERPRISE RISK MANAGEMENT",
+        "description": "Enterprise Risk Management (ERM) is a holistic approach that organizations use to identify, assess, prioritize, and manage risks across the entire enterprise. ERM involves a coordinated effort to understand and manage risks in a way that aligns with the organization's strategic objectives and enhances its ability to achieve sustainable success.",
+        "duration": "3 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "By the end of this course, participants will have the knowledge and practical, mentally needed to understand, implement and utilize a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "icon": "speaker",
+            "title": "ERM Roles Responsibility",
+            "description": "Comprehensive understanding of the roles and responsibilities of stakeholders involved in implementing and sustaining an ERM framework."
+          },
+          {
+            "icon": "lock",
+            "title": "Risk Capacity, Appetite and Tolerance",
+            "description": "Wholesome clarity and deep understanding on risk capacity, risk appetite, and risk tolerance, and how they guide organizational decision-making."
+          },
+          {
+            "icon": "map",
+            "title": "Roadmap For Implementation",
+            "description": "Acquire a practical roadmap for effective ERM implementation within the organization"
+          },
+          {
+            "icon": "key",
+            "title": "Appreciate The Risk Management Process",
+            "description": "Gain a comprehensive understanding of the enterprise risk management (ERM) process and its key components."
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "role": "Senior & Middle Level Management",
+            "description": "Leaders responsible for overall risk strategy."
+          },
+          {
+            "role": "Internal Control, Internal Audit",
+            "description": "Internal teams managing day to day activities"
+          },
+          {
+            "role": "Senior Management",
+            "description": "Executives needing to integrate risk into operations"
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us.",
+        "items": [
+          {
+            "quote": "The Enterprise Risk Management was a game-changer for my department. The course materials were practical and immediately applicable",
+            "name": "Mark Oteng Anjo",
+            "role": "CIO, 1st financial solutions",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "We have thoroughly benefitted from the training PEF consult provided. We have developed robust systems and are pleased with the outcome",
+            "name": "Angela Ubanu",
+            "role": "Finance director, 1st financial solutions",
+            "location": "Kampala, Uganda"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Bring your team in front of the Risk Management masters and equip them with top-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Enterprise Risk Management course manual.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": [
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Enterprise Risk Management",
+          "path": "/enterprise-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Operational Risk Management",
+          "path": "/operational-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Credit Risk Management",
+          "path": "/credit-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Fraud Risk Management",
+          "path": "/fraud-risk-management"
+        }
+      ]
+    },
+    {
+      "id": "credit-risk-management",
+      "title": "Credit Risk Management",
+      "route": "/credit-risk-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Credit Risk Management",
+        "subtitle": "Our Credit Risk Management course helps businesses evaluate, monitor, and control credit exposure, building stronger systems that protect cash flow and support sustainable growth.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "CREDIT RISK MANAGEMENT",
+        "description": "Credit Risk Management is the practice of assessing, controlling, and mitigating the risks associated with lending money or extending credit to customers, counterparties, or other entities. This training course will empower you with complete information and knowledge about credit risk evaluation, modelling and management.",
+        "duration": "3 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "icon": "person",
+            "title": "Stronger Risk Management",
+            "description": "Gain the ability to manage credit exposure, improve lending decisions, and protect financial stability"
+          },
+          {
+            "icon": "speaker",
+            "title": "Greater Strategic Impact",
+            "description": "Develop the skills to safeguard your organization's finances and drive sustainable profitability"
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "role": "Managers & Team Leads",
+            "description": "Leaders responsible for overseeing credit risk"
+          },
+          {
+            "role": "Credit & Recovery Professionals",
+            "description": "Personnel handling analysis, recovery and repayment"
+          },
+          {
+            "role": "Professionals and Learners",
+            "description": "Deepen your knowledge of credit risk evaluation"
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us:",
+        "items": [
+          {
+            "quote": "The sessions were practical and easy to follow. I've already improved our recovery approach using what I learned.",
+            "name": "Mark Oteng Adjei",
+            "role": "CTO, This Financial Institution",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "A valuable experience for anyone working with credit. It strengthened both my technical skills and decision-making.",
+            "name": "Ama Atebia",
+            "role": "Head of Recruitment, OOAO",
+            "location": "Kumasi, Ghana"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Book your place in our Enterprise Risk Management session and equip your team with world-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Credit Risk Management course module.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": [
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Enterprise Risk Management",
+          "path": "/enterprise-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Operational Risk Management",
+          "path": "/operational-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Credit Risk Management",
+          "path": "/credit-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Fraud Risk Management",
+          "path": "/fraud-risk-management"
+        }
+      ]
+    },
+    {
+      "id": "fraud-risk-management",
+      "title": "Fraud Risk Management",
+      "route": "/fraud-risk-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Fraud Risk Management",
+        "subtitle": "Our Fraud Risk Management course helps organizations detect, prevent, and respond to fraudulent activities to protect revenue, assets, and reputation.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "FRAUD RISK MANAGEMENT",
+        "description": "Fraud Risk Assessment is a systematic method by which frauds are reduced in an organization. Frauds can only be reduced if there is a process where the fraud is detected at an early stage. Once the fraud is detected, measures have to be taken in order to mitigate the fraud.",
+        "duration": "2 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "icon": "speaker",
+            "title": "Anti-Fraud Program Elements",
+            "description": "Understand the key components of an effective management-level anti-fraud framework."
+          },
+          {
+            "icon": "person",
+            "title": "Fraud Risk Assessment",
+            "description": "Learn how to systematically identify, evaluate, and prioritize fraud risks within an organization."
+          },
+          {
+            "icon": "map",
+            "title": "Fraud Program Implementation",
+            "description": "Develop practical skills to design and roll out a structured fraud management program."
+          },
+          {
+            "icon": "key",
+            "title": "Fraud Resilience Strengthening",
+            "description": "Build the capability to embed controls and monitoring systems that reduce fraud exposure."
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "role": "Internal Control Professionals",
+            "description": "Designers and enforcers of internal control"
+          },
+          {
+            "role": "Internal Audit Professionals",
+            "description": "Independent evaluators of controls and processes"
+          },
+          {
+            "role": "Risk & Compliance Professionals",
+            "description": "Teams that identify and manage risk and ensure adherence"
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us:",
+        "items": [
+          {
+            "quote": "Strong balance of theory and real-world case examples. This course provides essential training for anyone in governance and control functions.",
+            "name": "Mark Oteng Adjei",
+            "role": "CTO, This Financial Institution",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "This very practical course improved my confidence in detecting and preventing fraud risks.",
+            "name": "Angela Ubanu",
+            "role": "Financial Manager, This Financial Institution",
+            "location": "Kampala, Uganda"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Book your place in our Enterprise Risk Management session and equip your team with world-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Fraud Risk Management course module.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": [
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Enterprise Risk Management",
+          "path": "/enterprise-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Operational Risk Management",
+          "path": "/operational-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Credit Risk Management",
+          "path": "/credit-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Fraud Risk Management",
+          "path": "/fraud-risk-management"
+        }
+      ]
+    },
+    {
+      "id": "operational-risk-management",
+      "title": "Operational Risk Management Framework",
+      "route": "/operational-risk-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Operational Risk Management Framework",
+        "subtitle": "Our Enterprise Risk Management course helps businesses identify, assess, and manage key risks, building resilient systems that safeguard value and ensure stability.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "OPERATIONAL RISK MANAGEMENT FRAMEWORK",
+        "description": "Operational Risk Management (ORM) is the process of identifying, assessing, controlling, and mitigating operational risks within an organization.",
+        "duration": "3 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "This course will help their organizations achieve operational excellence, optimize performance, and sustain long-term success.",
+        "items": [
+          {
+            "icon": "speaker",
+            "title": "ERM Roles Responsibility",
+            "description": "Comprehensive understanding of the roles and responsibilities of stakeholders involved in implementing and sustaining an ERM framework."
+          },
+          {
+            "icon": "lock",
+            "title": "Risk Capacity, Appetite and Tolerance",
+            "description": "Wholesome clarity and deep understanding on risk capacity, risk appetite, and risk tolerance, and how they guide organizational decision-making."
+          },
+          {
+            "icon": "map",
+            "title": "Roadmap For Implementation",
+            "description": "Acquire a practical roadmap for effective ERM implementation within the organization"
+          },
+          {
+            "icon": "key",
+            "title": "Appreciate The Risk Management Process",
+            "description": "Gain a comprehensive understanding of the enterprise risk management (ERM) process and its key components."
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "By the end of this course, participants will gain the knowledge and practical insights needed to understand, implement, and sustain a robust Enterprise Risk Management (ERM) framework within their organizations. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "role": "Senior & Middle Level Management",
+            "description": "Leaders responsible for overall risk strategy"
+          },
+          {
+            "role": "Internal Control, Internal Audit",
+            "description": "Internal teams managing day to day activities"
+          },
+          {
+            "role": "Senior Management",
+            "description": "Executives needing to integrate risk into operations"
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us:",
+        "items": [
+          {
+            "quote": "The Enterprise Risk Management was a game-changer for my department. The course materials were practical and immediately applicable",
+            "name": "Mark Oteng Adjei",
+            "role": "CTO, This Financial Institution",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "We have thoroughly benefitted from the training PEF consult provided. We have developed robust systems and are please with the outcome",
+            "name": "Angela Ubanu",
+            "role": "Financial Manager, This Financial Institution",
+            "location": "Kampala, Uganda"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Book your place in our Enterprise Risk Management session and equip your team with world-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Operational Risk Management Framework course module.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": [
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Enterprise Risk Management",
+          "path": "/enterprise-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Operational Risk Management",
+          "path": "/operational-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Credit Risk Management",
+          "path": "/credit-risk-management"
+        },
+        {
+          "category": "Enterprise & Operational Risk Management",
+          "label": "Fraud Risk Management",
+          "path": "/fraud-risk-management"
+        }
+      ]
+    },
+    {
+      "id": "business-continuity-management",
+      "title": "Business Continuity Management",
+      "route": "/business-continuity-management",
+      "category": "Risk Management",
+      "hero": {
+        "pageTitle": "Business Continuity Management",
+        "subtitle": "Our Business Continuity Management course equips organizations with the tools to identify threats, maintain critical operations, and recover swiftly from disruptions.",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "action": "downloadManual" }
+        ]
+      },
+      "overview": {
+        "badge": "Course Overview",
+        "heading": "BUSINESS CONTINUITY MANAGEMENT",
+        "description": "Business Continuity Management is defined as a holistic management process that identifies potential threats to an organisation and the impacts to business operations those threats.",
+        "duration": "2 days",
+        "level": "Executive, Senior and Middle Level Management"
+      },
+      "expectedOutcomes": {
+        "sectionLabel": "EXPECTED OUTCOMES",
+        "description": "By the end of this course, participants will gain the knowledge and practical tools to design, implement, and maintain an effective Business Continuity Management framework. The attendees will have developed the following competencies:",
+        "items": [
+          {
+            "icon": "speaker",
+            "title": "Recovery & Resilience Building",
+            "description": "Develop expertise in restoring operations efficiently and strengthening long-term organizational resilience."
+          },
+          {
+            "icon": "person",
+            "title": "Risk & Impact Assessment",
+            "description": "Sharpen your skill in identifying potential disruptions and evaluating their impact on the business."
+          },
+          {
+            "icon": "map",
+            "title": "Business Continuity Planning",
+            "description": "Grow and sharpen your ability to design and implement effective continuity plans for critical operations."
+          },
+          {
+            "icon": "key",
+            "title": "Crisis Response & Coordination",
+            "description": "Build the capacity to respond quickly and coordinate actions during disruptions or emergencies."
+          }
+        ]
+      },
+      "whoShouldAttend": {
+        "sectionLabel": "WHO SHOULD ATTEND?",
+        "description": "Designed for professionals responsible for ensuring organizational resilience, including risk, operations, IT, and senior management teams involved in disruption planning and recovery.",
+        "items": [
+          {
+            "role": "Internal Control Professionals",
+            "description": "Teams ensuring controls and safeguarding assets"
+          },
+          {
+            "role": "Internal Audit Professionals",
+            "description": "Professionals who evaluate controls and governance."
+          },
+          {
+            "role": "Risk & Compliance Professionals",
+            "description": "Teams managing risk and compliance adherence."
+          }
+        ]
+      },
+      "testimonials": {
+        "sectionLabel": "TESTIMONIALS",
+        "description": "Our training and implementations have transformed thousands of businesses across the continent. This is what a few of them have to say about us:",
+        "items": [
+          {
+            "quote": "This course gave me a clear, practical understanding of how to build and sustain an effective business continuity framework.",
+            "name": "Mark Oteng Adjei",
+            "role": "CTO, This Financial Institution",
+            "location": "Accra, Ghana"
+          },
+          {
+            "quote": "Highly relevant and well-structured. This course helped our team improve preparedness and response planning for disruptions.",
+            "name": "Angela Ubanu",
+            "role": "Financial Manager, This Financial Institution",
+            "location": "Kampala, Uganda"
+          }
+        ]
+      },
+      "readyToTransform": {
+        "heading": "Ready to Transform?",
+        "description": "Book your place in our Business Continuity Management session and equip your team with world-class expertise",
+        "buttons": [
+          { "label": "Book This Course", "icon": "arrow-right", "type": "primary", "action": "bookCourse" },
+          { "label": "Download Course Manual", "icon": "download", "type": "outline", "action": "downloadManual" }
+        ]
+      },
+      "downloadModal": {
+        "heading": "Coming Soon!",
+        "body": "We are currently putting the finishing touches on the Business Continuity Management course module.",
+        "secondaryText": "Check back soon or contact us on our email info@pefconsult.com to be notified when it's ready.",
+        "ctaLabel": "Stay Tuned"
+      },
+      "otherPrograms": []
+    }
+  ]
+}

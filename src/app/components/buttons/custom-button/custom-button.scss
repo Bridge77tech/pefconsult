@@ -21,10 +21,25 @@
             color: theme-get(colors, whiteColor);
             letter-spacing: -4%;
             font-size: theme-get(fontSizes, xs);
+            white-space: nowrap;
 
             @include respond-to(mobile) {
                 font-size: theme-get(fontSizes, xxs);
             }
         }
     }
+
+    .loading {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        border-top-color: #fff;
+        border-radius: 50%;
+        margin: 0 auto;
+        animation: btn-spin 0.7s linear infinite;
+    }
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
 }

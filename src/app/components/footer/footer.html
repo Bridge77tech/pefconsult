@@ -10,9 +10,24 @@
 
       <div class="email-subscription">
         <div class="subscription-form">
-          <input type="email" placeholder="Enter your email here" class="email-input" />
-          <button class="request-button">Request Course Book</button>
+          <input
+            type="email"
+            placeholder="Enter your email here"
+            class="email-input"
+            [(ngModel)]="subscriptionEmail"
+            (keyup.enter)="requestCourseBook()"
+            [disabled]="subscriptionSending"
+          />
+          <button class="request-button" (click)="requestCourseBook()" [disabled]="subscriptionSending">
+            @if (subscriptionSending) { Sending... } @else { Request Course Book }
+          </button>
         </div>
+        @if (subscriptionError) {
+          <p class="form-error">{{ subscriptionError }}</p>
+        }
+        @if (subscriptionSuccess) {
+          <p class="form-success">Request sent! We'll be in touch soon.</p>
+        }
         <p class="disclaimer">
           By sending your email, you agree to allow us send you messages via email
         </p>
@@ -48,10 +63,40 @@
           Reach out to us and we will get back to you with a tailored, well planned solution
         </p>
 
-        <form class="contact-form">
-          <input type="email" placeholder="Enter your email" class="form-input" />
-          <textarea placeholder="Type your message" class="form-textarea" rows="4"></textarea>
-          <app-custom-button [label]="'Send you message'" [labelFontSize]="16"></app-custom-button>
+        <form class="contact-form" (ngSubmit)="sendMessage()">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="form-input"
+            [(ngModel)]="contactEmail"
+            name="contactEmail"
+          />
+          <input
+            type="text"
+            placeholder="Topic"
+            class="form-input"
+            [(ngModel)]="contactTopic"
+            name="contactTopic"
+          />
+          <textarea
+            placeholder="Type your message"
+            class="form-textarea"
+            rows="4"
+            [(ngModel)]="contactMessage"
+            name="contactMessage"
+          ></textarea>
+          @if (contactError) {
+            <p class="form-error">{{ contactError }}</p>
+          }
+          @if (contactSuccess) {
+            <p class="form-success">Message sent! We'll get back to you shortly.</p>
+          }
+          <app-custom-button
+            [label]="'Send your message'"
+            [labelFontSize]="16"
+            [isButtonLoading]="contactSending"
+            (click)="sendMessage()"
+          ></app-custom-button>
         </form>
       </div>
 

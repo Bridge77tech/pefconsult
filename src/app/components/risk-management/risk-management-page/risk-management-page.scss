@@ -40,12 +40,13 @@ section {
       }
 
       @include respond-to(mobile) {
-        padding: 80px theme-get(spaces, main-app-space-mobile) 30px;
+        padding: 80px 5% 30px; /* 5% sides for iPhone 17 Pro Max (430px) */
         .page-title {
           font-size: theme-get(fontSizes, lg);
         }
         .page-subtitle {
-          font-size: theme-get(fontSizes, s);
+          font-size: theme-get(fontSizes, xs);
+          line-height: 1.7;
         }
       }
     }
@@ -83,7 +84,7 @@ section {
       @include respond-to(mobile) {
         width: 95%;
         .carousel-slide img {
-          height: 200px;
+          height: 220px;
         }
       }
     }
@@ -110,7 +111,7 @@ section {
       @include respond-to(mobile) {
         flex-direction: column;
         align-items: center;
-        padding: theme-get(spaces, sm) theme-get(spaces, main-app-space-mobile);
+        padding: theme-get(spaces, sm) 5%;
       }
     }
 
@@ -255,7 +256,7 @@ section {
       }
 
       @include respond-to(mobile) {
-        padding: theme-get(spaces, md) theme-get(spaces, main-app-space-mobile);
+        padding: theme-get(spaces, md) 5%;
         .overview-card {
           padding: theme-get(spaces, md);
           h2 {
@@ -286,7 +287,7 @@ section {
       }
 
       @include respond-to(mobile) {
-        padding: theme-get(spaces, md) theme-get(spaces, main-app-space-mobile);
+        padding: theme-get(spaces, md) 5%;
       }
     }
 
@@ -495,7 +496,7 @@ section {
       }
 
       @include respond-to(mobile) {
-        padding: theme-get(spaces, lg) theme-get(spaces, main-app-space-mobile);
+        padding: theme-get(spaces, lg) 5%;
         h2 {
           font-size: theme-get(fontSizes, md);
         }
