@@ -31,7 +31,7 @@ export class About implements AfterViewInit, OnDestroy {
     this.heroTitle?.nativeElement.classList.add('hero-animate');
     this.heroSubtitle?.nativeElement.classList.add('hero-animate-sub');
 
-    const opts: IntersectionObserverInit = { threshold: 0.3 };
+    const opts: IntersectionObserverInit = { threshold: 0 };
 
     // Our Company
     this.observeOnce(this.companyLeft,  'slide-from-left',  opts);
