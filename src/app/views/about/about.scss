@@ -267,8 +267,7 @@ section {
 
         .card {
           width: 45%;
-          height: 48vh;
-          min-height: 320px;
+          min-height: clamp(260px, 42vh, 420px);
           position: relative;
           z-index: 0;
           opacity: 0;
@@ -282,14 +281,12 @@ section {
 
           @include respond-to(tablet) {
             width: 100%;
-            height: 280px;
-            min-height: unset;
+            min-height: 240px;
           }
 
           @include respond-to(mobile) {
             width: 100%;
-            height: 260px;
-            min-height: unset;
+            min-height: 200px;
           }
 
           img {
@@ -398,14 +395,14 @@ section {
         width: 100%;
 
         h2 {
-          font-size: 0.9rem;
+          font-size: theme-get(fontSizes, s);
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #9c6b2f;
-          margin-bottom: 3rem;
+          color: theme-get(colors, primary);
+          margin-bottom: theme-get(spaces, lg);
 
-          @include respond-to(tablet) { margin-bottom: 1.5rem; }
-          @include respond-to(mobile) { margin-bottom: 1rem; }
+          @include respond-to(tablet) { margin-bottom: theme-get(spaces, sm); }
+          @include respond-to(mobile) { margin-bottom: theme-get(spaces, xs); }
         }
 
         .message-row {
@@ -456,20 +453,20 @@ section {
 
             small {
               display: block;
-              font-weight: 600;
-              font-size: 1rem;
-              color: #111;
-              margin-top: 0.75rem;
+              font-weight: theme-get(weights, semiBold);
+              font-size: theme-get(fontSizes, xs);
+              color: theme-get(colors, textColorBrown);
+              margin-top: theme-get(spaces, s);
 
-              @include respond-to(mobile) { font-size: 0.9rem; }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
             }
 
             p {
-              margin: 0.25rem 0 0;
-              font-size: 0.9rem;
-              color: #666;
+              margin: theme-get(spaces, xxs) 0 0;
+              font-size: theme-get(fontSizes, s);
+              color: theme-get(colors, textColor);
 
-              @include respond-to(mobile) { font-size: 0.8rem; }
+              @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
             }
           }
 

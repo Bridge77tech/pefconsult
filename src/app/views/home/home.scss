@@ -427,17 +427,17 @@ section {
           gap: theme-get(spaces, sm);
           width: 100%;
           align-items: stretch;
-          height: 277px;
+          min-height: 240px;
           margin-top: theme-get(spaces, sm);
 
           @include respond-to(tablet) {
-            height: auto;
+            min-height: unset;
             flex-wrap: wrap;
           }
 
           @include respond-to(mobile) {
             flex-direction: column;
-            height: auto;
+            min-height: unset;
           }
 
           .cont-1 {
@@ -598,16 +598,16 @@ section {
         display: flex;
         align-items: stretch;
         gap: theme-get(spaces, sm);
-        height: 325px;
+        min-height: 260px;
 
         @include respond-to(tablet) {
-          height: auto;
+          min-height: unset;
           flex-wrap: wrap;
         }
 
         @include respond-to(mobile) {
           flex-direction: column;
-          height: auto;
+          min-height: unset;
         }
 
         .cont-1,
