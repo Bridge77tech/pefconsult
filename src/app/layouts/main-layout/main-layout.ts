@@ -43,6 +43,16 @@ ngOnInit() {
     .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
     .subscribe(event => {
       this.checkRoute(event.urlAfterRedirects);
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+          if (document.scrollingElement) {
+            (document.scrollingElement as HTMLElement).scrollTop = 0;
+          }
+        }, 0);
+      }
     });
 }
 
