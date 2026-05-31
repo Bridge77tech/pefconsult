@@ -21,28 +21,28 @@ const RISK_CAROUSEL_IMAGES = [
 
 const RISK_MANAGEMENT_PROGRAMS = [
   {
-    title: 'Enterprise & Operational Risk Management',
-    description: 'Enterprise Risk Management',
+    category: 'Enterprise & Operational Risk Management',
+    label: 'Enterprise Risk Management',
     path: '/enterprise-risk-management',
   },
   {
-    title: 'Enterprise & Operational Risk Management',
-    description: 'Operational Risk Management',
+    category: 'Enterprise & Operational Risk Management',
+    label: 'Operational Risk Management',
     path: '/operational-risk-management',
   },
   {
-    title: 'Enterprise & Operational Risk Management',
-    description: 'Credit Risk Management',
+    category: 'Enterprise & Operational Risk Management',
+    label: 'Credit Risk Management',
     path: '/credit-risk-management',
   },
   {
-    title: 'Enterprise & Operational Risk Management',
-    description: 'Fraud Risk Management',
+    category: 'Enterprise & Operational Risk Management',
+    label: 'Fraud Risk Management',
     path: '/fraud-risk-management',
   },
   {
-    title: 'Enterprise & Operational Risk Management',
-    description: 'Business Continuity Management',
+    category: 'Enterprise & Operational Risk Management',
+    label: 'Business Continuity Management',
     path: '/business-continuity-management',
   },
 ];
