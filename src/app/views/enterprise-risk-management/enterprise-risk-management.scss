@@ -39,10 +39,16 @@ section {
         line-height: 1.7;
       }
 
-      @include respond-to(mobile) {
-        padding: 80px 5% 30px;
+      @include respond-to(tablet) {
+        padding: 110px 5% 35px;
         .page-title { font-size: theme-get(fontSizes, lg); }
-        .page-subtitle { font-size: theme-get(fontSizes, xs); line-height: 1.7; }
+        .page-subtitle { font-size: theme-get(fontSizes, xs); max-width: 100%; }
+      }
+
+      @include respond-to(mobile) {
+        padding: 80px 5% 28px;
+        .page-title { font-size: theme-get(fontSizes, md); }
+        .page-subtitle { font-size: theme-get(fontSizes, s); line-height: 1.7; }
       }
     }
 
@@ -68,9 +74,14 @@ section {
         }
       }
 
+      @include respond-to(tablet) {
+        width: 92%;
+        .carousel-slide img { width: 300px; height: 240px; }
+      }
+
       @include respond-to(mobile) {
         width: 95%;
-        .carousel-slide img { height: 220px; }
+        .carousel-slide img { width: 240px; height: 190px; }
       }
     }
 
@@ -268,8 +279,8 @@ section {
 
           .outcome-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
           .card-text { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
-          .outcome-title { font-size: 20px; font-weight: theme-get(weights, semiBold); color: theme-get(colors, primary); line-height: 1.3; }
-          .outcome-desc { font-size: 14px; color: theme-get(colors, textColor); line-height: 1.5; }
+          .outcome-title { font-size: theme-get(fontSizes, sm); font-weight: theme-get(weights, semiBold); color: theme-get(colors, primary); line-height: 1.3; @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); } }
+          .outcome-desc { font-size: theme-get(fontSizes, s); color: theme-get(colors, textColor); line-height: 1.5; }
         }
 
         @include respond-to(tablet) { grid-template-columns: 1fr; }
@@ -295,8 +306,8 @@ section {
 
           .attend-icon { flex-shrink: 0; display: flex; align-items: center; font-size: theme-get(fontSizes, sm); }
           .card-text { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
-          .attendee-role { font-size: 20px; font-weight: theme-get(weights, semiBold); color: theme-get(colors, primary); line-height: 1.3; }
-          .attendee-description { font-size: 14px; color: theme-get(colors, textColor); line-height: 1.4; }
+          .attendee-role { font-size: theme-get(fontSizes, sm); font-weight: theme-get(weights, semiBold); color: theme-get(colors, primary); line-height: 1.3; @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); } }
+          .attendee-description { font-size: theme-get(fontSizes, s); color: theme-get(colors, textColor); line-height: 1.4; }
         }
 
         @include respond-to(tablet) { grid-template-columns: 1fr 1fr; }
