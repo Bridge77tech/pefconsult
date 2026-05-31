@@ -28,8 +28,8 @@ export interface RiskManagementContent {
   transformHeading: string;
   transformSubtext: string;
   otherPrograms: {
-    title: string;
-    description: string;
+    category: string;
+    label: string;
     path: string;
   }[];
 }
