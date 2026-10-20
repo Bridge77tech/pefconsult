@@ -1,12 +1,14 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, HostListener, ElementRef, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { filter, map, startWith } from 'rxjs/operators';
 import { CustomButton } from "../buttons/custom-button/custom-button";
 import { ImageService } from '../../services/general/image-service';
 
 @Component({
   selector: 'app-menu',
-  imports: [CustomButton],
+  imports: [CustomButton, RouterLink],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
@@ -22,9 +24,27 @@ export class Menu {
 
   menuItems = [
     { label: 'Home',     path: '/home'     },
-    { label: 'Services', path: '/services' },
     { label: 'About',    path: '/about'    },
+    { label: 'Services', path: '/services' },
   ];
+
+  /** Nav item for the current page; course pages belong to Services. */
+  protected readonly activePath = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => e.urlAfterRedirects),
+      startWith(this.router.url),
+      map((url) => this.sectionFor(url)),
+    ),
+    { initialValue: '/home' },
+  );
+
+  private sectionFor(url: string): string {
+    const path = url.split(/[?#]/)[0];
+    if (path === '/' || path.startsWith('/home')) return '/home';
+    if (path.startsWith('/about')) return '/about';
+    return '/services';
+  }
 
   protected routeTo(path: string) {
     this.isShowMenu = false;

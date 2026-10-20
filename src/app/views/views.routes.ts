@@ -2,7 +2,6 @@ import { Routes } from "@angular/router";
 import { Home } from "./home/home";
 import { About } from "./about/about";
 import { Services } from "./services/services";
-import { EnterpriseRiskManagement } from "./enterprise-risk-management/enterprise-risk-management";
 import { Course } from "./course/course";
 
 export const viewsRoutes: Routes = [
@@ -34,8 +33,8 @@ export const viewsRoutes: Routes = [
 
     {
         path: 'enterprise-risk-management',
-        component: EnterpriseRiskManagement,
-        data: {title: 'Enterprise Risk Management'}
+        component: Course,
+        data: {title: 'Enterprise Risk Management', courseId: 'enterprise-risk-management'}
     },
 
     {

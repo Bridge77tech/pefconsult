@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class ImageService {
   aboutHeroBgImg = 'images/about-hero-img.png';
-  landingpageBackgroundImage = 'images/landing-page-background-pic-img.webp';
-  serviceHeroBgImg = 'images/service-hero-img.png';
-  diversityAndInclusive = "images/diversity-and-inclusive.svg";
+  landingpageBackgroundImage = 'images/landing-hero-img.jpg';
+  serviceHeroBgImg = 'images/service-hero-img.webp';
+  diversityAndInclusive = "images/diversity-and-inclusive.webp";
   africanMan = 'images/african-man-black-suit.webp';
   femaleImage = 'images/female-image.webp';
-  groupImage = "images/group-image.svg";
+  groupImage = "images/group-image.webp";
   yelloBackground =  "images/yello-bkgd.webp";
   ceoPicuture = 'images/ceo-picture.webp';
   riskImage = 'images/risk-image.svg';

@@ -1,0 +1,65 @@
+@use 'sass:list';
+@use 'sass:math';
+
+// Figma "services hero" effect layers shared by the About and Services heroes
+// ("Ellipse 11" has a background blur but no fill, so Figma renders no blur for it).
+// Expects inside the hero: <img>, then <div class="progressive-blur"> with six <span>s.
+@mixin page-hero-effects {
+  // "Ellipse 13" progressive blur: none above ~390px, ramping to ~20px sigma near the bottom.
+  // Each layer adds blur below its mask edge; sigmas are chosen so the stacked result
+  // (sqrt of summed squares) matches the profile measured from Figma's render.
+  .progressive-blur {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    span {
+      position: absolute;
+      inset: 0;
+    }
+
+    $layers: (
+      (430, 3px),
+      (480, 5.77px),
+      (530, 8.25px),
+      (580, 9.26px),
+      (630, 11.31px),
+      (680, 11.76px),
+    );
+
+    @for $i from 1 through list.length($layers) {
+      $layer: list.nth($layers, $i);
+      $edge: list.nth($layer, 1);
+      span:nth-child(#{$i}) {
+        backdrop-filter: blur(list.nth($layer, 2));
+        -webkit-backdrop-filter: blur(list.nth($layer, 2));
+        $from: math.percentage(math.div($edge - 50, 679));
+        $to: math.percentage(math.div($edge, 679));
+        mask-image: linear-gradient(to bottom, transparent $from, #000 $to);
+        -webkit-mask-image: linear-gradient(to bottom, transparent $from, #000 $to);
+      }
+    }
+  }
+
+  // "Ellipse 13" fill: 37% gradient from black (y=471) to transparent white (y=-628).
+  // Figma interpolates colour and alpha separately, so intermediate stops reproduce that.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180.46deg,
+      rgba(255, 255, 255, 0) -628.21px,
+      rgba(212, 212, 212, 0.167) -444.96px,
+      rgba(170, 170, 170, 0.333) -261.71px,
+      rgba(128, 128, 128, 0.5) -78.47px,
+      rgba(85, 85, 85, 0.667) 104.78px,
+      rgba(42, 42, 42, 0.833) 288.03px,
+      #000 471.28px
+    );
+    opacity: 0.37;
+    z-index: 0;
+    pointer-events: none;
+  }
+}

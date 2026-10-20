@@ -1,4 +1,5 @@
 @use '../../../styles/theme' as *;
+@use '../../../styles/motion' as *;
 
 .main-layout {
   width: 100%;
@@ -18,9 +19,10 @@
 
     .menu {
       position: fixed;
-      top: 2vh;
-      left: 7%;
-      right: 7%;
+      top: 20px;
+      // 1200px wide at 1440 (Figma), 7% gutters on narrower screens
+      left: max(7%, calc((100% - 1200px) / 2));
+      right: max(7%, calc((100% - 1200px) / 2));
       z-index: 100;
 
       /* enable smooth hide/show on mobile when scrolling */
@@ -29,9 +31,11 @@
         opacity 220ms ease;
       will-change: transform, opacity;
 
+      // Figma mobile nav: 358x38 bar, 12px from the top, 16px from the sides
       @include respond-to(mobile) {
-        left: theme-get(spaces, s);
-        right: theme-get(spaces, s);
+        top: 12px;
+        left: 16px;
+        right: 16px;
         transform: translateY(0);
 
         &.hidden {
@@ -54,56 +58,61 @@
   .footer {
     width: 100%;
     margin-top: auto;
-    padding: 7%;
+    // Home footer is the standard on every page: 1316px card (62px gutters at 1440),
+    // 48px above it and 63px below
+    --footer-pad-bottom: 63px;
+    padding: 48px max(4.3%, calc((100% - 1316px) / 2)) var(--footer-pad-bottom);
     z-index: 0;
-    background:
-      radial-gradient(1100px 700px at 0% 60%, rgba(255, 115, 0, 0.2) 0%, rgba(255, 115, 0, 0) 55%),
-      radial-gradient(
-        1000px 700px at 94% 60%,
-        rgba(177, 224, 23, 0.2) 0%,
-        rgba(177, 224, 23, 0) 55%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.2) 0%,
-        rgba(255, 255, 255, 0.2) 40%,
-        rgba(255, 255, 255, 0.2) 100%
-      );
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: screen;
-    filter: saturate(1.04);
+
+    // on Home the CTA sits above the card and already ends with the 48px gap
+    &.has-cta { padding-top: 0; }
 
     @include respond-to(mobile) {
-      padding: theme-get(spaces, md) theme-get(spaces, sm);
+      --footer-pad-bottom: #{theme-get(spaces, md)};
+      padding: theme-get(spaces, md) theme-get(spaces, sm) var(--footer-pad-bottom);
     }
 
+    // Figma CTA frame: 364px tall, 60px top/bottom, 28px between items
     .make-that-move {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      gap: theme-get(spaces, md); // spacing between title, text, button
-      padding: theme-get(spaces, md);
-      text-align: center; // centers all text inside
+      gap: 28px;
+      padding: 60px 0;
+      margin-bottom: 48px; // footer card starts 412px below the CTA top
+      text-align: center;
 
-      @include respond-to(mobile) {
-        padding: theme-get(spaces, xxs);
+      @include respond-to(tablet) {
+        gap: theme-get(spaces, md);
+        padding: theme-get(spaces, lg) 0;
         margin-bottom: theme-get(spaces, md);
       }
 
+      @include respond-to(mobile) {
+        padding: theme-get(spaces, md) theme-get(spaces, xxs);
+      }
+
       .title {
-        font-size: theme-get(fontSizes, sm);
-        font-weight: theme-get(weights, bold);
+        font-size: 42px;
+        line-height: 48px;
+        font-weight: theme-get(weights, normal);
         font-family: 'Graduate', serif;
+        color: theme-get(colors, navyTextColor);
         text-align: center;
+
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: normal; }
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, sm); }
       }
 
       small {
-        max-width: 500px;
-        font-size: theme-get(fontSizes, xs);
-        line-height: 1.5;
+        max-width: 726px;
+        font-size: 20px;
+        line-height: 27px;
+        color: theme-get(colors, navyTextColor);
         text-align: center;
+
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); line-height: 1.5; }
       }
 
       .explore-button {
@@ -111,22 +120,87 @@
         align-items: center;
         justify-content: center;
         border: 1px solid theme-get(colors, primary);
-        padding: theme-get(spaces, ss) theme-get(spaces, md);
-        border-radius: theme-get(spaces, s);
+        // Figma strokes sit inside the frame: 16px/32px padding measured from the outer edge
+        padding: 15px 31px;
+        border-radius: 16px;
+        font-size: 20px;
+        line-height: 27px;
+        font-weight: theme-get(weights, bold);
         color: theme-get(colors, primary);
         width: auto; // auto width
         cursor: pointer;
         text-align: center;
+        text-decoration: none;
+        transition: background-color 100ms $ease-in, color 100ms $ease-in;
 
         @include respond-to(mobile) {
           font-size: theme-get(fontSizes, s);
+          line-height: normal;
+          padding: theme-get(spaces, ss) theme-get(spaces, md);
         }
 
+        // Figma "Explore Our Services Now" hover: filled brown, white text
         &:hover {
-          background-color: theme-get(colors, activeHoveColor);
+          background-color: theme-get(colors, primary);
+          color: theme-get(colors, whiteColor);
         }
       }
+
+      // Figma "CTA Frame" false → true (on scroll into view): 500ms linear. Title drops in from
+      // 120px above, copy fades in, button rises 130px.
+      .title,
+      .explore-button { transition: transform 500ms linear; }
+      small { transition: opacity 500ms linear; }
+
+      &:not(.revealed) {
+        .title { transform: translateY(-120px); }
+        small { opacity: 0; }
+        .explore-button { transform: translateY(130px); }
+      }
     }
+
+    .footer-card {
+      position: relative;
+
+      // Holds the glows: they may fade up into the section above, but are clipped at the
+      // footer's bottom edge so they never add scrollable space below the page.
+      .glow-layer {
+        position: absolute;
+        z-index: -1;
+        top: -1000px;
+        bottom: calc(-1 * var(--footer-pad-bottom));
+        left: 50%;
+        width: 4000px;
+        margin-left: -2000px;
+        overflow: clip;
+        pointer-events: none;
+      }
+
+      // 814px circles, 20% opacity, 425px gaussian blur; offsets are from the footer card top
+      // (glow-layer starts 1000px above it) and the page centre at 1440 (orange x -282, green x 717)
+      .glow {
+        position: absolute;
+        width: 814px;
+        height: 814px;
+        border-radius: 50%;
+        opacity: 0.2;
+        filter: blur(425px);
+        pointer-events: none;
+      }
+
+      .glow-orange {
+        top: calc(1000px - 179.27px);
+        left: calc(50% - 1002px);
+        background-color: theme-get(colors, glowOrange);
+      }
+
+      .glow-green {
+        top: calc(1000px - 169.27px);
+        left: calc(50% - 3px);
+        background-color: theme-get(colors, glowGreen);
+      }
+    }
+
   }
 }
 
@@ -134,3 +208,45 @@
 body.show-move .main-layout .footer .make-that-move {
   display: flex !important;
 }
+
+// ─── MOBILE (Figma mobile frames, 390px) ─────────────────────────────────────
+.main-layout .footer {
+  @include respond-to(mobile) {
+    --footer-pad-bottom: 42px;
+    padding: 42px 16px var(--footer-pad-bottom);
+
+    &.has-cta { padding-top: 42px; } // the CTA keeps Figma's 42px inset on mobile
+
+    // "make that move": Graduate 24, 20px copy, 16px button; 34px then 32px apart
+    .make-that-move {
+      gap: 32px;
+      padding: 0;
+      margin-bottom: 106px;
+
+      .title {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 2px; // title→copy is 34px
+      }
+
+      small {
+        font-size: 20px;
+        line-height: 27px;
+      }
+
+      .explore-button {
+        padding: 15px 31px;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    // footer glows are tall 177x1123 shapes on mobile, starting ~190px above the footer content
+    .footer-card {
+      .glow { width: 177px; height: 1123px; }
+      .glow-orange { top: calc(1000px - 197px); left: calc(50% - 195px); }
+      .glow-green { top: calc(1000px - 183px); left: calc(50% + 12px); }
+    }
+  }
+}
+

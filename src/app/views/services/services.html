@@ -1,45 +1,42 @@
 <section>
     <div class="home-body">
-        <div class="hero-section">
+        <div class="hero-section" appReveal="load">
             <img [src]="_images.serviceHeroBgImg" alt="">
+            <!-- Figma "Ellipse 13" progressive background blur, approximated with stacked masked layers -->
+            <div class="progressive-blur" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
             <div class="content">
-                <p #heroTitle>SOLUTIONS THAT MOVE YOUR BUSINESS FORWARD</p>
-                <small #heroSubtitle>
-                    Our consulting services help organizations
-                    anticipate risks, strengthen governance and
-                    improve decision-making. Browse through our
-                    carefully curated, expert-led training courses
-                    designed to empower your organization with
-                    actionable strategies and compliance excellence.
-                    We support your organization in achieving
-                    lasting excellence at every level.
-                </small>
+                <h1>Solutions that move your business forward</h1>
+                <app-reach-out-card class="reach-out" (callClick)="scrollToFooter()"></app-reach-out-card>
             </div>
         </div>
 
         <div class="body col-container">
-            <div class="service" #serviceIntro>
-                <h3>Expert Services, Stronger organizations</h3>
+            <div class="service" appReveal>
+                <h3>Expert Services, Stronger Organizations</h3>
                 <p>
-                    Our services span enterprise risk, audit, compliance
-                    strategic management and IT best practices, 
-                    Each of our services are tailored to support your
-                    unique challenges. We work with you to build structures,
-                    capabilities and systems that enhance stability and drive
-                    long-term success.
+                    Our services span enterprise risk, governance, audit, compliance, strategic
+                    management and IT best practices. Each of our services are tailored to support
+                    your unique challenges. We work with you to build structures, capabilities and
+                    systems that enhance stability and drive long-term success.
                 </p>
             </div>
             <div class="services-list">
-                <div class="service-item" #svcItem>
+                <div class="service-item">
                     <app-service-container
                     [label]="'Enterprise and Operational Risk Management'"
-                    [description]="'We Help Businesses Identify, Assess, and Manage Key Risk, Building Resilient Systems That Safeguard Value And Ensure Stability in Dynamic Operating Environments.'"
+                    [description]="'We help businesses identify, assess, and manage key risks, building resilient systems that safeguard value and ensure stability in dynamic operating environments.'"
                     [backgroundColor]="'#FEFFFA'"
                     >
                     @for (risk of riskManagement; track $index) {
                         <app-service-card
                         [label]="risk.label"
+                        [titleWidth]="risk.titleWidth"
+                        [mobileTitleWidth]="risk.mobileTitleWidth"
                         [iconUrl]="risk.iconUrl"
+                        [imageBox]="riskImageBox"
+                        [mobileImageBox]="riskMobileImageBox"
                         [backgroundColor]="'#F3F0E1'"
                         [learnButtonColor]="'#955D09'"
                         (onButtonClickEvent)="onButtonClick(risk.path)"
@@ -47,16 +44,20 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item" #svcItem>
+                <div class="service-item">
                     <app-service-container
-                    [label]="'Corporate Governance & Board Effectivenes'"
+                    [label]="'Corporate Governance & Board Effectiveness'"
                     [description]="'We strengthen governance structures and leadership oversight, helping boards operate with clarity, accountability, and confidence in a rapidly evolving regulatory landscape.'"
                     [backgroundColor]="'#FFFBFA'"
                     >
                     @for (corporate of corporateGovernances; track $index) {
                         <app-service-card
                         [label]="corporate.label"
+                        [titleWidth]="corporate.titleWidth"
+                        [mobileTitleWidth]="corporate.mobileTitleWidth"
                         [iconUrl]="corporate.iconUrl"
+                        [imageBox]="corporateImageBox"
+                        [mobileImageBox]="corporateMobileImageBox"
                         [backgroundColor]="'#F3E3E1'"
                         [learnButtonColor]="'#950962'"
                         (onButtonClickEvent)="onButtonClick(corporate.path)"
@@ -64,7 +65,7 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item" #svcItem>
+                <div class="service-item">
                     <app-service-container
                     [label]="'Strategy & Organized Performance'"
                     [description]="'We support organizations in shaping clear, competitive strategies that drive growth, sharpen focus, and enable sustained performance across all levels.'"
@@ -73,7 +74,11 @@
                     @for (strategy of strategyOrgs; track $index) {
                         <app-service-card
                         [label]="strategy.label"
+                        [titleWidth]="strategy.titleWidth"
+                        [mobileTitleWidth]="strategy.mobileTitleWidth"
                         [iconUrl]="strategy.iconUrl"
+                        [imageBox]="strategyImageBox"
+                        [mobileImageBox]="strategyMobileImageBox"
                         [backgroundColor]="'#E1F3E7'"
                         [learnButtonColor]="'#099533'"
                         (onButtonClickEvent)="onButtonClick(strategy.path)"
@@ -81,7 +86,7 @@
                     }
                     </app-service-container>
                 </div>
-                <div class="service-item" #svcItem>
+                <div class="service-item">
                     <app-service-container
                     [label]="'Information Systems, IT Governance and Audit'"
                     [description]="'We provide guidance and assurance across IT environments, empowering organizations to manage technology risks, strengthen controls, and align systems with enterprise objectives.'"
@@ -90,7 +95,11 @@
                     @for (info of informations; track $index) {
                         <app-service-card
                         [label]="info.label"
+                        [titleWidth]="info.titleWidth"
+                        [mobileTitleWidth]="info.mobileTitleWidth"
                         [iconUrl]="info.iconUrl"
+                        [imageBox]="infoImageBox"
+                        [mobileImageBox]="infoMobileImageBox"
                         [backgroundColor]="'#EFF3E1'"
                         [learnButtonColor]="'#749509'"
                         (onButtonClickEvent)="onButtonClick(info.path)"
@@ -99,12 +108,11 @@
                     </app-service-container>
                 </div>
             </div>
-            <div class="make-move" #makeMoveRef>
+            <div class="make-move">
                 <p>Make The Move Towards Better Decisions</p>
                 <small>
-                    Transform uncertainty to opportunity with 
-                    our expertly tailored services. We are primed 
-                    to help you thrive! <br> Book a Consultation Now
+                    Transform uncertainty to opportunity with our expertly tailored services. We
+                    are primed to help you thrive! <br> Book a Consultation Now
                 </small>
             </div>
         </div>

@@ -1,534 +1,833 @@
 @use '../../../styles/theme' as *;
 
+// Figma "Course - Enterprise Risk Management" (149:11241). Colours that change per course
+// type arrive as --course-* custom properties (see COURSE_THEMES in course-data.service).
+$gutter: max(7%, calc((100% - 1200px) / 2));
+
 section {
   width: 100%;
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
-  background-color: theme-get(colors, backgroundColor);
 
   .course-body {
     width: 100%;
     display: flex;
     flex-direction: column;
 
-    // ===== HERO =====
+    // ─── HERO ───────────────────────────────────────────────────────────────
+    // 145px top / 45px bottom, 32px between title, photo strip and CTAs
     .hero-section {
-      padding: 145px theme-get(spaces, main-app-space) 45px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      background-color: theme-get(colors, backgroundColor);
-      width: 100%;
+      gap: 32px;
+      padding: 145px $gutter 44px; // + 1px border = Figma's 45px bottom inset
+      background-color: theme-get(colors, whiteColor);
+      border-bottom: 1px solid #e4e4e4;
+
+      @include respond-to(tablet) { padding: 7rem 5% theme-get(spaces, md); gap: theme-get(spaces, md); }
+
+      .hero-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+        color: theme-get(colors, subtitleTextColor);
+      }
 
       .page-title {
-        font-family: 'Satoshi', sans-serif;
-        font-weight: 500;
-        font-size: theme-get(fontSizes, xl);
-        line-height: 100%;
-        letter-spacing: -0.04em;
-        color: theme-get(colors, textColorBrown);
-        margin-bottom: theme-get(spaces, sm);
+        font-size: 42px;
+        line-height: 57px;
+        letter-spacing: -1.68px;
+        font-weight: theme-get(weights, semiBold);
+
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: normal; }
       }
 
       .page-subtitle {
-        font-size: theme-get(fontSizes, xs);
-        color: theme-get(colors, textColor);
-        max-width: 700px;
-        line-height: 1.7;
-      }
-
-      @include respond-to(tablet) {
-        padding: 110px 5% 35px;
-        .page-title { font-size: theme-get(fontSizes, lg); }
-        .page-subtitle { font-size: theme-get(fontSizes, xs); max-width: 100%; }
-      }
-
-      @include respond-to(mobile) {
-        padding: 80px 5% 28px;
-        .page-title { font-size: theme-get(fontSizes, md); }
-        .page-subtitle { font-size: theme-get(fontSizes, s); line-height: 1.7; }
+        max-width: 636px;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -0.64px;
+        font-weight: theme-get(weights, light);
       }
     }
 
-    // ===== CAROUSEL =====
+    // 1200x348 window; the strip of 380x300 photos starts 110px left of it, 17px down
     .carousel-section {
       position: relative;
-      width: 86%;
-      margin: 0 auto theme-get(spaces, md);
+      width: 100%;
+      max-width: 1200px;
+      height: 348px;
       overflow: hidden;
-      border-radius: 5px;
+
+      @include respond-to(tablet) { height: 280px; }
 
       .carousel-track {
+        position: absolute;
+        top: 17px;
+        left: -110px;
         display: flex;
-        gap: 16px;
+        gap: 24px;
         width: max-content;
-        animation: carousel-scroll 14s linear infinite;
+        background: linear-gradient(to right, rgba(217, 217, 217, 0.16), rgba(115, 115, 115, 0));
+        animation: carousel-scroll 10s linear infinite; // Figma: one photo set per 10s
 
         &:hover { animation-play-state: paused; }
+      }
 
-        .carousel-slide {
-          flex-shrink: 0;
-          img {
-            width: 380px;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-          }
+      .carousel-slide {
+        position: relative;
+        flex-shrink: 0;
+        width: 380px;
+        height: 300px;
+        overflow: hidden;
+        background-color: theme-get(colors, whiteColor);
+
+        @include respond-to(tablet) { width: 300px; height: 236px; }
+
+        // Figma: 391.76x444 image, centred horizontally, 91px above the 380x300 frame
+        img {
+          position: absolute;
+          left: 50%;
+          top: -30.333%;
+          width: 103.1%;
+          max-width: none;
+          height: 148%;
+          transform: translateX(-50%);
+          object-fit: cover;
+          display: block;
         }
       }
 
-      @include respond-to(tablet) {
-        width: 92%;
-        .carousel-slide img { width: 300px; height: 240px; }
+      // Figma "Ellipse 977/978": 1617x38 white ellipses over the strip's top and bottom edges
+      .edge {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        width: 1617px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: theme-get(colors, whiteColor);
+        transform: translateX(calc(-50% - 0.5px));
+        pointer-events: none;
       }
 
-      @include respond-to(mobile) {
-        width: 95%;
-        .carousel-slide img { width: 240px; height: 190px; }
-      }
+      .edge-top { top: 0; }
+      .edge-bottom { top: 310px; }
+
+      @include respond-to(tablet) { .edge-bottom { top: 242px; } }
     }
 
+    // the photo set is rendered twice, so shifting by half the strip loops seamlessly
     @keyframes carousel-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-1584px); }
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-50% - var(--strip-half-gap, 12px))); }
     }
 
-    // ===== CTA BUTTONS =====
     .cta-section {
       display: flex;
-      gap: theme-get(spaces, sm);
+      gap: 48px;
+      flex-wrap: wrap;
       justify-content: center;
-      padding-top: 70px;
-      padding-bottom: theme-get(spaces, sm);
-      padding-left: theme-get(spaces, main-app-space);
-      padding-right: theme-get(spaces, main-app-space);
-      border-bottom: 1px solid theme-get(colors, borderColor);
 
-      @include respond-to(mobile) {
-        flex-direction: column;
-        align-items: center;
-        padding: theme-get(spaces, sm) 5%;
-      }
+      @include respond-to(mobile) { gap: theme-get(spaces, xs); }
     }
 
-    // ===== SHARED BUTTONS =====
+    // ─── BUTTONS (Figma "Hero CTA") ─────────────────────────────────────────
+    .btn-outline,
     .btn-primary {
-      background-color: theme-get(colors, primary);
-      color: white;
-      border: none;
-      padding: 12px 1.6rem;
-      border-radius: 6px;
-      font-size: theme-get(fontSizes, xs);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      font-weight: theme-get(weights, semiBold);
       display: inline-flex;
       align-items: center;
-      white-space: nowrap;
-      gap: 6px;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 20px;
+      line-height: 27px;
+      letter-spacing: -0.8px;
+      font-weight: theme-get(weights, semiBold);
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
 
-      &:hover {
-        background-color: theme-get(colors, activeHoveColor);
-        transform: translateY(-1px);
-      }
+      img { display: block; width: 24px; height: 24px; }
+
+      @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
     }
 
     .btn-outline {
-      background: transparent;
+      background-color: theme-get(colors, whiteColor);
       color: theme-get(colors, primary);
-      border: 1.5px solid theme-get(colors, primary);
-      padding: 12px 1.6rem;
-      border-radius: 6px;
-      font-size: theme-get(fontSizes, xs);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: theme-get(weights, semiBold);
-      display: inline-flex;
-      align-items: center;
-      white-space: nowrap;
-      gap: 6px;
+      border: 1px solid theme-get(colors, primary);
+      padding: 11px 23px; // 12px/24px from the outer edge, inside the stroke
 
-      &:hover { background-color: theme-get(colors, lightPrimary); }
+      &:hover { background-color: theme-get(colors, lighterPrimary); }
     }
 
-    // ===== COURSE OVERVIEW =====
+    .btn-primary {
+      background-color: theme-get(colors, primary);
+      color: theme-get(colors, whiteColor);
+      border: none;
+      padding: 12px 32px;
+
+      &:hover { background-color: theme-get(colors, activeHoveColor); transform: translateY(-1px); }
+    }
+
+    // ─── COURSE OVERVIEW BANNER ─────────────────────────────────────────────
     .course-overview {
-      padding: theme-get(spaces, sm) theme-get(spaces, main-app-space);
+      padding: 30px $gutter;
 
-      .overview-card {
-        background: theme-get(colors, primary);
-        border-radius: 16px;
-        padding: theme-get(spaces, sm) theme-get(spaces, lg);
-        color: white;
-        position: relative;
-        overflow: hidden;
-
-        & > * { position: relative; z-index: 1; }
-
-        &::before {
-          content: '';
-          position: absolute;
-          right: -150px;
-          bottom: -10px;
-          width: 320px;
-          height: 320px;
-          border-radius: 50%;
-          background: #e5bdab;
-          z-index: 0;
-        }
-
-        &::after {
-          content: '';
-          position: absolute;
-          right: 15px;
-          bottom: -190px;
-          width: 320px;
-          height: 320px;
-          border-radius: 50%;
-          background: #6d3700;
-          z-index: 0;
-        }
-
-        .overview-badge {
-          display: inline-block;
-          background: #f0eada;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          border-radius: 4px;
-          padding: 0.25rem 0.8rem;
-          font-size: theme-get(fontSizes, s);
-          margin-bottom: theme-get(spaces, sm);
-          letter-spacing: 0.5px;
-          color: theme-get(colors, primary);
-        }
-
-        h2 {
-          font-family: 'Graduate', serif;
-          font-size: theme-get(fontSizes, lg);
-          font-weight: theme-get(weights, bold);
-          color: theme-get(colors, lightPrimary);
-          margin-bottom: theme-get(spaces, sm);
-          line-height: 1.3;
-        }
-
-        p {
-          font-size: theme-get(fontSizes, xs);
-          line-height: 1.7;
-          color: rgba(255, 255, 255, 0.85);
-          max-width: 700px;
-          margin-bottom: theme-get(spaces, md);
-        }
-
-        .overview-stats {
-          display: flex;
-          gap: theme-get(spaces, md);
-          flex-wrap: wrap;
-          padding-top: 45px;
-
-          .stat {
-            font-size: theme-get(fontSizes, s);
-            color: rgba(255, 255, 255, 0.7);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-          }
-        }
-      }
-
-      @include respond-to(mobile) {
-        padding: theme-get(spaces, md) 5%;
-        .overview-card {
-          padding: theme-get(spaces, md);
-          h2 { font-size: theme-get(fontSizes, md); }
-        }
-      }
+      @include respond-to(tablet) { padding: theme-get(spaces, md) 5%; }
     }
 
-    // ===== GENERIC SECTION WRAPPER =====
-    .section {
-      padding: theme-get(spaces, lg) theme-get(spaces, main-app-space);
+    .overview-card {
+      position: relative;
+      height: 362px;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: var(--course-banner);
+      color: theme-get(colors, whiteColor);
 
-      .section-label {
-        font-size: theme-get(fontSizes, s);
-        font-weight: theme-get(weights, bold);
-        letter-spacing: 1.5px;
-        color: theme-get(colors, primary);
-        text-transform: uppercase;
-        margin-bottom: theme-get(spaces, xs);
-      }
-
-      .section-desc {
-        font-size: theme-get(fontSizes, xs);
-        color: theme-get(colors, textColor);
-        line-height: 1.7;
-        margin-bottom: theme-get(spaces, md);
-      }
-
-      @include respond-to(mobile) { padding: theme-get(spaces, md) 5%; }
-    }
-
-    // ===== EXPECTED OUTCOMES =====
-    .outcomes-section {
-      .outcomes-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: theme-get(spaces, md);
-
-        .outcome-card {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: theme-get(spaces, sm);
-          padding: theme-get(spaces, md);
-          background: #f5f5e1;
-          border-radius: 12px;
-          border: 1px solid theme-get(colors, borderColor);
-
-          .outcome-icon {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .card-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-            min-width: 0;
-          }
-
-          .outcome-title {
-            font-size: theme-get(fontSizes, sm);
-            font-weight: theme-get(weights, semiBold);
-            color: theme-get(colors, primary);
-            line-height: 1.3;
-
-            @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
-          }
-
-          .outcome-desc {
-            font-size: theme-get(fontSizes, s);
-            color: theme-get(colors, textColor);
-            line-height: 1.5;
-          }
-        }
-
-        @include respond-to(tablet) { grid-template-columns: 1fr; }
-      }
-    }
-
-    // ===== WHO SHOULD ATTEND =====
-    .attend-section {
-      .attend-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+      @include respond-to(tablet) {
+        height: auto;
+        padding: 22px 24px 32px;
+        display: flex;
+        flex-direction: column;
         gap: theme-get(spaces, sm);
-
-        .attend-card {
-          background: #f5f5e1;
-          border-radius: 12px;
-          padding: 7px;
-          border: 1px solid theme-get(colors, borderColor);
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: theme-get(spaces, sm);
-
-          .attend-icon {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-          }
-
-          .card-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-            min-width: 0;
-          }
-
-          .attendee-role {
-            font-size: theme-get(fontSizes, sm);
-            font-weight: theme-get(weights, semiBold);
-            color: theme-get(colors, primary);
-            line-height: 1.3;
-
-            @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
-          }
-
-          .attendee-description {
-            font-size: theme-get(fontSizes, s);
-            color: theme-get(colors, textColor);
-            line-height: 1.4;
-          }
-        }
-
-        @include respond-to(tablet) { grid-template-columns: 1fr 1fr; }
-        @include respond-to(mobile) { grid-template-columns: 1fr; }
       }
-    }
 
-    // ===== TESTIMONIALS =====
-    .testimonials-section {
-      .testimonials-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: theme-get(spaces, md);
-
-        .testimonial-card {
-          background: theme-get(colors, lightPrimary);
-          border-radius: 12px;
-          padding: theme-get(spaces, md);
-          border: 1px solid theme-get(colors, borderColor);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-
-          .quote {
-            font-size: 24px;
-            color: theme-get(colors, textColor);
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: theme-get(spaces, sm);
-          }
-
-          .testimonial-author {
-            display: flex;
-            align-items: flex-start;
-            gap: theme-get(spaces, xs);
-
-            div {
-              display: flex;
-              flex-direction: column;
-              gap: 2px;
-            }
-          }
-
-          .author-title {
-            font-size: 24px;
-            font-weight: theme-get(weights, semiBold);
-            color: theme-get(colors, primary);
-            line-height: 1.3;
-          }
-
-          .author-role,
-          .author-location {
-            font-size: 12px;
-            color: theme-get(colors, textColor);
-            line-height: 1.4;
-          }
-        }
-
-        @include respond-to(tablet) { grid-template-columns: 1fr; }
+      // soft white light spots, 137px gaussian blur
+      .glow {
+        position: absolute;
+        z-index: 0;
+        width: 317px;
+        height: 317px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.4);
+        filter: blur(137px);
+        pointer-events: none;
       }
-    }
 
-    // ===== READY TO TRANSFORM =====
-    .transform-section {
-      background: #e0dac926;
-      padding: theme-get(spaces, xl) theme-get(spaces, main-app-space);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      color: theme-get(colors, textColorBrown);
+      .glow-1 { left: -228px; top: -216px; }
+      .glow-2 { left: 46px; top: 24px; width: 643px; background-color: rgba(255, 255, 255, 0.12); }
+      .glow-3 { left: 1392px; top: -266px; }
+      .glow-4 { right: -223px; bottom: -265px; }
+
+      .circle {
+        position: absolute;
+        z-index: 0;
+        width: 401px;
+        height: 401px;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .circle-light { right: -207px; top: 108px; background-color: var(--course-circle-light); }
+      .circle-dark { right: -5px; top: 255px; background-color: var(--course-circle-dark); }
+
+      @include respond-to(tablet) { .circle { display: none; } }
+
+      .overview-badge,
+      h2,
+      p,
+      .overview-stats {
+        position: absolute;
+        z-index: 1;
+        left: 40px;
+
+        @include respond-to(tablet) { position: relative; left: auto; }
+      }
+
+      // Figma positions; on tablet and below the content stacks instead
+      @media (min-width: #{theme-get(breakPoints, md) + 1}) {
+        .overview-badge { top: 22px; }
+        h2 { top: 99px; }
+        p { top: 159px; }
+        .overview-stats { top: 318px; }
+      }
+
+      .overview-badge {
+        padding: 12px 24px;
+        border-radius: 8px;
+        background-color: var(--course-pill-bg);
+        color: var(--course-pill-text);
+        font-size: 19px;
+        line-height: 26px;
+
+        @include respond-to(tablet) { align-self: flex-start; }
+      }
 
       h2 {
-        font-family: 'Satoshi', sans-serif;
-        font-size: theme-get(fontSizes, lg);
-        margin-bottom: theme-get(spaces, xs);
-        color: theme-get(colors, textColorBrown);
+        margin: 0;
+        font-family: 'Graduate', serif;
+        font-weight: theme-get(weights, normal);
+        font-size: 35px;
+        line-height: 40px;
+        white-space: nowrap;
+
+        @include respond-to(tablet) { white-space: normal; font-size: theme-get(fontSizes, md); line-height: 1.2; }
       }
 
       p {
-        font-size: theme-get(fontSizes, xs);
-        color: theme-get(colors, textColor);
-        margin-bottom: theme-get(spaces, md);
-        max-width: 500px;
-        line-height: 1.6;
+        width: 942px;
+        max-width: calc(100% - 80px);
+        margin: 0;
+        font-size: 18px;
+        line-height: 24px;
+
+        @include respond-to(tablet) { width: auto; max-width: none; font-size: theme-get(fontSizes, xs); }
+      }
+
+      .overview-stats {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: theme-get(weights, semiBold);
+
+        @include respond-to(mobile) { flex-direction: column; align-items: flex-start; gap: theme-get(spaces, xs); }
+
+        .stat {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          white-space: nowrap;
+
+          svg { display: block; flex-shrink: 0; fill: var(--course-pill-bg); }
+        }
+
+        .stat-level { gap: 10px; white-space: normal; }
+      }
+    }
+
+    // ─── SHARED SECTION (outcomes / attend / testimonials) ──────────────────
+    // 100px/120px padding; label, 24px, description, 32px, cards
+    .section {
+      display: flex;
+      flex-direction: column;
+      padding: 100px $gutter;
+
+      @include respond-to(tablet) { padding: theme-get(spaces, lg) 5%; }
+
+      .section-label {
+        margin: 0 0 24px;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: theme-get(weights, bold);
+        text-transform: uppercase;
+        color: theme-get(colors, primary);
+      }
+
+      .section-desc {
+        margin: 0 0 32px;
+        font-size: 18px;
+        line-height: 24px;
+        color: theme-get(colors, textColorBrown);
+
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
+      }
+    }
+
+    // icon + title/description card used by Expected Outcomes and Who Should Attend
+    .info-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 21px;
+      padding: 24px;
+      border-radius: 12px;
+      background-color: var(--course-card-bg);
+
+      .card-icon {
+        display: block;
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+      }
+
+      // Figma: 16.5x21 person glyph inset 1.5px/3.75px in its 24px frame
+      .person-icon {
+        position: relative;
+
+        img {
+          position: absolute;
+          left: 3.75px;
+          top: 1.5px;
+          width: 16.5px;
+          height: 21px;
+        }
+      }
+
+      .card-text {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .card-title {
+        font-size: 20px;
+        line-height: 22px;
+        letter-spacing: -0.8px;
+        font-weight: theme-get(weights, semiBold);
+        color: theme-get(colors, primary);
+      }
+
+      .card-desc {
+        max-width: 480px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -0.56px;
+        color: theme-get(colors, textColorBrown);
+      }
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 126px;
+      gap: 24px;
+
+      @include respond-to(tablet) { grid-template-columns: 1fr; grid-auto-rows: auto; gap: theme-get(spaces, xs); }
+    }
+
+    .attend-grid {
+      display: flex;
+      gap: 32px;
+
+      .info-card { flex: 1 1 0; min-width: 0; }
+      .card-title { white-space: nowrap; }
+
+      @include respond-to(laptop) { .card-title { white-space: normal; } }
+      @include respond-to(tablet) { flex-direction: column; gap: theme-get(spaces, xs); }
+    }
+
+    .testimonials-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+
+      @include respond-to(tablet) { flex-direction: column; }
+
+      .testimonial-card {
+        flex: 0 1 562px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px 16px;
+        border-radius: 16px;
+        background-color: theme-get(colors, lightPrimary);
+        color: theme-get(colors, primaryTextColor);
+
+        @include respond-to(tablet) { flex: none; }
+      }
+
+      .quote {
+        margin: 0;
+        font-size: 24px;
+        line-height: 32px;
+
+        @include respond-to(mobile) { font-size: theme-get(fontSizes, sm); line-height: 1.35; }
+      }
+
+      .testimonial-author {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .author-title {
+        font-size: 24px;
+        line-height: 32px;
+        color: theme-get(colors, primary);
+      }
+
+      .author-role,
+      .author-location {
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    // ─── READY TO TRANSFORM ─────────────────────────────────────────────────
+    .transform-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 100px $gutter;
+      background-color: rgba(224, 218, 201, 0.15);
+      color: theme-get(colors, textColorBrown);
+
+      @include respond-to(tablet) { padding: theme-get(spaces, lg) 5%; gap: theme-get(spaces, sm); }
+
+      h2 {
+        margin: 0;
+        font-size: 42px;
+        line-height: 57px;
+        letter-spacing: -1.68px;
+        font-weight: theme-get(weights, semiBold);
+
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: normal; }
+      }
+
+      .transform-body {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 20px;
+        line-height: 27px;
+        letter-spacing: -0.8px;
+        font-weight: theme-get(weights, light);
       }
 
       .transform-btns {
         display: flex;
-        gap: theme-get(spaces, sm);
         flex-wrap: wrap;
-      }
+        gap: 48px;
 
-      @include respond-to(mobile) {
-        padding: theme-get(spaces, lg) 5%;
-        h2 { font-size: theme-get(fontSizes, md); }
+        @include respond-to(mobile) { gap: theme-get(spaces, xs); }
       }
     }
 
-    // ===== BROWSE OTHER PROGRAMS =====
+    // ─── BROWSE OTHER PROGRAMS ──────────────────────────────────────────────
     .browse-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 20px $gutter;
+
+      @include respond-to(tablet) { padding: theme-get(spaces, md) 5%; }
+
+      .browse-title {
+        margin: 0;
+        font-size: 20px;
+        line-height: 27px;
+        letter-spacing: -0.8px;
+        font-weight: theme-get(weights, light);
+        color: theme-get(colors, subtitleTextColor);
+      }
+
       .browse-grid {
         display: flex;
-        flex-direction: row;
-        gap: theme-get(spaces, sm);
+        gap: 24px;
+        padding: 12px 0;
         overflow-x: auto;
-        padding-bottom: theme-get(spaces, sm);
-        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
         cursor: grab;
+        user-select: none;
 
-        &::-webkit-scrollbar { height: 6px; display: block; }
-        &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        &::-webkit-scrollbar-thumb { background: theme-get(colors, primary); border-radius: 10px; }
-        scrollbar-width: thin;
-        scrollbar-color: theme-get(colors, primary) #f1f1f1;
+        &::-webkit-scrollbar { display: none; }
+      }
 
-        .browse-card {
-          flex-shrink: 0;
-          width: 350px;
-          padding: theme-get(spaces, sm);
-          border: 1px solid theme-get(colors, borderColor);
-          border-radius: 10px;
+      .browse-card {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 24px;
+        background-color: theme-get(colors, whiteColor);
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+
+        .card-text {
           display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          gap: theme-get(spaces, sm);
-          cursor: pointer;
-          background: white;
-          transition: border-color 0.2s, background 0.2s;
-          scroll-snap-align: start;
-          user-select: none;
+          flex-direction: column;
+          gap: 4px;
+        }
 
-          .card-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-            min-width: 0;
-          }
+        .prog-title {
+          font-size: 12px;
+          line-height: 16px;
+          font-weight: theme-get(weights, light);
+          color: theme-get(colors, mutedTitleColor);
+          white-space: nowrap;
+        }
 
-          .prog-title {
-            font-size: 12px;
-            font-weight: theme-get(weights, semiBold);
-            color: theme-get(colors, primary);
-            line-height: 1.3;
-          }
+        .prog-desc {
+          font-size: 14px;
+          line-height: 19px;
+          font-weight: theme-get(weights, semiBold);
+          color: theme-get(colors, textColorBrown);
+        }
 
-          .prog-desc {
-            font-size: 14px;
-            color: theme-get(colors, textColor);
-            line-height: 1.4;
-          }
+        .arrow { display: block; width: 24px; height: 24px; }
 
-          .arrow { flex-shrink: 0; }
+        // Figma highlights the current course
+        &.active,
+        &:hover {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
-          &:hover {
-            border-color: theme-get(colors, primary);
-            background: theme-get(colors, lightPrimary);
-          }
+          .prog-title { color: theme-get(colors, primary); }
         }
       }
     }
 
-    // ===== DOWNLOAD MODAL =====
+    // ─── MOBILE (Figma mobile "Course - Enterprise Risk Management" 149:21047, 390px) ──
+    // Hero, banner, outcomes and attendees follow the mobile frame; testimonials, "Ready to
+    // Transform?" and browse have no mobile design and use the same mobile type scale.
+    @include respond-to(mobile) {
+      .hero-section {
+        gap: 0;
+        padding: 103px 0 54px;
+        border-bottom: none;
+
+        .hero-title {
+          gap: 12px;
+          padding: 0 16px;
+        }
+
+        .page-title {
+          font-size: 18px;
+          line-height: 24px;
+          letter-spacing: -0.72px;
+        }
+
+        .page-subtitle {
+          max-width: 358px;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.48px;
+        }
+      }
+
+      // photo strip at 0.51 of desktop: 194x153 photos, 12px gaps, 827x19 edge ellipses
+      // centred on the strip frame (x 83), strip starting at x -280
+      .carousel-section {
+        --strip-half-gap: 6px;
+        max-width: none;
+        height: 178px;
+        margin-top: 24px;
+
+        .carousel-track {
+          top: 9px;
+          left: -280px;
+          gap: 12px;
+        }
+
+        .carousel-slide {
+          width: 194px;
+          height: 153px;
+        }
+
+        .edge {
+          left: -330.5px;
+          width: 827px;
+          height: 19px;
+          transform: none;
+        }
+
+        .edge-bottom { top: 159px; }
+      }
+
+      .cta-section {
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .cta-section .btn-outline {
+        gap: 10px;
+        padding: 7px 11px;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: -0.56px;
+
+        img { width: 12px; height: 12px; }
+      }
+
+      // everything below the hero sits on one #FEFFFA band, sections 40px apart
+      .course-overview,
+      .section {
+        background-color: #fefffa;
+      }
+
+      .course-overview { padding: 24px 16px 0; }
+
+      // banner at 0.298 of desktop: 358x187
+      .overview-card {
+        display: block;
+        height: 187px;
+        padding: 0;
+        border-radius: 3.6px;
+
+        .glow { width: 94.6px; height: 94.6px; filter: blur(41px); }
+        .glow-1 { left: -68px; top: -64.4px; }
+        .glow-2 { left: 13.7px; top: 7.2px; width: 191.8px; }
+        .glow-3 { left: 415px; top: -79.3px; }
+        .glow-4 { right: -66.5px; bottom: -79px; }
+
+        .circle { display: block; width: 120px; height: 120px; }
+        .circle-light { right: -81px; top: 99px; }
+        .circle-dark { right: -21px; top: 143px; }
+
+        .overview-badge,
+        h2,
+        p,
+        .overview-stats {
+          position: absolute;
+          left: 12px;
+        }
+
+        .overview-badge {
+          top: 12px;
+          padding: 4px 8px;
+          border-radius: 2.4px;
+          font-size: 10px;
+          line-height: 14px;
+        }
+
+        h2 {
+          top: 44px;
+          font-size: 18px;
+          line-height: 21px;
+          white-space: nowrap;
+        }
+
+        p {
+          top: 75px;
+          width: 335px;
+          max-width: calc(100% - 24px);
+          font-size: 10px;
+          line-height: 14px;
+        }
+
+        .overview-stats {
+          top: 167px;
+          flex-direction: row;
+          align-items: center;
+          gap: 7px;
+          font-size: 8px;
+          line-height: 11px;
+
+          .stat { gap: 2px; }
+          .stat-level { gap: 3px; }
+
+          svg { width: 12px; height: 12px; }
+        }
+      }
+
+      .section {
+        padding: 40px 16px 0;
+
+        .section-label {
+          margin-bottom: 16px;
+          letter-spacing: -0.64px;
+        }
+
+        .section-desc {
+          margin-bottom: 32px;
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+
+      .attend-section { padding-bottom: 24px; }
+
+      .info-card {
+        gap: 8px;
+        padding: 16px 12px;
+        border-radius: 8px;
+
+        .card-text { gap: 8px; }
+
+        .card-title {
+          font-size: 16px;
+          line-height: 14px;
+          letter-spacing: -0.64px;
+        }
+
+        .card-desc {
+          max-width: none;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.48px;
+        }
+      }
+
+      .outcomes-grid,
+      .attend-grid,
+      .testimonials-grid {
+        gap: 32px;
+      }
+
+      .testimonials-section { padding-bottom: 40px; }
+
+      .testimonials-grid .testimonial-card {
+        gap: 16px;
+        padding: 16px 12px;
+        border-radius: 8px;
+
+        .quote,
+        .author-title {
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .author-role,
+        .author-location {
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+
+      // "Ready to Transform?" in the mobile closing-band style (Graduate 18, 12px copy, centred)
+      .transform-section {
+        align-items: center;
+        gap: 25px;
+        padding: 30px 16px;
+        text-align: center;
+
+        h2 {
+          font-family: 'Graduate', serif;
+          font-weight: theme-get(weights, normal);
+          font-size: 18px;
+          line-height: 21px;
+          letter-spacing: 0;
+          color: theme-get(colors, navyTextColor);
+        }
+
+        .transform-body { align-items: center; gap: 22px; }
+
+        p {
+          max-width: 334px;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.48px;
+        }
+
+        .transform-btns { justify-content: center; gap: 12px; }
+
+        .btn-primary,
+        .btn-outline {
+          padding: 8px 12px;
+          font-size: 14px;
+          line-height: 19px;
+          letter-spacing: -0.56px;
+
+          img { width: 12px; height: 12px; }
+        }
+
+        .btn-outline { padding: 7px 11px; }
+      }
+
+      .browse-section {
+        padding: 20px 16px;
+        gap: 16px;
+
+        .browse-title {
+          font-size: 16px;
+          line-height: 22px;
+          letter-spacing: -0.64px;
+        }
+      }
+    }
+
+    // ─── DOWNLOAD MODAL ─────────────────────────────────────────────────────
     .modal-overlay {
       position: fixed;
       top: 0;

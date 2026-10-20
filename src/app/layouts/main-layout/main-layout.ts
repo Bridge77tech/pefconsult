@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from "@angular/router";
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Footer } from "../../components/footer/footer";
 import { Menu } from "../../components/menu/menu";
 import { ImageService } from '../../services/general/image-service';
+import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
 @Component({
   selector: 'app-main-layout',
   imports: [
     Menu, 
     RouterOutlet, 
+    RouterLink,
+    RevealDirective,
     Footer,
     CommonModule,
   ],

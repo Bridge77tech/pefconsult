@@ -5,8 +5,9 @@
 
 // Use the theme partial for access to `$theme`, `theme-get()` and mixins.
 @use "styles/theme" as *;
+@use "styles/globe";
 
-@import url('https://fonts.googleapis.com/css2?family=Graduate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Graduate&family=Outfit:wght@400&display=swap');
 
 :root {
   --primary: #{theme-get(colors, primary)};
@@ -70,7 +71,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
     font-family: "Satoshi", serif;
     font-weight: 400;
     
@@ -103,10 +103,34 @@
     background: #b3b3b3;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+
+  // Figma prototype motion is skipped for visitors who ask for reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      animation-delay: 0s !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+    }
+  }
+
+  // `clip` (not `hidden`) hides sideways overflow without turning html/body into scroll
+  // containers; with `hidden` on both, body became a second scroller that swallowed the
+  // first wheel/trackpad gesture at the top and bottom of the page as a bounce.
   html,
   body {
     min-height: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100%;
   }
 

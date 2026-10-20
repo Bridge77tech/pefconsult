@@ -1,12 +1,17 @@
-<div class="button" (click)="onClick()">
+<div class="button" (click)="onClick()"
+    [style.padding]="padding()"
+    [style.border-radius]="borderRadius()"
+    [style.--btn-hover-bg]="hoverColor()"
+    [style.--btn-hover-duration]="hoverDuration()">
     @if (!isButtonLoading()) {
         <div class="btn-row">
             @if (prefixIcon()) {
                 <img [src]="prefixIcon()!" alt="icon" class="prefix-icon">
             }
             <small 
-            [style.font-size.px]="labelFontSize()"
+            [style.font-size]="'var(--label-font-size, ' + labelFontSize() + 'px)'"
             [style.font-weight]="fontWeight()"
+            [style.line-height]="lineHeight()"
             >{{ label() }}</small>
             @if (suffixIcon()) {
                 <img [src]="suffixIcon()!" alt="icon" class="suffix-icon">

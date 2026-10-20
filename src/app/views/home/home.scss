@@ -1,4 +1,5 @@
 @use '../../../styles/theme' as *;
+@use '../../../styles/motion' as *;
 
 section {
   width: 100%;
@@ -16,8 +17,9 @@ section {
       position: relative;
       z-index: 0;
       width: 100%;
-      height: clamp(36rem, 88vh, 52rem);
+      height: 679px;
       overflow: hidden;
+      background-color: #fffcf5;
 
       @include respond-to(tablet) { height: 50vh; min-height: 26rem; }
       @include respond-to(mobile) { height: 60svh; min-height: 18rem; max-height: 24rem; }
@@ -29,10 +31,9 @@ section {
         z-index: 1;
         pointer-events: none;
         background: linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.50) 0%,
-          rgba(0, 0, 0, 0.22) 52%,
-          rgba(0, 0, 0, 0.00) 100%
+          92.107deg,
+          rgba(theme-get(colors, heroOverlayColor), 0.45) 13.909%,
+          rgba(theme-get(colors, heroOverlayColor), 0) 64.01%
         );
 
         @include respond-to(tablet) {
@@ -52,12 +53,22 @@ section {
         }
       }
 
+      // Figma: image 1827x1105 anchored top-left of the 1440x679 frame
       img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: relative;
+        position: absolute;
+        top: 1px;
+        left: -0.086%;
+        width: 126.89%;
+        height: auto;
+        max-width: none;
         z-index: 0;
+
+        @include respond-to(tablet) {
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       /* lazy blur-up */
@@ -98,24 +109,26 @@ section {
 
       .content {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 200px;
         left: 7%;
         z-index: 3;
         box-sizing: border-box;
-        max-width: 820px;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: theme-get(spaces, xs);
-        padding: theme-get(spaces, md) theme-get(spaces, lg);
+        width: 692px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
         @include respond-to(tablet) {
           top: 50%;
           transform: translateY(-50%);
           left: 5%;
           right: 5%;
+          width: auto;
           max-width: 100%;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-radius: theme-get(spaces, xs);
           padding: theme-get(spaces, sm) theme-get(spaces, md);
         }
 
@@ -130,32 +143,44 @@ section {
         }
 
         .content-header {
+          position: relative;
           display: flex;
           flex-direction: column;
-          gap: theme-get(spaces, xs);
+          gap: 24px;
 
+          @include respond-to(tablet) { gap: theme-get(spaces, xs); }
           @include respond-to(mobile) { gap: theme-get(spaces, xxs); }
 
+          // Figma "Enterprise Risk Management" label: 54px above the title, cycling through the
+          // four practice areas with a left-to-right mask wipe (0.8s hidden, 0.8s wipe in,
+          // 0.8s shown, 0.8s wipe out, then the next label)
           small {
-            font-size: theme-get(fontSizes, sm);
+            position: absolute;
+            top: -54px;
+            left: 0;
+            font-size: 20px;
+            line-height: 27px;
+            white-space: nowrap;
             color: theme-get(colors, primary);
-            animation: heroSlideDown 1.1s ease-out 0.15s both;
+            clip-path: inset(0 100% 0 0);
+            animation: hero-label-wipe 3.2s linear infinite;
 
-            @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+            @include respond-to(tablet) {
+              position: static;
+              font-size: theme-get(fontSizes, xs);
+            }
             @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
           }
 
           h3 {
-            font-size: theme-get(fontSizes, xl);
+            font-size: 42px;
             font-family: 'Graduate', serif;
             color: theme-get(colors, textColorBrown);
-            margin: 0 0 theme-get(spaces, xs) 0;
-            line-height: 1.05;
+            margin: 0;
+            line-height: 48px;
             max-width: 100%;
-            animation: heroSlideDown 1.1s ease-out 0.45s both;
 
-            @media (min-width: 1200px) { font-size: theme-get(fontSizes, xxl); line-height: 1.08; }
-            @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: 1.1; }
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, lg); line-height: 1.1; margin-bottom: theme-get(spaces, xs); }
             @include respond-to(mobile) {
               font-size: theme-get(fontSizes, sm);
               line-height: 1.2;
@@ -168,13 +193,12 @@ section {
 
           p {
             font-family: Satoshi;
-            font-weight: theme-get(weights, normal);
-            font-size: theme-get(fontSizes, sm);
+            font-weight: theme-get(weights, light);
+            font-size: 20px;
             line-height: 27px;
-            letter-spacing: -4%;
-            max-width: 700px;
-            color: theme-get(colors, textColor);
-            animation: heroSlideDown 1.1s ease-out 0.75s both;
+            letter-spacing: -0.8px;
+            max-width: 692px;
+            color: theme-get(colors, textColorBrown);
 
             @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); max-width: 100%; }
             @include respond-to(mobile) { display: none; }
@@ -182,43 +206,32 @@ section {
         }
 
         .reach-out {
-          display: inline-flex;
-          align-items: center;
-          gap: theme-get(spaces, sm);
-          margin-top: theme-get(spaces, lg);
-          background-color: theme-get(colors, whiteColor);
-          border-radius: theme-get(spaces, xs);
-          padding: theme-get(spaces, ss);
-          width: auto;
-          align-self: flex-start;
-          flex-wrap: nowrap;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-          animation: heroSlideLeft 1.1s ease-out 1.05s both;
+          display: block;
+          // Figma: card top at 536px, text block ends at 428px
+          margin-top: 108px;
 
-          p {
-            font-size: theme-get(fontSizes, mm);
-            font-weight: theme-get(weights, light);
-            margin: 0;
-            white-space: nowrap;
-          }
-
-          @include respond-to(tablet) {
-            margin-top: theme-get(spaces, md);
-            padding: theme-get(spaces, s) theme-get(spaces, xs);
-            gap: theme-get(spaces, xs);
-
-            p { font-size: theme-get(fontSizes, s); }
-          }
-
-          @include respond-to(mobile) {
-            margin-top: theme-get(spaces, xs);
-            padding: theme-get(spaces, s) theme-get(spaces, sm);
-            gap: 0;
-            width: fit-content;
-
-            p { display: none; }
-          }
+          @include respond-to(tablet) { margin-top: theme-get(spaces, md); }
+          @include respond-to(mobile) { margin-top: theme-get(spaces, xs); }
         }
+
+        // Figma "Hero" false → True: 0.8s after load, 1437ms Bouncy. The headline block slides in
+        // from x -660 (fading in), the card rises from y 686, the label shifts 10px right.
+        .content-header h3,
+        .content-header p,
+        .content-header small,
+        .reach-out {
+          transition-property: transform, opacity;
+          transition-duration: 1437ms;
+          transition-timing-function: $spring-bouncy;
+          transition-delay: 0.8s;
+        }
+      }
+
+      &:not(.revealed) .content {
+        .content-header h3,
+        .content-header p { transform: translateX(-780px); opacity: 0; }
+        .content-header small { transform: translateX(-10px); }
+        .reach-out { transform: translate(-10px, 150px); }
       }
     }
 
@@ -244,10 +257,18 @@ section {
     }
 
     // ─── OUR REACH ──────────────────────────────────────────────────────────
+    // Figma: 1200px content at 120px gutters, 48px top/bottom
+    .body.our-reach-section {
+      padding: 48px max(7%, calc((100% - 1200px) / 2));
+      overflow-y: clip; // the logo row starts below the frame, as in Figma
+
+      @include respond-to(tablet) { padding: 4% 5%; }
+      @include respond-to(mobile) { padding: 3% 5%; }
+    }
+
     .body .our-reach {
       display: flex;
       flex-direction: column;
-      gap: theme-get(spaces, xl);
 
       @include respond-to(tablet)  { gap: theme-get(spaces, lg); }
       @include respond-to(mobile)  { gap: theme-get(spaces, md); }
@@ -261,14 +282,14 @@ section {
         @include respond-to(mobile) { flex-direction: column; gap: theme-get(spaces, sm); }
 
         .title {
-          width: 70%;
-          opacity: 0;
-          transform: translateX(-50px);
-          transition: all 1.1s ease-out;
+          flex: 1;
 
           p {
             color: theme-get(colors, primary);
-            font-size: theme-get(fontSizes, sm);
+            font-size: theme-get(fontSizes, xs);
+            font-weight: theme-get(weights, bold);
+            line-height: normal;
+            text-transform: uppercase;
             @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
           }
 
@@ -276,57 +297,70 @@ section {
           @include respond-to(mobile) { width: 100%; }
         }
 
-        .title.visible { opacity: 1; transform: translateX(0); }
 
         .content {
-          width: 100%;
-          opacity: 0;
-          transform: translateX(60px);
-          transition: all 1s ease-in-out;
+          flex: 0 1 727px;
+
+          @include respond-to(tablet) { flex: none; width: 100%; }
 
           p {
-            font-size: theme-get(fontSizes, xs);
-            color: theme-get(colors, textColor);
+            font-size: 20px;
+            line-height: 27px;
+            color: theme-get(colors, textColorBrown);
+
+            @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); line-height: 1.5; color: theme-get(colors, textColor); }
           }
         }
 
-        .content.visible-right { opacity: 1; transform: translateX(0); }
       }
 
+      // Figma "Connected globe": 923x349.27, centred, 55px below the intro text
       .globe-image {
-        padding: 0 theme-get(spaces, xl);
-        opacity: 0;
-        transform: scale(0.7);
-        transition: none;
+        width: 100%;
+        max-width: 923px;
+        margin: 55px auto 0;
+        aspect-ratio: 923 / 349.27;
 
-        &.bubble-in {
-          animation: globeBubble 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
+        @include respond-to(tablet) { margin-top: 0; }
 
-        @include respond-to(tablet) { padding: 0 theme-get(spaces, md); }
-        @include respond-to(mobile) { padding: 0; }
-
-        img { width: 100%; height: auto; }
+        // sweep, node and connector animation: src/styles/_globe.scss
       }
 
       small {
-        font-size: theme-get(fontSizes, sm);
+        margin-top: 55px;
+        font-size: 20px;
+        line-height: 27px;
         color: theme-get(colors, primary);
+
+        @include respond-to(tablet) { margin-top: 0; font-size: theme-get(fontSizes, sm); line-height: 1.5; }
 
         @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
       }
 
+      // Figma "Endless scroll": 56px tall row, 50px gap, starts flush left
       .clients {
         width: 100%;
+        height: 56px;
+        margin-top: 36px;
         overflow: hidden;
+
+        @include respond-to(tablet) { height: auto; margin-top: 0; }
 
         .cli-row {
           display: flex;
-          width: 100%;
+          width: max-content;
+          height: 100%;
           align-items: center;
-          gap: theme-get(spaces, xxl);
-          animation: slideLoop 20s linear infinite;
-          overflow: hidden;
+          gap: 50px;
+          animation: slideLoop 10s linear infinite; // Figma: one logo set (1148px) per 10s
+
+          .client {
+            flex-shrink: 0;
+            width: var(--logo-width, auto);
+
+            @include respond-to(tablet) { width: auto; }
+          }
+          .client img { display: block; }
 
           @include respond-to(tablet) { gap: theme-get(spaces, lg); }
           @include respond-to(mobile) {
@@ -335,10 +369,31 @@ section {
           }
         }
 
+        // the set is duplicated, so shifting by half the row (+ half a gap) loops seamlessly
         @keyframes slideLoop {
-          0%   { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - var(--marquee-half-gap, 25px))); }
         }
+      }
+    }
+
+    // Figma "Social Proof" False → True (on scroll into view): 800ms ease-in. Copy fades in,
+    // the logo row rises 110px.
+    .body .our-reach {
+      .top-content .title,
+      .top-content .content,
+      > small {
+        transition: opacity 800ms $ease-in;
+      }
+
+      .clients { transition: transform 800ms $ease-in; }
+
+      &:not(.revealed) {
+        .top-content .title,
+        .top-content .content,
+        > small { opacity: 0; }
+
+        .clients { transform: translateY(110px); }
       }
     }
 
@@ -449,11 +504,6 @@ section {
             display: flex;
             flex-direction: column;
             gap: theme-get(spaces, xs);
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: opacity 1.1s ease-out, transform 1.1s ease-out;
-
-            &.slide-from-left { opacity: 1; transform: translateX(0); }
 
             @include respond-to(tablet) {
               width: 100%;
@@ -480,11 +530,6 @@ section {
             width: 25%;
             z-index: 0;
             position: relative;
-            opacity: 0;
-            transform: translateY(-60px);
-            transition: opacity 1.1s ease-out 0.25s, transform 1.1s ease-out 0.25s;
-
-            &.slide-from-top { opacity: 1; transform: translateY(0); }
 
             @include respond-to(tablet) {
               width: calc(50% - theme-get(spaces, sm) / 2);
@@ -540,11 +585,6 @@ section {
             height: 100%;
             padding: theme-get(spaces, lg) theme-get(spaces, md);
             border-radius: theme-get(spaces, sm);
-            opacity: 0;
-            transform: translateX(60px);
-            transition: opacity 1.1s ease-out 0.5s, transform 1.1s ease-out 0.5s;
-
-            &.slide-from-right { opacity: 1; transform: translateX(0); }
 
             @include respond-to(tablet) {
               width: calc(50% - theme-get(spaces, sm) / 2);
@@ -572,116 +612,114 @@ section {
       }
     }
 
+    // Figma "Value propositon" false → true (on scroll into view): 500ms ease-in. Heading fades in;
+    // cards arrive from x -610 (left), y 672 (middle) and x 1464 (right).
+    .who-we-are {
+      overflow: clip;
+
+      .content > .title,
+      .content > .sub-text { transition: opacity 500ms $ease-in; }
+
+      .container-row > div { transition: transform 500ms $ease-in; }
+
+      &:not(.revealed) {
+        .content > .title,
+        .content > .sub-text { opacity: 0; }
+
+        .cont-1 { transform: translateX(-730px); }
+        .cont-2 { transform: translateY(390px); }
+        .cont-3 { transform: translateX(420px); }
+      }
+    }
+
     // ─── OUR SERVICES ────────────────────────────────────────────────────────
+    // Figma: 100px top / 50px bottom, 120px gutters, 50px between heading block and cards
     .services {
       display: flex;
       flex-direction: column;
-      gap: theme-get(spaces, sm);
-      padding-bottom: 2%;
+      gap: 28px;
+      padding: 100px max(7%, calc((100% - 1200px) / 2)) 50px;
+
+      @include respond-to(tablet) { padding: 4% 5%; gap: theme-get(spaces, sm); }
+      @include respond-to(mobile) { padding: 3% 5%; }
 
       .title {
         color: theme-get(colors, primary);
-        font-size: theme-get(fontSizes, mm);
-
-        @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
+        font-size: theme-get(fontSizes, xs);
+        font-weight: theme-get(weights, bold);
+        line-height: 22px;
+        text-transform: uppercase;
       }
 
-      .sub-content, p {
-        font-size: theme-get(fontSizes, sm);
+      .sub-content p {
+        font-size: 32px;
         font-weight: theme-get(weights, bold);
+        line-height: 43px;
+        color: theme-get(colors, textColorBrown);
 
-        @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
+        @include respond-to(tablet) { font-size: theme-get(fontSizes, sm); line-height: normal; }
         @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
       }
 
       .container-row-1 {
         display: flex;
         align-items: stretch;
-        gap: theme-get(spaces, sm);
-        min-height: 260px;
+        gap: 28px;
+        margin-top: 22px; // 50px total below the headline (28px gap + 22px)
 
         @include respond-to(tablet) {
-          min-height: unset;
           flex-wrap: wrap;
+          gap: theme-get(spaces, sm);
+          margin-top: 0;
         }
 
-        @include respond-to(mobile) {
-          flex-direction: column;
-          min-height: unset;
-        }
+        @include respond-to(mobile) { flex-direction: column; }
 
         .cont-1,
+        .cont-2,
         .cont-3 {
-          width: 25%;
-          height: 100%;
-          border: 2px solid theme-get(colors, borderColor);
-          border-radius: theme-get(spaces, xs);
-          padding: theme-get(spaces, xs);
+          flex: none;
+          width: calc((100% - 56px) / 3); // three equal cards, 28px gaps
+          background-color: theme-get(colors, whiteColor);
+          border: 1px solid theme-get(colors, cardBorderColor);
+          border-radius: 16px;
+          // Figma strokes sit inside the frame, so padding is measured from the outer edge
+          padding: 23px 15px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
-          gap: theme-get(spaces, md);
+          gap: 25px;
 
-          @include respond-to(tablet) {
-            width: calc(50% - theme-get(spaces, sm) / 2);
-            height: 240px;
+          @include respond-to(tablet) { width: calc(50% - theme-get(spaces, sm) / 2); }
+          @include respond-to(mobile) { width: 100%; }
+
+          img { display: block; width: 40px; height: 40px; flex-shrink: 0; }
+
+          .sub {
+            font-size: 20px;
+            font-weight: theme-get(weights, bold);
+            line-height: 27px;
+            color: #000;
+            text-align: center;
           }
 
-          @include respond-to(mobile) { width: 100%; height: auto; padding: theme-get(spaces, md); }
-
-          img { height: 40px; width: 40px; }
-
           .content {
+            font-size: theme-get(fontSizes, xs);
+            line-height: 22px;
+            color: theme-get(colors, textColorBrown);
             text-align: center;
-            font-size: theme-get(fontSizes, s);
-            color: theme-get(colors, textColor);
           }
         }
 
         .cont-1 {
-          opacity: 0;
-          transform: translateX(-60px);
-          transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-          &.slide-from-left { opacity: 1; transform: translateX(0); }
-
-          img { height: 18.33px; width: 40px; }
         }
 
         .cont-2 {
-          width: 50%;
-          height: 100%;
-          border: 2px solid theme-get(colors, borderColor);
-          border-radius: theme-get(spaces, xs);
-          padding: theme-get(spaces, xs);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: theme-get(spaces, md);
-          opacity: 0;
-          transform: translateY(-60px);
-          transition: opacity 0.7s ease-out 0.15s, transform 0.7s ease-out 0.15s;
 
-          &.slide-from-top { opacity: 1; transform: translateY(0); }
-
-          @include respond-to(tablet) { width: 100%; height: auto; order: -1; }
-          @include respond-to(mobile) { width: 100%; height: auto; padding: theme-get(spaces, md); }
-
-          img { height: 40px; width: 40px; }
-
-          .content {
-            text-align: center;
-            font-size: theme-get(fontSizes, s);
-            color: theme-get(colors, textColor);
-          }
+          @include respond-to(tablet) { order: -1; width: 100%; }
         }
 
         .cont-3 {
-          opacity: 0;
-          transform: translateX(60px);
-          transition: opacity 0.7s ease-out 0.3s, transform 0.7s ease-out 0.3s;
-          &.slide-from-right { opacity: 1; transform: translateX(0); }
         }
       }
     }
@@ -734,19 +772,322 @@ section {
 
 @keyframes spin        { to { transform: rotate(360deg); } }
 
-@keyframes heroSlideDown {
-  from { opacity: 0; transform: translateY(-40px); }
-  to   { opacity: 1; transform: translateY(0); }
+// ─── MOBILE (Figma "Mobile - Landing Page" 149:20008, 390px) ─────────────────
+// Layout and type from the mobile frame; content stays as on desktop.
+section .home-body {
+  @include respond-to(mobile) {
+    // Hero: 253px (Figma's 254px frame starts at y -1); photo 803x485 from (-141, 1);
+    // warm gradient over its left; 27% white wash
+    .hero-section {
+      height: 253px;
+      min-height: 0;
+      max-height: none;
+
+      img {
+        inset: auto;
+        top: 1px;
+        left: -36.15%;
+        width: 205.9%;
+        height: auto;
+      }
+
+      &::before {
+        inset: auto;
+        top: -75px;
+        left: -67px;
+        width: 524px;
+        height: 404px;
+        background: linear-gradient(
+          91.29deg,
+          rgba(theme-get(colors, heroOverlayColor), 0.45) 13.909%,
+          rgba(theme-get(colors, heroOverlayColor), 0) 64.01%
+        );
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 1px;
+        left: 0;
+        right: 0;
+        height: 283px;
+        background-color: rgba(249, 249, 249, 0.27);
+        pointer-events: none;
+      }
+
+      .content {
+        top: 73px;
+        bottom: auto;
+        left: 16px;
+        right: 16px;
+        width: auto;
+        padding: 0;
+        transform: none;
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-radius: 0;
+
+        .content-header {
+          gap: 16px;
+
+          small {
+            position: static;
+            font-size: 12px;
+            line-height: 16px;
+          }
+
+          h3 {
+            max-width: 302px;
+            margin: 0;
+            font-size: 18px;
+            line-height: 21px;
+          }
+        }
+
+        .reach-out { margin-top: 36px; }
+      }
+    }
+
+    .mobi {
+      padding: 0 16px;
+      margin-top: 13px;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.48px;
+      font-weight: theme-get(weights, light);
+      color: theme-get(colors, textColorBrown);
+    }
+
+    // Our Reach: 12px copy, globe 358 wide, logo row at 4/7 of desktop scale
+    .body.our-reach-section { padding: 58px 16px 21px; }
+
+    .body .our-reach {
+      gap: 0;
+
+      .top-content {
+        gap: 16px;
+
+        .title p {
+          font-size: 12px;
+          line-height: 16px;
+        }
+
+        .content p {
+          font-size: 12px;
+          line-height: 16px;
+          color: theme-get(colors, textColorBrown);
+        }
+      }
+
+      .globe-image {
+        margin-top: 24px;
+        padding: 0;
+      }
+
+      small {
+        margin-top: 32px;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .clients {
+        height: 32px;
+        margin-top: 16px;
+
+        .cli-row {
+          --marquee-half-gap: 14.286px;
+          gap: 28.571px;
+
+          .client {
+            width: calc(var(--logo-width, 0px) * 0.5714);
+            padding-left: 0;
+          }
+
+          .client img {
+            width: auto;
+            height: 22.857px;
+          }
+
+          .client:first-child img,
+          .client:nth-child(9) img { height: 17.7px; } // Viu Consult wordmark
+        }
+      }
+    }
+
+    // Our Footprint: 152px band, Graduate 20/10, 2px underline under each figure
+    .footprint {
+      padding: 16px 16px 30px;
+
+      .content {
+        gap: 24px;
+
+        .logo h3 {
+          font-size: 12px;
+          line-height: 16px;
+          font-weight: theme-get(weights, bold);
+        }
+
+        .count-row {
+          flex-wrap: nowrap;
+          gap: 0;
+
+          .count {
+            padding-bottom: 12px;
+            border-bottom: 2px solid theme-get(colors, primary);
+
+            p {
+              font-size: 20px;
+              line-height: 40px;
+            }
+
+            h3 {
+              display: block;
+              font-size: 10px;
+              line-height: 12.5px;
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+
+    // Who We Are: 42px/16px padding, three stacked cards
+    .who-we-are {
+      padding: 42px 16px;
+
+      .content {
+        gap: 10px;
+
+        > .title {
+          font-size: 12px;
+          line-height: 16px;
+        }
+
+        .sub-text {
+          font-size: 12px;
+          line-height: 16px;
+          color: theme-get(colors, textColorBrown);
+        }
+
+        .container-row {
+          margin-top: 16px;
+          gap: 38px;
+
+          .cont-1 {
+            padding: 16px;
+            border-radius: 16px;
+            gap: 24px;
+
+            .title {
+              font-size: 18px;
+              line-height: 24px;
+              font-weight: theme-get(weights, normal);
+              color: theme-get(colors, primary);
+            }
+
+            small {
+              font-size: 16px;
+              line-height: 22px;
+            }
+          }
+
+          .cont-2 {
+            width: 276px;
+            height: 277px;
+            align-self: center;
+
+            .diversity-image {
+              width: 100%;
+              height: 100%;
+              border-radius: 16px;
+            }
+
+            .text {
+              left: 5px;
+              right: auto;
+              bottom: auto;
+              top: 204px;
+              padding: 10px;
+              border-radius: 24px;
+              background-color: rgba(255, 255, 255, 0.24);
+              backdrop-filter: blur(2px);
+              -webkit-backdrop-filter: blur(2px);
+
+              p {
+                font-size: 24px;
+                line-height: 32px;
+                font-weight: theme-get(weights, semiBold);
+                white-space: nowrap;
+              }
+            }
+          }
+
+          .cont-3 {
+            padding: 16px;
+            border-radius: 16px;
+
+            h3 {
+              font-size: 18px;
+              line-height: 24px;
+            }
+
+            small {
+              font-size: 16px;
+              line-height: 22px;
+              color: theme-get(colors, textColor);
+            }
+          }
+        }
+      }
+    }
+
+    // Our Services: 42px/16px padding, 32px gaps, full-width cards
+    .services {
+      padding: 42px 16px;
+      gap: 10px;
+
+      .title {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .sub-content p {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .container-row-1 {
+        margin-top: 22px;
+        gap: 32px;
+
+        .cont-2 { order: 0; } // Figma keeps the natural order on mobile
+
+        .cont-1,
+        .cont-2,
+        .cont-3 {
+          width: 100%;
+          padding: 23px 7px; // 24px/8px inside the 1px stroke
+          gap: 16px;
+
+          .sub {
+            font-size: 18px;
+            line-height: 24px;
+          }
+
+          .content {
+            font-size: 16px;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
 }
 
-@keyframes heroSlideLeft {
-  from { opacity: 0; transform: translateX(-60px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes globeBubble {
-  0%   { opacity: 0; transform: scale(0.7); }
-  60%  { opacity: 1; transform: scale(1.05); }
-  80%  {             transform: scale(0.97); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes hero-label-wipe {
+  0%, 25%   { clip-path: inset(0 100% 0 0); }
+  50%, 75%  { clip-path: inset(0 0 0 0); }
+  100%      { clip-path: inset(0 100% 0 0); }
 }

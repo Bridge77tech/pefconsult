@@ -1,0 +1,48 @@
+@use '../../../styles/theme' as *;
+
+// Figma "Frame 1321316939": 568x75 card used in the page heroes
+.reach-out-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: theme-get(spaces, sm);
+  background-color: theme-get(colors, heroCardColor);
+  border-radius: 12px;
+  padding: 12px 12px 12px 32px;
+  width: 568px;
+  flex-wrap: nowrap;
+
+  p {
+    font-size: 20px;
+    font-weight: theme-get(weights, normal);
+    line-height: normal;
+    letter-spacing: -0.8px;
+    color: theme-get(colors, textColorBrown);
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  @include respond-to(tablet) {
+    --label-font-size: 14px;
+    width: auto;
+    padding: theme-get(spaces, s) theme-get(spaces, xs);
+    gap: theme-get(spaces, xs);
+
+    p { font-size: theme-get(fontSizes, s); }
+  }
+
+  // Figma mobile hero card: 4px/8px padding, 10px gap, 12px copy and button
+  @include respond-to(mobile) {
+    --label-font-size: 12px;
+    --btn-mobile-padding: 8px;
+    padding: 4px 8px;
+    gap: 10px;
+    width: fit-content;
+
+    p {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.48px;
+    }
+  }
+}

@@ -1,23 +1,33 @@
 <section>
   <div class="menu-row">
-    <div class="left-row">
+    <a class="left-row" routerLink="/home" (click)="isShowMenu = false" aria-label="Patrick Fiscian Consulting – home">
       <h5>
         PATRICK FISCIAN <br />
         <span>CONSULTING</span>
       </h5>
-    </div>
+    </a>
     <div class="menu-icon" (click)="onMenuClick()">
       <img [src]="_images.menuIcon" alt="" />
     </div>
     <div class="middle-row" [class.show]="isShowMenu">
       @for (item of menuItems; track item.path) {
-      <div class="menu-item" (click)="routeTo(item.path)">
+      <div class="menu-item" [class.active]="activePath() === item.path" (click)="routeTo(item.path)">
         <p>{{ item.label }}</p>
       </div>
       }
     </div>
     <div class="send-mail">
-      <app-custom-button label="Send an Email!" (onClickEvent)="scrollToFooter()"></app-custom-button>
+      <small>patrick&#64;pefconsult.com</small>
+      <app-custom-button
+        label="Send an Email!"
+        [fontWeight]="400"
+        padding="6px 8px"
+        borderRadius="6px"
+        lineHeight="normal"
+        hoverColor="#6A6762"
+        hoverDuration="300ms"
+        (onClickEvent)="scrollToFooter()"
+      ></app-custom-button>
     </div>
   </div>
 </section>

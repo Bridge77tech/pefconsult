@@ -1,0 +1,76 @@
+// Figma "Connected globe" (149:18346): the globe lights up on Our Reach's reveal.
+// The SVG (public/images/globe-network.svg) is injected at runtime, so these rules are global.
+//
+// 1. Sweep — Figma's #C9C9AF rectangle grows from a 16x18 speck at the bottom-left to cover
+//    the globe: 1000ms linear, 0.8s after the section reveals (clip on .globe-sweep).
+// 2. Nodes light up as the sweep reaches them (--t = 0..1, when the sweep passes the node):
+//    pop in brand brown, settle to the globe colour.
+// 3. Connectors draw themselves from end to end as the sweep reaches their first point.
+$globe-delay: 0.8s;
+$globe-sweep: 1000ms;
+
+.globe-image {
+  position: relative;
+  overflow: hidden;
+
+  .globe-sweep {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(-14.6% -3.58% -0.21% 0);
+    transition: clip-path $globe-sweep linear $globe-delay;
+  }
+
+  &.has-svg .globe-fallback { display: none; }
+
+  .globe-fallback {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  // the SVG is 998x727 drawn from (-21.98, -0.22) inside the 923x349 frame
+  .globe-svg {
+    position: absolute;
+    left: -2.382%;
+    top: -0.063%;
+    width: 108.15%;
+    height: auto;
+  }
+
+  .globe-node {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .globe-link {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+}
+
+:not(.revealed) > .globe-image .globe-sweep {
+  clip-path: inset(95.06% 98.27% -0.21% 0);
+}
+
+.revealed > .globe-image {
+  .globe-node {
+    animation: globe-node-light 700ms cubic-bezier(0, 0, 0.58, 1) both;
+    animation-delay: calc(#{$globe-delay} + var(--t, 0) * #{$globe-sweep});
+  }
+
+  .globe-link {
+    animation: globe-link-draw 900ms cubic-bezier(0.42, 0, 0.58, 1) both;
+    animation-delay: calc(#{$globe-delay} + var(--t, 0) * #{$globe-sweep} + 100ms);
+  }
+}
+
+@keyframes globe-node-light {
+  0%   { opacity: 0; transform: scale(0.3); fill: #955d09; }
+  45%  { opacity: 1; transform: scale(1.9); fill: #955d09; }
+  100% { opacity: 1; transform: scale(1); fill: #c9c9af; }
+}
+
+@keyframes globe-link-draw {
+  to { stroke-dashoffset: 0; }
+}

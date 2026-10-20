@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseBrowseItem, CourseData, CourseDataService } from '../../services/course/course-data.service';
+import { CourseBrowseItem, CourseData, CourseDataService, CourseTheme } from '../../services/course/course-data.service';
 
 @Component({
   selector: 'app-course',
@@ -16,6 +16,7 @@ export class Course implements OnInit {
   @ViewChild('browseGrid') browseGridRef!: ElementRef<HTMLElement>;
 
   course: CourseData | null = null;
+  theme: CourseTheme | null = null;
   otherPrograms: CourseBrowseItem[] = [];
   showDownloadModal = false;
 
@@ -23,24 +24,19 @@ export class Course implements OnInit {
   private dragStartX = 0;
   private scrollStartLeft = 0;
 
-  readonly carouselImages = [
-    {
-      src: 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHByZXNlbnRhdGlvbnxlbnwwfHwwfHx8MA%3D%3D',
-      alt: 'Training Session 1',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJlc2VudGF0aW9ufGVufDB8fDB8fHww',
-      alt: 'Training Session 2',
-    },
-    {
-      src: 'https://images.pexels.com/photos/1709003/pexels-photo-1709003.jpeg',
-      alt: 'Workshop 3',
-    },
-    {
-      src: 'https://images.pexels.com/photos/8761560/pexels-photo-8761560.jpeg',
-      alt: 'Seminar 4',
-    },
-  ];
+  readonly outcomeIcons: Partial<Record<string, string>> = {
+    speaker: 'assets/course/speaker.svg',
+    lock: 'assets/course/lock.svg',
+    map: 'assets/course/map.svg',
+    key: 'assets/course/key.svg',
+    person: 'assets/course/person.png',
+  };
+
+  // Figma course hero photo strip (order as in the design)
+  readonly carouselImages = [1, 2, 3, 4, 5, 6].map((n) => ({
+    src: `images/course/course-photo-${n}.jpg`,
+    alt: `PEF Consult training session ${n}`,
+  }));
 
   ngOnInit(): void {
     const courseId = this.route.snapshot.data['courseId'] as string;
@@ -49,7 +45,8 @@ export class Course implements OnInit {
       this.router.navigate(['/services']);
       return;
     }
-    this.otherPrograms = this.courseDataService.getBrowseListExcluding(courseId);
+    this.theme = this.courseDataService.getTheme(this.course);
+    this.otherPrograms = this.courseDataService.getBrowseList(courseId);
   }
 
   bookCourse(): void {

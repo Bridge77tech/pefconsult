@@ -1,22 +1,21 @@
 <section>
   <div class="about-body">
-    <div class="hero-section">
+    <div class="hero-section" appReveal="load">
       <img [src]="_images.aboutHeroBgImg" alt="" />
+      <!-- Figma "Ellipse 13" progressive background blur, approximated with stacked masked layers -->
+      <div class="progressive-blur" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
       <div class="content">
-        <h2 #heroTitle>PROFESSIONAL RISK MANAGEMENT TRAINING AND CONSULTANCY</h2>
-        <p #heroSubtitle
-          >PF Consults offers risk management training and consultancy for business. We are
-          continually shaping the future of business, side by side with you. We equip leaders and
-          organizations with the knowledge and systems needed to turn risk into opportunity. Our
-          expertise ensures your strategies remain sound, secure, and sustainable.</p
-        >
+        <h2>We equip leaders with the knowledge needed to turn risk into opportunity.</h2>
+        <app-reach-out-card class="reach-out" (callClick)="scrollToFooter()"></app-reach-out-card>
       </div>
     </div>
 
-    <div class="body company">
+    <div class="body company" appReveal>
       <h3 class="topic">OUR COMPANY</h3>
       <div class="row">
-        <div class="left" #companyLeft>
+        <div class="left">
           <h2 class="title">How We Started</h2>
           <p class="content">
             Patrick Fiscian Consulting is a home-grown indigenous firm made of professionals who are
@@ -27,7 +26,7 @@
             covering a wide range of industries
           </p>
         </div>
-        <div class="right" #companyRight>
+        <div class="right">
           <img [src]="_images.africanMan" alt="" class="img1" />
           <img [src]="_images.femaleImage" alt="" class="img2" />
           <img [src]="_images.groupImage" alt="" class="img3" />
@@ -35,10 +34,12 @@
       </div>
     </div>
 
-    <div class="body our-mission">
+    <div class="body our-mission" appReveal>
       <div class="mission-row">
-        <div class="card" #missionCard>
+        <div class="card">
           <img [src]="_images.yelloBackground" alt="" />
+          <!-- Figma: soft diagonal light streak across the lower half of the card -->
+          <span class="streak" aria-hidden="true"></span>
           <div class="content">
             <h2 class="title">OUR MISSION</h2>
             <p>
@@ -47,7 +48,7 @@
             </p>
             <small>
               We are committed to helping our clients navigate uncertainty with confidence. By
-              combining analytical expertise with pratical experience, we design solutions that not
+              combining analytical expertise with practical experience, we design solutions that not
               only mitigate risk but also unlock opportunities for sustainable growth and
               competitive advantage.
             </small>
@@ -55,16 +56,16 @@
         </div>
 
         <div class="grid-view">
-          <div class="card1" #gridItem>
+          <div class="card1">
             <app-text-content
               [icon]="_images.professionIcon"
               [titleText]="'Professional Excellence'"
               [contentText]="
-                'Our Services reflect over 85 years of collective expertise, ensuring excellence grounded in deep industry knowledge and experience.'
+                'Our services reflect over 85 years of collective expertise, ensuring excellence grounded in deep industry knowledge and experience.'
               "
             ></app-text-content>
           </div>
-          <div class="card1" #gridItem>
+          <div class="card1">
             <app-text-content
               [icon]="_images.diversityIcon"
               [titleText]="'Diversity'"
@@ -73,16 +74,16 @@
               "
             ></app-text-content>
           </div>
-          <div class="card1" #gridItem>
+          <div class="card1">
             <app-text-content
               [icon]="_images.clientIcon"
               [titleText]="'Client Centric'"
               [contentText]="
-                'Every solutions we offer is design with our clients\' best interests in mind, built on strong foundations and refined through practical experience.'
+                'Every solution we offer is designed with our clients’ best interests in mind, built on strong foundations and refined through practical experience.'
               "
             ></app-text-content>
           </div>
-          <div class="card1" #gridItem>
+          <div class="card1">
             <app-text-content
               [icon]="_images.expertiseIcon"
               [titleText]="'Proven Expertise'"
@@ -95,16 +96,16 @@
       </div>
     </div>
 
-    <div class="body message-section">
+    <div class="body message-section" appReveal>
       <div class="content">
         <h2>MESSAGE FROM OUR CHIEF EXECUTIVE OFFICER</h2>
         <div class="message-row">
-          <div class="image" #msgImage>
+          <div class="image">
             <img [src]="_images.ceoPicuture" alt="" />
-            <small>Dr. Patrick Edwin Fiscian</small>
+            <small>Dr Patrick Edwin Fiscian</small>
             <p>CEO & Lead Consultant</p>
           </div>
-          <div class="con" #msgContent>
+          <div class="con">
             <p>
               Patrick Fiscian Consulting is a home-grown management consulting firm made up of
               seasoned professionals with extensive experience in the banking and financial services

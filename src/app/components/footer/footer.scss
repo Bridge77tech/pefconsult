@@ -1,13 +1,15 @@
 @use '../../../styles/theme' as *;
 @use 'sass:color';
+@use '../../../styles/motion' as *;
 
 .footer {
   width: 100%;
-  background-color: theme-get(colors, whiteColor);
+  // Figma: 85% white card, 2px #F1F1F1 inside stroke, 32px radius, 40px padding, 61px row gap
+  background-color: rgba(theme-get(colors, whiteColor), 0.85);
   background-repeat: no-repeat;
-  padding: theme-get(spaces, xl) theme-get(spaces, md);
+  padding: 38px;
   border: 2px solid theme-get(colors, borderColor);
-  border-radius: theme-get(spaces, md);
+  border-radius: 32px;
   position: relative;
   overflow: hidden;
 
@@ -18,37 +20,52 @@
 
   .footer-main-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: theme-get(spaces, xl);
-    max-width: 1400px;
-    margin: 0 auto theme-get(spaces, xl) auto;
+    grid-template-columns: minmax(0, 637px) minmax(0, 506px);
+    justify-content: space-between;
+    margin: 0 0 61px;
 
     .left-section {
       display: flex;
       flex-direction: column;
-      gap: theme-get(spaces, xl);
 
       .branding {
         .company-name {
-          font-size: theme-get(fontSizes, md);
+          display: inline-block;
+          background-color: theme-get(colors, whiteColor);
+          font-size: 20px;
           font-weight: theme-get(weights, bold);
-          color: theme-get(colors, textColorBrown);
+          color: theme-get(colors, primary);
           margin: 0;
-          line-height: 1.2;
+          line-height: 27px;
+
+          span {
+            font-weight: theme-get(weights, normal);
+            letter-spacing: 5px;
+          }
         }
       }
 
       .email-subscription {
         display: flex;
         flex-direction: column;
-        gap: theme-get(spaces, sm);
-        width: 65%;
+        gap: 8px;
+        width: 475px;
+        max-width: 100%;
+        margin-top: 24px;
 
         .subscription-form {
           display: flex;
-          border: 1px solid rgba(54, 33, 2, 1);
-          border-radius: theme-get(spaces, s);
-          padding: theme-get(spaces, ss);
+          align-items: center;
+          justify-content: space-between;
+          background-color: theme-get(colors, whiteColor);
+          border: 1px solid theme-get(colors, inputBorderDark);
+          border-radius: 12px;
+          padding: 11px 11px 11px 31px;
+
+          // Figma "Enter your email" focused state: brown stroke (instant)
+          &:focus-within {
+            border-color: theme-get(colors, primary);
+          }
 
           @include respond-to(mobile) {
             width: 100%;
@@ -56,41 +73,104 @@
 
           .email-input {
             flex: 1;
-            font-size: theme-get(fontSizes, s);
+            min-width: 0;
+            font-size: 16px;
+            line-height: 22px;
+            letter-spacing: -0.64px;
             font-family: inherit;
             outline: none;
-            transition: border-color 0.3s ease;
-
-            &:focus {
-              border-color: theme-get(colors, primary);
-            }
+            caret-color: theme-get(colors, primary);
 
             &::placeholder {
-              color: rgba(0, 0, 0, 0.4);
+              color: theme-get(colors, placeholderColor);
             }
           }
 
           .request-button {
-            padding: theme-get(spaces, xxs) theme-get(spaces, sm);
+            position: relative;
+            padding: 8px 12px;
             background-color: theme-get(colors, primaryLightColor);
             color: theme-get(colors, primary);
             border: none;
-            border-radius: theme-get(spaces, s);
-            font-size: theme-get(fontSizes, xxs);
-            font-weight: theme-get(weights, semiBold);
+            border-radius: 12px;
+            font-size: 18px;
+            line-height: 24px;
+            letter-spacing: -0.72px;
+            font-weight: theme-get(weights, normal);
             cursor: pointer;
-            transition: background-color 0.3s ease;
             white-space: nowrap;
 
             @include respond-to(mobile) {
               font-size: theme-get(fontSizes, xxs);
+              line-height: normal;
               padding: theme-get(spaces, xxs) theme-get(spaces, s);
             }
 
-            &:hover {
-              background-color: color.adjust(theme-get(colors, activeHoveColor), $lightness: -10%);
-              color: theme-get(colors, whiteColor);
+            // Figma hover / pressed: brown with cream text (instant swap)
+            &:hover,
+            &.is-sending,
+            &.is-sent {
+              background-color: theme-get(colors, primary);
+              color: #fff7ea;
             }
+
+            &:disabled { cursor: default; }
+
+            .label {
+              display: inline-block;
+              transition: transform 248ms $spring-quick, opacity 248ms $spring-quick;
+            }
+
+            // label shrinks to the centre (18px → 3px, fading to 20%) as it "sends"
+            &.is-sending .label,
+            &.is-sent .label {
+              transform: scale(0.17);
+              opacity: 0.2;
+            }
+
+            &.is-sent .label { opacity: 0; }
+
+            .done {
+              position: absolute;
+              inset: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              opacity: 0;
+              transform: scale(0.6);
+              pointer-events: none;
+              transition: opacity 124ms $spring-quick, transform 124ms $spring-quick;
+
+              svg { display: block; }
+            }
+
+            &.is-sent .done {
+              opacity: 1;
+              transform: scale(1);
+            }
+
+            // four 4px sparkles around the check, shown for one 124ms step (Figma Variant6)
+            .spark {
+              position: absolute;
+              width: 4px;
+              height: 4px;
+              border-radius: 2px;
+              background-color: theme-get(colors, whiteColor);
+              opacity: 0;
+            }
+
+            .spark-1 { left: calc(50% - 19px); top: 18px; }
+            .spark-2 { left: calc(50% - 9px); top: 8px; }
+            .spark-3 { left: calc(50% + 11px); top: 18px; }
+            .spark-4 { left: calc(50% + 1px); top: 30px; }
+
+            &.is-sent .spark { animation: request-spark 248ms $ease-out 124ms both; }
+          }
+
+          @keyframes request-spark {
+            0%   { opacity: 0; transform: scale(0); }
+            50%  { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.4); }
           }
         }
 
@@ -107,20 +187,21 @@
         }
 
         .disclaimer {
-          font-size: theme-get(fontSizes, s);
-          color: theme-get(colors, secondaryTextColor);
+          font-size: 14px;
+          color: theme-get(colors, bodyTextGrey);
           margin: 0;
-          line-height: 1.5;
+          line-height: 19px;
 
           @include respond-to(mobile) {
             font-size: theme-get(fontSizes, xxs);
+            line-height: 1.5;
           }
         }
       }
 
       .desktop {
-        display: block;
-        gap: theme-get(spaces, sm);
+        display: flex;
+        gap: 24px;
 
         @include respond-to(mobile) {
           display: none;
@@ -135,40 +216,52 @@
     .right-section {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
       width: 100%;
-      align-items: flex-end;
 
       .contact-section {
         display: flex;
         flex-direction: column;
-        gap: theme-get(spaces, xs);
+        gap: 24px;
+
+        .contact-intro {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
 
         .contact-heading {
-          font-size: theme-get(fontSizes, sm);
+          font-size: 20px;
+          line-height: 27px;
           font-weight: theme-get(weights, bold);
+          color: theme-get(colors, headingDark);
           margin: 0;
         }
 
         .contact-description {
-          font-size: theme-get(fontSizes, xs);
-          color: theme-get(colors, primaryTextColor);
-          line-height: 1.2rem;
-          letter-spacing: -4%;
+          font-size: 16px;
+          color: theme-get(colors, bodyTextGrey);
+          line-height: 20px;
+          letter-spacing: -0.16px;
           margin: 0;
         }
 
         .contact-form {
           display: flex;
           flex-direction: column;
-          gap: theme-get(spaces, md);
+          gap: 24px;
 
           .form-input,
           .form-textarea {
-            padding: theme-get(spaces, s) theme-get(spaces, xs);
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: theme-get(spaces, s);
-            font-size: theme-get(fontSizes, xs);
+            // Figma: 12px/32px padding inside a 1px stroke
+            padding: 11px 31px;
+            background-color: theme-get(colors, fieldBgColor);
+            border: 1px solid theme-get(colors, fieldBorderColor);
+            border-radius: 12px;
+            font-size: 16px;
+            line-height: 22px;
+            letter-spacing: -0.64px;
+            font-weight: theme-get(weights, light);
+            color: theme-get(colors, bodyTextGrey);
             font-family: inherit;
             outline: none;
             transition: border-color 0.3s ease;
@@ -179,12 +272,16 @@
             }
 
             &::placeholder {
-              color: rgba(0, 0, 0, 0.4);
+              color: theme-get(colors, bodyTextGrey);
             }
           }
 
+          // Figma: 33px between the email field and the message box
+          .form-input { margin-bottom: 9px; }
+
           .form-textarea {
-            min-height: 120px;
+            height: 118px;
+            min-height: 118px;
           }
 
           .form-error {
@@ -225,20 +322,31 @@
     width: 100%;
 
     .nav-btn {
-      background-color: transparent;
+      background-color: theme-get(colors, whiteColor);
       color: theme-get(colors, primary);
       border: 1px solid theme-get(colors, primary);
-      border-radius: theme-get(spaces, xs);
-      font-size: theme-get(fontSizes, xs);
-      font-weight: theme-get(weights, semiBold);
+      border-radius: 16px;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: theme-get(weights, normal);
       padding: theme-get(spaces, ss);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: background-color 100ms $ease-in, color 100ms $ease-in, border-color 100ms $ease-in;
 
+      // Figma "Bottom Nav" hover: brown pill, white text
       &:hover {
         background-color: theme-get(colors, primary);
+        border-color: theme-get(colors, primary);
         color: theme-get(colors, whiteColor);
       }
+    }
+
+    // Figma "Component 5": content-width pills, 24px apart, pinned to the column bottom
+    &.desktop {
+      width: auto;
+      margin: auto 0 0;
+
+      .nav-btn { padding: 11px 23px; }
     }
   }
 
@@ -262,8 +370,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
 
     @include respond-to(mobile) {
       max-width: none;
@@ -273,7 +379,7 @@
     }
 
     .footer-item {
-      flex: 1;
+      flex: none;
       text-align: center;
 
       @include respond-to(mobile) {
@@ -282,17 +388,23 @@
       }
 
       p {
-        font-size: theme-get(fontSizes, s);
-        color: theme-get(colors, textColor);
+        font-size: 16px;
+        line-height: 22px;
+        color: theme-get(colors, textColorBrown);
         font-weight: theme-get(weights, normal);
+        white-space: nowrap;
         margin: 0;
+
+        @include respond-to(laptop) {
+          white-space: normal;
+        }
 
         @include respond-to(mobile) {
           text-align: left;
         }
 
         a {
-          color: theme-get(colors, tex);
+          color: inherit;
           text-decoration: none;
           transition: color 0.3s ease;
 
@@ -356,6 +468,7 @@
         .branding {
           .company-name {
             font-size: theme-get(fontSizes, lg);
+            line-height: normal;
           }
 
           .company-subtitle {
@@ -368,6 +481,7 @@
         .contact-section {
           .contact-heading {
             font-size: theme-get(fontSizes, xl);
+            line-height: normal;
           }
         }
       }
@@ -506,3 +620,139 @@
     }
   }
 }
+
+// ─── MOBILE (Figma mobile "Footer/Contact us", 390px) ───────────────────────
+// No card on mobile: groups stack 42px apart on the page background.
+.footer {
+  @include respond-to(mobile) {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+
+    .footer-main-content {
+      gap: 42px;
+      margin: 0 0 42px;
+
+      .left-section {
+        gap: 0;
+
+        .branding { display: flex; } // no inline line box around the 8px logo
+
+        .branding .company-name {
+          font-size: 8px;
+          line-height: 11px;
+          color: theme-get(colors, primary);
+
+          span { letter-spacing: 2px; }
+        }
+
+        .email-subscription {
+          width: 100%;
+          margin-top: 24px;
+          gap: 8px;
+
+          .subscription-form {
+            padding: 11px; // 12px inside the stroke
+
+            .email-input {
+              font-size: 12px;
+              line-height: 16px;
+              letter-spacing: -0.48px;
+            }
+
+            .request-button {
+              padding: 8px 12px;
+              font-size: 12px;
+              line-height: 16px;
+              letter-spacing: -0.48px;
+            }
+          }
+
+          .disclaimer {
+            font-size: 10px;
+            line-height: 13px;
+          }
+        }
+      }
+
+      .right-section {
+        align-items: stretch;
+
+        .contact-section {
+          gap: 24px;
+
+          .contact-heading {
+            font-size: 20px;
+            line-height: 27px;
+          }
+
+          .contact-description {
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.12px;
+          }
+
+          .contact-form {
+            --btn-mobile-padding: 12px;
+            gap: 16px;
+
+            .form-input,
+            .form-textarea {
+              padding: 11px;
+              border: 1px solid theme-get(colors, fieldBorderColor);
+              background-color: theme-get(colors, fieldBgColor);
+              font-size: 12px;
+              line-height: 16px;
+              letter-spacing: -0.48px;
+              color: theme-get(colors, bodyTextGrey);
+            }
+
+            .form-input { margin-bottom: 0; }
+
+            .form-textarea {
+              height: 118px;
+              min-height: 118px;
+            }
+
+            app-custom-button { margin-top: 8px; } // 24px above the send button
+          }
+        }
+
+        .mobile {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+          width: auto;
+          margin: 42px 0 0;
+
+          .nav-btn {
+            width: auto;
+            padding: 7px 23px; // 8px/24px inside the stroke
+            font-size: 14px;
+            line-height: 19px;
+            font-weight: theme-get(weights, normal);
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      .footer-item {
+        width: auto;
+
+        p {
+          font-size: 12px;
+          line-height: 16px;
+          text-align: left;
+          white-space: normal;
+        }
+      }
+    }
+  }
+}
+

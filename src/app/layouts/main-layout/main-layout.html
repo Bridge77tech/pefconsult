@@ -7,19 +7,26 @@
       <router-outlet></router-outlet>
     </section>
   </div>
-  <div class="footer">
+  <div class="footer" [class.has-cta]="isHomeRoute">
     @if (isHomeRoute) {
-    <div class="make-that-move">
-      <div class="title">MAKE THAT MOVE</div>
+    <div class="make-that-move" appReveal>
+      <div class="title">make that move</div>
       <small
-        >Don't wait for the future to unfold-shape it. Through our risk management consultancy
-        services. we help you anticipate challenges, align strategies, and act with precision and
+        >Don’t wait for the future to unfold—shape it. Through our risk management and consultancy
+        services, we help you anticipate challenges, align strategies, and act with precision and
         purpose.
       </small>
-      <div class="explore-button">Explore Our Services Now!</div>
+      <a class="explore-button" routerLink="/services">Explore Our Services Now!</a>
     </div>
     }
 
-    <app-footer></app-footer>
+    <div class="footer-card">
+      <!-- Figma "Ellipse 5" / "Ellipse 4": blurred orange and green glows behind the footer -->
+      <div class="glow-layer" aria-hidden="true">
+        <span class="glow glow-orange"></span>
+        <span class="glow glow-green"></span>
+      </div>
+      <app-footer></app-footer>
+    </div>
   </div>
 </section>

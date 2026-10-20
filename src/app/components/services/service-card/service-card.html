@@ -1,14 +1,28 @@
 <div class="service-card" [style.backgroundColor]="backgroundColor()">
-  <div class="info">
-    <h4>{{ label() }}</h4>
-    <div class="learn-more-button" (click)="onClick()">
-      <div class="image" [style.backgroundColor]="learnButtonColor()">
-        <img [src]="_images.learnMoreIcon" alt="" />
-      </div>
-      <p [style.color]="learnButtonColor()">Learn More</p>
+  <h4 [style.--title-width.px]="titleWidth()" [style.--title-m-width.px]="mobileTitleWidth()">
+    @for (part of titleParts(); track $index) {
+      <span [class.muted]="part.muted">{{ part.text }}</span>
+    }
+  </h4>
+  <div class="learn-more-button" (click)="onClick()">
+    <div class="image" [style.backgroundColor]="learnButtonColor()">
+      <img [src]="_images.learnMoreIcon" alt="" />
     </div>
+    <p [style.color]="learnButtonColor()">Learn More</p>
   </div>
-  <div class="icon">
-    <img [src]="iconUrl()" alt="{{ label() }} icon" />
-  </div>
+  @if (imageBox(); as box) {
+    <img
+      class="illustration"
+      [src]="iconUrl()"
+      [alt]="plainLabel() + ' illustration'"
+      [style.--img-left.px]="box.left"
+      [style.--img-top.px]="box.top"
+      [style.--img-width.px]="box.width"
+      [style.--img-height.px]="box.height"
+      [style.--img-m-left.px]="mobileImageBox()?.left"
+      [style.--img-m-top.px]="mobileImageBox()?.top"
+      [style.--img-m-width.px]="mobileImageBox()?.width"
+      [style.--img-m-height.px]="mobileImageBox()?.height"
+    />
+  }
 </div>

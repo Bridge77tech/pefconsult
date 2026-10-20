@@ -1,46 +1,42 @@
 <section>
   <div class="home-body">
-    <div class="hero-section">
+    <div class="hero-section" appReveal="load">
       <img [src]="_images.landingpageBackgroundImage" alt="" class="laptop" />
       <!-- <img [src]="_images.homeHeroBgImg" alt="" class="mobile" /> -->
       <div class="content">
         <div class="content-header">
-          <small>Enterprise Risk Management</small>
-          <h3>RETHINK BUSINESS WITH <br />BALANCE, EQUITY AND GROWTH</h3>
+          <small (animationiteration)="nextHeroLabel()">{{ heroLabels[heroLabelIndex] }}</small>
+          <h3>Rethink Business with balance, Equity and Growth</h3>
           <p class="laptop">{{ homeContent }}</p>
         </div>
-        <div class="reach-out">
-          <p>We are readily available to assist!</p>
-          <app-custom-button 
-          [label]="'Reach out, Call Us Now'"
-          (onClickEvent)="scrollToTheFooter()"
-          [labelFontSize]="14"
-          ></app-custom-button>
-        </div>
+        <app-reach-out-card class="reach-out" (callClick)="scrollToTheFooter()"></app-reach-out-card>
       </div>
     </div>
 
      <p class="mobi">{{ homeContent }}</p>
 
-    <div class="body">
-      <div class="our-reach">
+    <div class="body our-reach-section">
+      <div class="our-reach" appReveal>
         <div class="top-content">
-          <div class="title" #titleRef>
+          <div class="title">
             <p>OUR REACH</p>
           </div>
-          <div class="content" #contentRef>
+          <div class="content">
             <p>{{ ourReachContent }}</p>
           </div>
         </div>
-        <div class="globe-image" #globeRef>
-          <img [src]="_images.globalMapImage" alt="" />
+        <div class="globe-image" #globe>
+          <div class="globe-sweep">
+            <!-- static fallback (SSR / no JS); replaced by the animated SVG in the browser -->
+            <img [src]="_images.globalMapImage" alt="" class="globe-fallback" />
+          </div>
         </div>
         <small>Trusted by companies in over 30 countries across the globe.</small>
         <div class="clients">
           <div class="cli-row">
-            @for (client of clients; track $index) {
-            <div class="client">
-              <img [src]="client.imageUrl" alt="" />
+            @for (client of clients.concat(clients); track $index) {
+            <div class="client" [style.--logo-width.px]="client.width" [style.padding-left.px]="client.inset">
+              <img [src]="client.imageUrl" [alt]="client.name" />
             </div>
             }
           </div>
@@ -56,7 +52,7 @@
         <div class="count-row">
           @for (count of ourFootPrint; track $index) {
           <div class="count" #countBox >
-            <p>{{animatedCounts[$index]}} +</p>
+            <p>{{ animatedCounts()[$index] }} +</p>
             <h3>{{ count.label | uppercase }}</h3>
           </div>
           }
@@ -64,7 +60,7 @@
       </div>
     </div>
 
-    <div class="body who-we-are">
+    <div class="body who-we-are" appReveal>
       <div class="content">
         <div class="title">
           <p>WHO WE ARE</p>
@@ -77,7 +73,7 @@
         </div>
 
         <div class="container-row">
-          <div class="cont-1" #whoWeAreLeft>
+          <div class="cont-1">
             <div class="title">Who we are</div>
             <small>
               PEF Consulting was founded in response 
@@ -94,13 +90,13 @@
                operating on the continent.
             </small>
           </div>
-          <div class="cont-2" #whoWeAreMiddle>
+          <div class="cont-2">
             <img [src]="_images.diversityAndInclusive" alt="diversity" class="diversity-image" />
             <div class="text">
               <p>Diversity and Inclusion</p>
             </div>
           </div>
-          <div class="cont-3" #whoWeAreRight>
+          <div class="cont-3">
             <div class="number">
               <h3>50+ years</h3>
             </div>
@@ -125,29 +121,29 @@
         </p>
       </div>
       <div class="container-row-1">
-        <div class="cont-1" #servicesLeft>
+        <div class="cont-1">
           <img [src]="_images.riskManagementIcon" alt="" />
-          <div class="sub">Market Risk Management</div>
+          <div class="sub">Risk Intelligence</div>
           <div class="content">
-            ...across our home-grown indigenous firm made of professionals who are well-experienced
-            and exposed to the banking environment. We bring to bear a rich experience and exposure
+            We transform real-world insight into actionable intelligence, helping organizations
+            anticipate, assess, and respond to risk before it impacts performance or reputation.
           </div>
         </div>
-        <div class="cont-2" #servicesMiddle>
+        <div class="cont-2">
           <img [src]="_images.peopleIcon" alt="" />
-          <div class="sub">Corporate Governance, Risk and Compliance</div>
+          <div class="sub">Strategic Assurance</div>
           <div class="content">
-            GRC strategies help align processes and people to foster ethical conduct, strengthen
-            coordination, for sustainable business success. A well-structured GRC framework promotes
-            accountability, transparency, and long-term resilience.
+            Our advisory services provide leaders with confidence in their decisions by aligning
+            risk management, governance, and strategy to support sustainable growth.
           </div>
         </div>
-        <div class="cont-3" #servicesRight>
+        <div class="cont-3">
           <img [src]="_images.developmentIcon" alt="" />
-          <div class="sub">Corporate Strategy Development</div>
+          <div class="sub">Precision Advisory</div>
           <div class="content">
-            ...across our home-grown indigenous firm made of professionals who are well-experienced
-            and exposed to the banking environment. We bring to bear a rich experience and exposure
+            Through data-driven analysis and deep industry expertise, we deliver targeted guidance
+            that cuts through complexity and enables clear, informed action in uncertain
+            environments.
           </div>
         </div>
       </div>

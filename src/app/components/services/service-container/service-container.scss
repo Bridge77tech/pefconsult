@@ -1,49 +1,60 @@
 @use '../../../../styles/theme' as *;
 
+// Figma service group: 65px/120px padding, 45px between the heading and each card row
 .service-container {
   display: flex;
   flex-direction: column;
-  gap: theme-get(spaces, lg);
+  gap: 45px;
   width: 100%;
-  padding: 3.5% 7%;
+  padding: 65px max(7%, calc((100% - 1200px) / 2));
   box-sizing: border-box;
+  background-color: var(--group-bg);
 
   @include respond-to(tablet) { padding: 3% 5%; gap: theme-get(spaces, md); }
-  @include respond-to(mobile) { padding: 4% 5%; gap: theme-get(spaces, sm); }
+  // Figma mobile: one #FEFFFA band for all groups, 40px apart, 25px from heading to cards
+  @include respond-to(mobile) {
+    padding: 20px 16px;
+    gap: 25px;
+    background-color: #fefffa;
+  }
 
-  .content {
+  .heading {
     display: flex;
     flex-direction: column;
-    gap: theme-get(spaces, xxs);
+    gap: 6px;
+
+    @include respond-to(mobile) { gap: 16px; }
 
     h4 {
-      font-size: theme-get(fontSizes, sm);
-      font-weight: 200;
-      letter-spacing: 0%;
+      font-size: 20px;
+      line-height: 27px;
+      font-weight: theme-get(weights, bold);
+      color: theme-get(colors, textColorBrown);
 
-      @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); }
-      @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); }
+      @include respond-to(mobile) { font-size: 16px; line-height: 22px; letter-spacing: -0.64px; color: theme-get(colors, subtitleTextColor); }
     }
 
     p {
-      font-size: theme-get(fontSizes, xs);
-      color: theme-get(colors, textColor);
-      line-height: 1.5;
-      font-weight: theme-get(weights, light);
-      letter-spacing: 0%;
+      max-width: 1023px;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: theme-get(weights, normal);
+      color: theme-get(colors, groupDescColor);
+      text-transform: capitalize;
 
-      @include respond-to(tablet) { font-size: theme-get(fontSizes, s); }
-      @include respond-to(mobile) { font-size: theme-get(fontSizes, s); margin-top: theme-get(spaces, xs); }
+      @include respond-to(mobile) { font-size: 12px; line-height: 16px; }
     }
+  }
 
-    .service {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: theme-get(spaces, sm);
-      margin-top: theme-get(spaces, md);
+  // three 378px cards per row, 24px apart, 45px between rows
+  .service {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 378px));
+    column-gap: 24px;
+    row-gap: 45px;
 
-      @include respond-to(tablet)  { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-      @include respond-to(mobile)  { grid-template-columns: 1fr; }
-    }
+    @include respond-to(laptop) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @include respond-to(tablet) { row-gap: theme-get(spaces, sm); column-gap: theme-get(spaces, sm); }
+    @include respond-to(mobile) { grid-template-columns: 1fr; row-gap: 18px; }
   }
 }

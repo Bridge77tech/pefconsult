@@ -1,4 +1,6 @@
 @use '../../../styles/theme' as *;
+@use '../../../styles/page-hero' as *;
+@use '../../../styles/motion' as *;
 
 section {
   width: 100%;
@@ -12,87 +14,86 @@ section {
     flex-direction: column;
 
     // ─── HERO ───────────────────────────────────────────────────────────────
+    // Figma "services hero" (75:2907): 1440x679, title at (120, 332), card at (120, 536)
     .hero-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 0;
       position: relative;
+      z-index: 0;
       width: 100%;
+      height: 679px;
+      overflow: hidden;
+      background-color: theme-get(colors, whiteColor);
+
+      @include respond-to(tablet) { height: 32rem; }
+      @include respond-to(mobile) { height: 26rem; }
 
       img {
-        width: 100%;
-        height: 40rem;
         position: relative;
         z-index: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
         object-fit: cover;
         object-position: center;
-
-        @include respond-to(tablet) { height: 32rem; }
-        @include respond-to(mobile) { height: 26rem; }
       }
 
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 57%);
-        z-index: 0;
+      @include page-hero-effects;
+
+      &:not(.revealed) .content {
+        h1 { opacity: 0; }
+        .reach-out { transform: translateY(150px); }
       }
 
       .content {
         position: absolute;
         z-index: 1;
-        bottom: 10%;
-        left: 7%;
-        right: 7%;
+        top: 332px;
+        left: max(7%, calc((100% - 1200px) / 2));
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: theme-get(spaces, sm);
+        align-items: flex-start;
 
-        p {
+        h1 {
+          width: 675px;
+          max-width: 100%;
+          margin: 0;
           color: theme-get(colors, whiteColor);
-          font-size: theme-get(fontSizes, lg);
-          font-weight: theme-get(fontWeights, bold);
           font-family: 'Graduate', serif;
-          text-align: center;
+          font-weight: theme-get(weights, normal);
+          font-size: 42px;
+          line-height: 48px;
         }
 
-        small {
-          color: theme-get(colors, whiteColor);
-          font-size: theme-get(fontSizes, sm);
-          font-weight: theme-get(fontWeights, normal);
-          text-align: center;
-          max-width: 900px;
+        // Figma: card top at 536px, title ends at 428px
+        .reach-out {
+          display: block;
+          margin-top: 108px;
+        }
+
+        // Figma "services hero" false → true: 0.8s after load, 1916ms Gentle. Title fades in;
+        // the card rises from 150px lower.
+        h1,
+        .reach-out {
+          transition-property: transform, opacity;
+          transition-duration: 1916ms;
+          transition-timing-function: $spring-gentle;
+          transition-delay: 0.8s;
         }
 
         @include respond-to(tablet) {
-          bottom: 7%;
+          top: auto;
+          bottom: 5%;
           left: 5%;
           right: 5%;
-          gap: theme-get(spaces, xs);
 
-          p     { font-size: theme-get(fontSizes, md); }
-          small { font-size: theme-get(fontSizes, xs); }
+          h1 { width: auto; font-size: theme-get(fontSizes, lg); line-height: 1.15; }
+          .reach-out { margin-top: theme-get(spaces, md); }
         }
 
         @include respond-to(mobile) {
-          bottom: 6%;
-          left: 5%;
-          right: 5%;
-          align-items: flex-start;
+          bottom: 4%;
 
-          p {
-            font-size: theme-get(fontSizes, sm);
-            text-align: start;
-          }
-
-          small {
-            text-align: start;
-            font-size: theme-get(fontSizes, xs);
-          }
+          h1 { font-size: theme-get(fontSizes, md); }
+          .reach-out { margin-top: theme-get(spaces, xs); }
         }
       }
     }
@@ -109,77 +110,168 @@ section {
       flex-direction: column;
       width: 100%;
 
-      // ── Intro block ──────────────────────────────────────────────────────
+      // Figma "Sub title" (1:2850): 1440x323, heading at (120, 100), copy at (120, 169)
       .service {
         width: 100%;
-        background-color: rgba(theme-get(colors, bgOverlayColor), 0.6);
-        padding: 3.5% 7%;
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
+        background-color: theme-get(colors, bgOverlayColor);
+        padding: 100px max(7%, calc((100% - 1200px) / 2));
         box-sizing: border-box;
 
         @include respond-to(tablet) { padding: 3% 5%; }
         @include respond-to(mobile) { padding: theme-get(spaces, md); }
 
         h3 {
-          font-size: theme-get(fontSizes, lg);
+          font-size: 42px;
+          line-height: 57px;
+          letter-spacing: -1.68px;
           font-weight: theme-get(weights, semiBold);
-          margin-bottom: theme-get(spaces, sm);
-          color: theme-get(colors, textColor);
+          margin-bottom: 12px;
+          color: theme-get(colors, subtitleHeadingColor);
+          // Figma "Title" Hidden → Revealed: a 40px sliver widens to the full heading,
+          // 800ms linear, 0.8s after the section scrolls into view
+          clip-path: inset(0 0 0 0);
+          transition: clip-path 800ms linear 0.8s;
 
-          @include respond-to(tablet) { font-size: theme-get(fontSizes, md); }
+          @include respond-to(tablet) { font-size: theme-get(fontSizes, md); line-height: normal; letter-spacing: -0.04em; }
           @include respond-to(mobile) { font-size: theme-get(fontSizes, sm); text-align: center; }
         }
 
         p {
-          font-size: theme-get(fontSizes, xs);
-          color: theme-get(colors, textColor);
-          line-height: 1.6;
+          font-size: 20px;
+          line-height: 27px;
+          letter-spacing: -0.8px;
+          color: theme-get(colors, subtitleTextColor);
           font-weight: theme-get(weights, light);
 
-          @include respond-to(tablet) { max-width: 700px; }
-          @include respond-to(mobile) { font-size: theme-get(fontSizes, xs); text-align: center; }
+          @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); line-height: 1.6; }
+          @include respond-to(mobile) { text-align: center; }
         }
       }
 
-      // ── Service cards list ───────────────────────────────────────────────
+      .service:not(.revealed) h3 {
+        clip-path: inset(0 calc(100% - 40px) 0 0);
+      }
+
       .services-list {
         display: flex;
         flex-direction: column;
         width: 100%;
       }
 
-      // ── CTA banner ───────────────────────────────────────────────────────
+      // Figma "Social Proof" (1:3035): 1440x323, 100px/120px padding, 12px gap
       .make-move {
         background-color: rgba(224, 218, 201, 0.15);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        padding: 7%;
+        padding: 100px max(7%, calc((100% - 1200px) / 2));
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 12px;
 
         @include respond-to(tablet) { padding: 5% 7%; }
         @include respond-to(mobile) { padding: 5% 5%; }
 
         p {
-          font-size: theme-get(fontSizes, lg);
+          font-size: 42px;
+          line-height: 57px;
+          letter-spacing: -1.68px;
+          font-weight: theme-get(weights, semiBold);
+          color: theme-get(colors, textColorBrown);
           text-align: center;
-          margin-bottom: theme-get(spaces, xs);
 
-          @include respond-to(tablet) { font-size: theme-get(fontSizes, md); }
+          @include respond-to(tablet) { font-size: theme-get(fontSizes, md); line-height: normal; letter-spacing: -0.04em; }
           @include respond-to(mobile) { font-size: theme-get(fontSizes, sm); }
         }
 
         small {
-          font-size: theme-get(fontSizes, xs);
+          font-size: 20px;
+          line-height: 27px;
+          letter-spacing: -0.8px;
+          font-weight: theme-get(weights, light);
           text-align: center;
-          color: theme-get(colors, textColor);
+          color: theme-get(colors, textColorBrown);
 
+          @include respond-to(tablet) { font-size: theme-get(fontSizes, xs); line-height: normal; }
           @include respond-to(mobile) { font-size: theme-get(fontSizes, s); }
         }
       }
     }
   }
 }
+
+// ─── MOBILE (Figma mobile "Services" 149:20779, 390px) ──────────────────────
+section .home-body {
+  @include respond-to(mobile) {
+    // Hero: 340px; Graduate 18 title sitting 24px above the card, card bottom 60px from the edge
+    .hero-section {
+      height: 340px;
+
+      .content {
+        top: auto;
+        bottom: 60px;
+        left: 12px;
+        right: 16px;
+
+        h1 {
+          max-width: 302px;
+          font-size: 18px;
+          line-height: 21px;
+        }
+
+        .reach-out { margin-top: 25px; }
+      }
+    }
+
+    .col-container {
+      // Sub title: 161px band, centred 16px heading and 12px copy
+      .service {
+        padding: 24px 16px 39px;
+        text-align: center;
+
+        h3 {
+          font-size: 16px;
+          line-height: 22px;
+          letter-spacing: -0.64px;
+          margin-bottom: 12px;
+          text-align: center;
+        }
+
+        p {
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.48px;
+          text-align: center;
+        }
+      }
+
+      // the four groups share one band: 24px above the first and below the last
+      .services-list {
+        .service-item:first-child { padding-top: 4px; background-color: #fefffa; }
+        .service-item:last-child { padding-bottom: 4px; background-color: #fefffa; }
+      }
+
+      // "Make the move": 175px band, Graduate 18 heading, 12px copy
+      .make-move {
+        padding: 30px 16px;
+        gap: 25px;
+
+        p {
+          font-family: 'Graduate', serif;
+          font-size: 18px;
+          line-height: 21px;
+          letter-spacing: 0;
+          font-weight: theme-get(weights, normal);
+          color: theme-get(colors, navyTextColor);
+        }
+
+        small {
+          max-width: 334px;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.48px;
+        }
+      }
+    }
+  }
+}
+

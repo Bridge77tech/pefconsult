@@ -1,42 +1,41 @@
 import { isPlatformBrowser, UpperCasePipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, inject, NgZone, OnDestroy, OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { CustomButton } from "../../components/buttons/custom-button/custom-button";
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, PLATFORM_ID, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
+import { ReachOutCard } from "../../components/reach-out-card/reach-out-card";
+import { RevealDirective } from '../../shared/reveal/reveal.directive';
 import { ImageService } from '../../services/general/image-service';
 
 @Component({
   selector: 'app-home',
-  imports: [CustomButton, UpperCasePipe],
+  imports: [ReachOutCard, UpperCasePipe, RevealDirective],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home implements AfterViewInit, OnInit, OnDestroy {
   _images = inject(ImageService);
   platformId = inject(PLATFORM_ID)
-  private zone = inject(NgZone);
 
   homeContent: string = "PEF Consults offers risk management training and consultancy for business. We are continually shaping the future of business, side by side with you. We equip leaders and organizations with the knowledge and systems needed to turn risk into opportunity. Our expertise ensures your strategies remain sound, secure, and sustainable."
   ourReachContent: string = "Business do not stand still, and neither do we! At PEF Consults, we design solutions that move with you; anticipating every market shift, integrating innovation and crafting implementation. Our world wide experience helps us anticipate and act. In the midst of constant change, your organization thrives."
 
-  @ViewChild('titleRef') titleRef!: ElementRef;
-  @ViewChild('contentRef') contentRef!: ElementRef;
-  @ViewChild('globeRef') globeRef!: ElementRef;
-  @ViewChild('whoWeAreLeft') whoWeAreLeft!: ElementRef;
-  @ViewChild('whoWeAreMiddle') whoWeAreMiddle!: ElementRef;
-  @ViewChild('whoWeAreRight') whoWeAreRight!: ElementRef;
-  @ViewChild('servicesLeft') servicesLeft!: ElementRef;
-  @ViewChild('servicesMiddle') servicesMiddle!: ElementRef;
-  @ViewChild('servicesRight') servicesRight!: ElementRef;
   @ViewChildren('countBox', { read: ElementRef }) countBoxes!: QueryList<ElementRef>;
+  @ViewChild('globe') globeRef?: ElementRef<HTMLElement>;
 
-  animatedCounts: number[] = [];
-  hasAnimated: boolean[] = [];
-  private observer?: IntersectionObserver;
+  // Figma hero label cycle (Enterprise Risk Management component, 149:16314)
+  readonly heroLabels = [
+    'Enterprise Risk Management',
+    'Governance, Compliance & Audit',
+    'IT & Control Framework',
+    'Financial & Market Risk',
+  ];
+  heroLabelIndex = 0;
+
+  // signal so timer-driven updates render (the app runs zoneless)
+  animatedCounts = signal<number[]>([]);
   private counterObserver?: IntersectionObserver;
-
+  private counterTimers: ReturnType<typeof setInterval>[] = [];
 
   ngOnInit(): void {
-    this.animatedCounts = this.ourFootPrint.map(() => 0);
-    this.hasAnimated = this.ourFootPrint.map(() => false);
+    this.animatedCounts.set(this.ourFootPrint.map(() => 0));
     if (isPlatformBrowser(this.platformId)) {
       try { document.body.classList.add('show-move'); } catch {}
     }
@@ -46,182 +45,141 @@ export class Home implements AfterViewInit, OnInit, OnDestroy {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-
-    // Shared observer options — fires only when element is well inside the viewport
-    const inViewOpts: IntersectionObserverInit = { threshold: 0 };
-
-    // Title animation
-    const titleEl = this.titleRef?.nativeElement;
-    if (titleEl) {
-      const titleObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => entry.isIntersecting && titleEl.classList.add('visible'));
-      }, inViewOpts);
-      titleObserver.observe(titleEl);
-    }
-
-    // Content animation
-    const contentEl = this.contentRef?.nativeElement;
-    if (contentEl) {
-      const contentObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => entry.isIntersecting && contentEl.classList.add('visible-right'));
-      }, inViewOpts);
-      contentObserver.observe(contentEl);
-    }
-
-    // Globe bubble animation
-    const globeEl = this.globeRef?.nativeElement;
-    if (globeEl) {
-      const globeObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            globeEl.classList.add('bubble-in');
-            obs.unobserve(globeEl);
-          }
-        });
-      }, inViewOpts);
-      globeObserver.observe(globeEl);
-    }
-
-    // Who We Are — panel animations
-    const whoWeArePanels: { el: ElementRef | undefined; cls: string }[] = [
-      { el: this.whoWeAreLeft,   cls: 'slide-from-left'  },
-      { el: this.whoWeAreMiddle, cls: 'slide-from-top'   },
-      { el: this.whoWeAreRight,  cls: 'slide-from-right' },
-    ];
-    whoWeArePanels.forEach(({ el, cls }) => {
-      const node = el?.nativeElement;
-      if (!node) return;
-      const obs = new IntersectionObserver((entries, o) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            node.classList.add(cls);
-            o.unobserve(node);
-          }
-        });
-      }, inViewOpts);
-      obs.observe(node);
-    });
-
-    // Our Services — panel animations
-    const servicesPanels: { el: ElementRef | undefined; cls: string }[] = [
-      { el: this.servicesLeft,   cls: 'slide-from-left'  },
-      { el: this.servicesMiddle, cls: 'slide-from-top'   },
-      { el: this.servicesRight,  cls: 'slide-from-right' },
-    ];
-    servicesPanels.forEach(({ el, cls }) => {
-      const node = el?.nativeElement;
-      if (!node) return;
-      const obs = new IntersectionObserver((entries, o) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            node.classList.add(cls);
-            o.unobserve(node);
-          }
-        });
-      }, inViewOpts);
-      obs.observe(node);
-    });
-  
-    /** -------------------------------
-     *  COUNT ANIMATION FIX
-     *  -------------------------------- */
-  
-    setTimeout(() => this.initCounterObserver(), 100);
+    this.initCounterObserver();
+    this.loadAnimatedGlobe();
   }
-  
+
+  /**
+   * Swaps the static globe for its SVG, whose nodes and connectors light up in sequence
+   * (see src/styles/_globe.scss). The PNG stays if the SVG cannot be loaded.
+   */
+  private async loadAnimatedGlobe() {
+    const host = this.globeRef?.nativeElement;
+    const sweep = host?.querySelector('.globe-sweep');
+    if (!host || !sweep) return;
+    try {
+      const response = await fetch('images/globe-network.svg');
+      if (!response.ok) return;
+      sweep.insertAdjacentHTML('beforeend', await response.text()); // trusted, same-origin asset
+      host.classList.add('has-svg');
+    } catch {
+      // keep the static PNG
+    }
+  }
+
   ngOnDestroy(): void {
-    this.observer?.disconnect();
     this.counterObserver?.disconnect();
+    this.counterTimers.forEach(clearInterval);
     // remove helper class when leaving Home
     if (isPlatformBrowser(this.platformId)) {
       try { document.body.classList.remove('show-move'); } catch {}
     }
   }
 
+  /** Advances the label while it is fully masked (end of each 3.2s wipe cycle). */
+  nextHeroLabel() {
+    this.heroLabelIndex = (this.heroLabelIndex + 1) % this.heroLabels.length;
+  }
+
+  /** Figma "Social Proof Numbers": counts start when the section scrolls into view. */
   private initCounterObserver() {
-    if (!this.countBoxes?.length) return;
+    const row = this.countBoxes?.first?.nativeElement?.parentElement as HTMLElement | undefined;
+    if (!row) return;
 
     this.counterObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const index = this.countBoxes
-            .toArray()
-            .findIndex(el => el.nativeElement === entry.target);
-
-          if (index !== -1 && !this.hasAnimated[index]) {
-            this.hasAnimated[index] = true;
-            this.zone.run(() => this.startCounting(index));
-          }
-        });
+        if (!entries.some((e) => e.isIntersecting)) return;
+        this.counterObserver?.disconnect();
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.ourFootPrint.forEach((_, i) => this.startCounting(i, reduced));
       },
-      { threshold: 0 }
+      { threshold: 0.15 },
     );
-
-    this.countBoxes.forEach(box => this.counterObserver!.observe(box.nativeElement));
-  }
-  
-  startCounting(index: number) {
-    const target = this.ourFootPrint[index].count;
-    const step = Math.max(1, Math.ceil(target / 50));
-
-    const interval = setInterval(() => {
-      if (this.animatedCounts[index] < target) {
-        this.animatedCounts[index] += step;
-      } else {
-        this.animatedCounts[index] = target;
-        clearInterval(interval);
-      }
-    }, 30);
+    this.counterObserver.observe(row);
   }
 
+  /** Counts up by one every `stepMs` (Figma: 80ms for 30, 25ms for 100, 40ms for 50, 200ms for 12). */
+  startCounting(index: number, skipAnimation = false) {
+    const { count: target, stepMs } = this.ourFootPrint[index];
+    const setCount = (value: number) =>
+      this.animatedCounts.update((counts) => counts.map((c, i) => (i === index ? value : c)));
+    if (skipAnimation) {
+      setCount(target);
+      return;
+    }
+    let value = 0;
+    const timer = setInterval(() => {
+      setCount(++value);
+      if (value >= target) clearInterval(timer);
+    }, stepMs);
+    this.counterTimers.push(timer);
+  }
+
+  // widths are the Figma layer widths (Viu Consult is a 160px text box in Figma)
   clients = [
     {
       name: 'Vin Consult',
       imageUrl: this._images.viuConsult,
+      width: 160,
+      // Figma renders this as live text; the outlined SVG lacks the 4px left side-bearing
+      inset: 4,
     },
     {
       name: 'Ecobank',
       imageUrl: this._images.ecobank,
+      width: 81.466,
     },
     {
       name: 'Absa',
       imageUrl: this._images.absa,
+      width: 40,
+    },
+    {
+      name: 'Ecobank',
+      imageUrl: this._images.ecobank,
+      width: 81.466,
     },
     {
       name: 'Total Energies',
       imageUrl: this._images.totalEnergies,
+      width: 54.757,
     },
     {
       name: 'Modec',
       imageUrl: this._images.cmnLogo,
+      width: 167.442,
     },
     {
       name: 'Ecobank',
       imageUrl: this._images.ecobank,
+      width: 81.466,
     },
     {
       name: 'Ecobank',
       imageUrl: this._images.ecobank,
+      width: 81.466,
     }
   ];
 
   ourFootPrint = [
     {
       count: 30,
+      stepMs: 80,
       label: "Countries",
     },
     {
       count: 100,
+      stepMs: 25,
       label: "Customers",
     },
     {
       count: 50,
+      stepMs: 40,
       label: "Years",
     },
     {
       count: 12,
+      stepMs: 200,
       label: "Industries Served",
     },
   ]

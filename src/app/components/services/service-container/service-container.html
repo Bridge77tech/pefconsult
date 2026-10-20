@@ -1,11 +1,9 @@
-<div class="service-container" [style.background-color]="backgroundColor()">
-  <div class="content">
+<div class="service-container" [style.--group-bg]="backgroundColor()">
+  <div class="heading">
     <h4>{{ label() }}</h4>
-    <p>
-      {{ description() }}
-    </p>
-    <div class="service">
-      <ng-content #name></ng-content>
-    </div>
+    <p>{{ description() }}</p>
+  </div>
+  <div class="service">
+    <ng-content></ng-content>
   </div>
 </div>
